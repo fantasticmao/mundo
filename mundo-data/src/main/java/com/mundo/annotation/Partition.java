@@ -3,7 +3,7 @@ package com.mundo.annotation;
 import java.lang.annotation.*;
 
 /**
- * CheckProcessTime
+ * Partition
  *
  * @author maodh
  * @since 2017/11/14
@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface CheckProcessTime {
+public @interface Partition {
 
-    long limitTime() default 1_000;
+    int value() default 0;
 }

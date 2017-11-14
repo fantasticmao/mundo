@@ -17,15 +17,9 @@ import java.util.Queue;
  */
 abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInterceptor {
 
-    A getMethodAnnotation(Object handler, Class<A> annotationClass) {
-        if (handler != null && annotationClass != null && handler instanceof HandlerMethod) {
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
-            Method method = handlerMethod.getMethod();
-            return method.getAnnotation(annotationClass);
-        }
-        return null;
-    }
-
+    /**
+     * 获取执行方法的注解，以及其当前类和祖先类的注解
+     */
     Queue<A> getMethodAnnotationQueue(Object handler, Class<A> annotationClass) {
         if (handler != null && annotationClass != null && handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -58,6 +52,9 @@ abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInter
         }
     }
 
+    /**
+     * 获取祖先类数组
+     */
     private Class<?>[] getSuperClasses(Class<?> clazz) {
         if (clazz != null) {
             List<Class<?>> list = new ArrayList<>();
@@ -71,6 +68,6 @@ abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInter
         return new Class<?>[0];
     }
 
-    abstract boolean processAnnotationQueue(Queue<A> queue);
+    abstract boolean handleAnnotationQueue(Queue<A> queue);
 
 }

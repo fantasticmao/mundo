@@ -19,16 +19,16 @@ public class ListBuilder<E> {
         ARRAY, LINKED
     }
 
+    private ListBuilder() {
+        throw new AssertionError("No com.maomao.support.ListBuilder instances for you!");
+    }
+
     public static ListBuilder create() {
         return new ListBuilder(Type.ARRAY);
     }
 
     public static ListBuilder create(Type type) {
         return new ListBuilder(type);
-    }
-
-    private ListBuilder() {
-        throw new AssertionError("No com.maomao.support.ListBuilder instances for you!");
     }
 
     private ListBuilder(Type type) {

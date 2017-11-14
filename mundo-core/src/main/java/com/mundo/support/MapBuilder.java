@@ -20,16 +20,16 @@ public class MapBuilder<K, V> {
         HASH, TREE, LINKED_HASH
     }
 
+    private MapBuilder() {
+        throw new AssertionError("No com.maomao.support.MapBuilder instances for you!");
+    }
+
     public static MapBuilder create() {
         return new MapBuilder(Type.HASH);
     }
 
     public static MapBuilder create(Type type) {
         return new MapBuilder(type);
-    }
-
-    private MapBuilder() {
-        throw new AssertionError("No com.maomao.support.MapBuilder instances for you!");
     }
 
     private MapBuilder(Type type) {

@@ -73,7 +73,7 @@ public final class JsonApi implements Serializable {
     }
 
     /**
-     * 默认getter和setter方法，供反射使用
+     * 默认 getter 和 setter 方法，供反射使用
      */
 
     public boolean getStatus() {
