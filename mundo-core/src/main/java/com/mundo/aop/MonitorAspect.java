@@ -11,7 +11,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -26,7 +25,6 @@ import java.util.stream.Collectors;
  */
 @Aspect
 @Order(1)
-@Component
 public class MonitorAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(MonitorAspect.class);
     private long startTime;

@@ -1,12 +1,11 @@
-package com.mundo.annotation;
+package com.mundo;
 
-import com.mundo.CoreMvcConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * EnableCoreMvc
+ * EnableMundoWeb
  *
  * @author maodh
  * @since 2017/8/2
@@ -14,6 +13,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(CoreMvcConfiguration.class)
-public @interface EnableCoreMvc {
+@Import({MundoCoreAutoConfiguration.class, MundoWebAutoConfiguration.class})
+public @interface EnableMundoWeb {
 }
