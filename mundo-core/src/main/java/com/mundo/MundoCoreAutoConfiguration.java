@@ -1,6 +1,6 @@
 package com.mundo;
 
-import com.mundo.aop.MonitorAspect;
+import com.mundo.aop.TimeoutAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class MundoCoreAutoConfiguration {
 
     @Bean
-    MonitorAspect monitorAspect() {
-        return new MonitorAspect();
+    TimeoutAspect timeoutAspect() {
+        return new TimeoutAspect();
     }
 }

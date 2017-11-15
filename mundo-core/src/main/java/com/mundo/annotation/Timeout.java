@@ -3,7 +3,7 @@ package com.mundo.annotation;
 import java.lang.annotation.*;
 
 /**
- * Monitor
+ * Timeout
  * 此注解不具有传递性
  *
  * @author maodh
@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface Monitor {
+public @interface Timeout {
 
     long time() default 1_000;
 }

@@ -1,6 +1,6 @@
 package com.mundo.aop;
 
-import com.mundo.annotation.Monitor;
+import com.mundo.annotation.Timeout;
 import com.mundo.util.CollectionUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -18,19 +18,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * MonitorAspect
+ * TimeoutAspect
  *
  * @author maodh
  * @since 2017/11/14
  */
 @Aspect
 @Order(1)
-public class MonitorAspect {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MonitorAspect.class);
+public class TimeoutAspect {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TimeoutAspect.class);
     private long startTime;
     private long endTime;
 
-    @Pointcut("@annotation(com.mundo.annotation.Monitor)")
+    @Pointcut("@annotation(com.mundo.annotation.Timeout)")
     public void annotationPointCut() {
 
     }
@@ -50,10 +50,10 @@ public class MonitorAspect {
         String className = method.getDeclaringClass().getName();
         Class<?>[] parameterTypes = method.getParameterTypes();
         List<String> parameterTypeList = Arrays.stream(parameterTypes).map(Class::getSimpleName).collect(Collectors.toList());
-        String signature = CollectionUtil.join(parameterTypeList);
+        String signature = CollectionUtil.join(parameterTypeList, ", ");
 
-        Monitor monitor = method.getAnnotation(Monitor.class);
-        long limitTime = monitor.time();
+        Timeout timeout = method.getAnnotation(Timeout.class);
+        long limitTime = timeout.time();
 
         if (limitTime > 0 && durationTime > limitTime) {
             LOGGER.warn("{}.{}({}) 执行超时。限时时间：{}ms，超时时间：{}ms", className, methodName, signature, limitTime, durationTime);

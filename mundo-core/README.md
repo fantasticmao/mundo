@@ -3,5 +3,5 @@ Mundo Core
 
 # Feature
 - `constant`, `exception`, `support`, `util` package
-- `@Monitor` annotation
+- `@Timeout` annotation
 - `MaoMao` banner

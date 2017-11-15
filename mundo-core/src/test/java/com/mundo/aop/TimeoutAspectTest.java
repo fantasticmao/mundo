@@ -9,19 +9,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 
 /**
- * MonitorAspectTest
+ * TimeoutAspectTest
  *
  * @author maodh
  * @since 2017/11/15
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class MonitorAspectTest {
+public class TimeoutAspectTest {
     @Resource
-    private MonitorComponent monitorComponent;
+    private TimeoutComponent timeoutComponent;
 
     @Test
-    public void testMonitorAspect() {
-        monitorComponent.method();
+    public void testTimeoutAspect() {
+        timeoutComponent.hello("", null, null);
     }
 }
