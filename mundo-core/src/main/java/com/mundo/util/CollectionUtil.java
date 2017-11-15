@@ -1,5 +1,7 @@
 package com.mundo.util;
 
+import com.mundo.constant.Strings;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -65,5 +67,14 @@ public final class CollectionUtil {
             }
         }
         return false;
+    }
+
+    public static String join(Collection<String> collection){
+        return join(collection, Strings.COMMA);
+    }
+
+    public static String join(Collection<String> collection, String separator) {
+        String[] strArray = collection.toArray(new String[collection.size()]);
+        return ArrayUtil.join(strArray, separator);
     }
 }

@@ -14,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @author maodh
  * @since 2017/8/2
  */
-@Configuration
 @EnableWebMvc
+@Configuration
 public class CoreMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean

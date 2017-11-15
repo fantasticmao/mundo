@@ -1,6 +1,7 @@
 package com.mundo.aop;
 
 import com.mundo.annotation.MethodLogger;
+import com.mundo.util.CollectionUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * MethodLoggerAspect
@@ -39,16 +43,20 @@ public class MethodLoggerAspect {
     @After("annotationPointCut()")
     public void after(JoinPoint joinPoint) {
         endTime = System.nanoTime();
-        long durationTime = endTime - startTime;
+        long durationTime = (endTime - startTime) / 1_000_000;
 
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
         String methodName = method.getName();
-        String className = method.getClass().getName();
+        String className = method.getDeclaringClass().getName();
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        List<String> parameterTypeList = Arrays.stream(parameterTypes).map(Class::getSimpleName).collect(Collectors.toList());
+        String signature = CollectionUtil.join(parameterTypeList);
+
         MethodLogger methodLogger = method.getAnnotation(MethodLogger.class);
         long limitTime = methodLogger.limit();
 
         if (limitTime > 0 && durationTime > limitTime) {
-            LOGGER.warn("{} {} 执行超时", className, methodName);
+            LOGGER.warn("{}.{}({}) 执行超时。限时时间：{}ms，超时时间：{}ms", className, methodName, signature, limitTime, durationTime);
         }
     }
 }
