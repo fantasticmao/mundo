@@ -1,5 +1,6 @@
 package com.mundo.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,7 +22,7 @@ public class PartitionAspect {
     }
 
     @Before("annotationPointCut()")
-    public void before() {
+    public void before(JoinPoint joinPoint) {
         // TODO 选择数据源
     }
 }

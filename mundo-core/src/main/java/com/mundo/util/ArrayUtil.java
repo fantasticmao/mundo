@@ -246,8 +246,8 @@ public final class ArrayUtil {
     /**
      * 连接数组
      *
-     * @param separator 分隔符
      * @param array     数组
+     * @param separator 分隔符
      * @return 以分隔符连接的数组
      */
     public static <T> String join(T[] array, String separator) {
@@ -263,10 +263,10 @@ public final class ArrayUtil {
     }
 
     public static String join(boolean[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, boolean[] array) {
+    public static String join(boolean[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -279,10 +279,10 @@ public final class ArrayUtil {
     }
 
     public static String join(char[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, char[] array) {
+    public static String join(char[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -295,10 +295,10 @@ public final class ArrayUtil {
     }
 
     public static String join(byte[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, byte[] array) {
+    public static String join(byte[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -311,10 +311,10 @@ public final class ArrayUtil {
     }
 
     public static String join(short[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, short[] array) {
+    public static String join(short[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -327,10 +327,10 @@ public final class ArrayUtil {
     }
 
     public static String join(int[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, int[] array) {
+    public static String join(int[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -343,10 +343,10 @@ public final class ArrayUtil {
     }
 
     public static String join(long[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, long[] array) {
+    public static String join(long[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -359,10 +359,10 @@ public final class ArrayUtil {
     }
 
     public static String join(float[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, float[] array) {
+    public static String join(float[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -375,10 +375,10 @@ public final class ArrayUtil {
     }
 
     public static String join(double[] array) {
-        return join(Strings.COMMA, array);
+        return join(array, Strings.COMMA);
     }
 
-    public static String join(String separator, double[] array) {
+    public static String join(double[] array, String separator) {
         if (isEmpty(array)) {
             return Strings.EMPTY;
         }
@@ -697,7 +697,7 @@ public final class ArrayUtil {
      * @param start 起始位置（包含），第一个值是0，第二值是1......
      */
     public static <T> T[] slice(T[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     /**
@@ -754,7 +754,7 @@ public final class ArrayUtil {
     }
 
     public static boolean[] slice(boolean[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static boolean[] slice(boolean[] array, int start, int end) {
@@ -796,7 +796,7 @@ public final class ArrayUtil {
     }
 
     public static char[] slice(char[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static char[] slice(char[] array, int start, int end) {
@@ -838,7 +838,7 @@ public final class ArrayUtil {
     }
 
     public static byte[] slice(byte[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static byte[] slice(byte[] array, int start, int end) {
@@ -880,7 +880,7 @@ public final class ArrayUtil {
     }
 
     public static short[] slice(short[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static short[] slice(short[] array, int start, int end) {
@@ -922,7 +922,7 @@ public final class ArrayUtil {
     }
 
     public static int[] slice(int[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static int[] slice(int[] array, int start, int end) {
@@ -964,7 +964,7 @@ public final class ArrayUtil {
     }
 
     public static long[] slice(long[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static long[] slice(long[] array, int start, int end) {
@@ -1006,7 +1006,7 @@ public final class ArrayUtil {
     }
 
     public static float[] slice(float[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static float[] slice(float[] array, int start, int end) {
@@ -1048,7 +1048,7 @@ public final class ArrayUtil {
     }
 
     public static double[] slice(double[] array, int start) {
-        return array == null ? null : slice(array, start, array.length);
+        return slice(array, start, array.length);
     }
 
     public static double[] slice(double[] array, int start, int end) {

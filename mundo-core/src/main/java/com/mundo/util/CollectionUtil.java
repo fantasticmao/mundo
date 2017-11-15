@@ -17,30 +17,12 @@ public final class CollectionUtil {
         return collection == null || collection.isEmpty();
     }
 
-    public static boolean isEmpty(Collection<?>... collections) {
-        for (Collection<?> collection : collections) {
-            if (isEmpty(collection)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static boolean isEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
     public static boolean isNotEmpty(Collection<?> collection) {
         return !isEmpty(collection);
-    }
-
-    public static boolean isNotEmpty(Collection<?>... collections) {
-        for (Collection<?> collection : collections) {
-            if (isEmpty(collection)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public static boolean isNotEmpty(Map<?, ?> map) {
@@ -58,18 +40,7 @@ public final class CollectionUtil {
         return null;
     }
 
-    public static <E> boolean containsAny(Collection<E> collection1, Collection<E> collection2) {
-        if (isNotEmpty(collection1, collection2)) {
-            for (E e : collection2) {
-                if (collection1.contains(e)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static String join(Collection<String> collection){
+    public static String join(Collection<String> collection) {
         return join(collection, Strings.COMMA);
     }
 
