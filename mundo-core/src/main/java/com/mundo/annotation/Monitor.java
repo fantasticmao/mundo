@@ -3,7 +3,8 @@ package com.mundo.annotation;
 import java.lang.annotation.*;
 
 /**
- * MethodLogger
+ * Monitor
+ * 此注解不具有传递性
  *
  * @author maodh
  * @since 2017/11/14
@@ -12,7 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface MethodLogger {
+public @interface Monitor {
 
-    long limit() default 1_000;
+    long time() default 1_000;
 }

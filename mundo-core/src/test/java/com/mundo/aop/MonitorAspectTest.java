@@ -9,19 +9,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 
 /**
- * MethodLoggerAspectTest
+ * MonitorAspectTest
  *
  * @author maodh
  * @since 2017/11/15
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class MethodLoggerAspectTest {
+public class MonitorAspectTest {
     @Resource
-    private MethodLoggerComponent methodLoggerComponent;
+    private MonitorComponent monitorComponent;
 
     @Test
-    public void testMethodLoggerAspect() {
-        methodLoggerComponent.method();
+    public void testMonitorAspect() {
+        monitorComponent.method();
     }
 }

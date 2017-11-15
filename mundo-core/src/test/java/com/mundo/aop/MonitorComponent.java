@@ -1,24 +1,24 @@
 package com.mundo.aop;
 
-import com.mundo.annotation.MethodLogger;
+import com.mundo.annotation.Monitor;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * MethodLoggerCompont
+ * MonitorComponent
  *
  * @author maodh
  * @since 2017/11/15
  */
 @Component
-public class MethodLoggerComponent {
+public class MonitorComponent {
 
-    @MethodLogger
+    @Monitor
     public void method() {
         try {
             TimeUnit.SECONDS.sleep(2);
-            System.out.println("AOP Logger");
+            System.out.println("Monitor AOP");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

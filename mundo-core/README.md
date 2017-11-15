@@ -3,5 +3,5 @@ Mundo Core
 
 # Feature
 - `constant`, `exception`, `support`, `util` package
-- `@MethodLogger` annotation
+- `@Monitor` annotation
 - `MaoMao` banner
