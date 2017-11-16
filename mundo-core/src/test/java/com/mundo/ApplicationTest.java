@@ -1,8 +1,10 @@
 package com.mundo;
 
+import com.mundo.aop.TimeoutComponent;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * ApplicationTest
@@ -14,5 +16,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 @EnableMundoCore
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class ApplicationTest {
+
+    @Bean
+    TimeoutComponent timeoutComponent() {
+        return new TimeoutComponent();
+    }
 
 }

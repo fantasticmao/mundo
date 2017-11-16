@@ -1,4 +1,4 @@
-package com.mundo;
+package com.mundo.web;
 
 import org.springframework.context.annotation.Import;
 

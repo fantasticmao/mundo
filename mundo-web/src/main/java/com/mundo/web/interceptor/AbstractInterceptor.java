@@ -1,7 +1,7 @@
-package com.mundo.interceptor;
+package com.mundo.web.interceptor;
 
-import com.mundo.support.JsonApi;
-import com.mundo.util.AppUtil;
+import com.mundo.data.support.JsonApi;
+import com.mundo.data.util.AppUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

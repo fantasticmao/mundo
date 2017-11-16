@@ -1,4 +1,4 @@
-package com.mundo.interceptor;
+package com.mundo.web.interceptor;
 
 import org.springframework.web.method.HandlerMethod;
 

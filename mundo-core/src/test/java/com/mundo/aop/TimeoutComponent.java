@@ -1,7 +1,6 @@
 package com.mundo.aop;
 
 import com.mundo.annotation.Timeout;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +11,6 @@ import java.util.concurrent.TimeUnit;
  * @author maodh
  * @since 2017/11/15
  */
-@Component
 public class TimeoutComponent {
 
     @Timeout

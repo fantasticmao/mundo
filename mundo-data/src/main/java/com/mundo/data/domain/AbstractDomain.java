@@ -1,4 +1,4 @@
-package com.mundo.domain;
+package com.mundo.data.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

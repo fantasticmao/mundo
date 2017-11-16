@@ -1,8 +1,8 @@
-package com.mundo.interceptor;
+package com.mundo.web.interceptor;
 
-import com.mundo.annotation.CheckLogin;
-import com.mundo.constant.Words;
-import com.mundo.util.CollectionUtil;
+import com.mundo.web.annotation.CheckLogin;
+import com.mundo.data.constant.Words;
+import com.mundo.data.util.CollectionUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

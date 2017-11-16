@@ -1,4 +1,4 @@
-package com.mundo.aop;
+package com.mundo.data.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,13 +16,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class PartitionAspect {
 
-    @Pointcut("@annotation(com.mundo.annotation.Partition)")
-    public void annotationPointCut() {
+    @Pointcut("@args(com.mundo.data.annotation.Partition)")
+    public void argsPointCut() {
 
     }
 
-    @Before("annotationPointCut()")
+    @Before("argsPointCut()")
     public void before(JoinPoint joinPoint) {
+        // TODO 获取 PartitionSeed
+
         // TODO 选择数据源
     }
 }

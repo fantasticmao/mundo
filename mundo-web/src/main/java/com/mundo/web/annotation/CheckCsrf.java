@@ -1,9 +1,9 @@
-package com.mundo.annotation;
+package com.mundo.web.annotation;
 
 import java.lang.annotation.*;
 
 /**
- * CheckLogin
+ * CheckCsrf
  *
  * @author maodh
  * @since 2017/8/1
@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface CheckLogin {
+public @interface CheckCsrf {
 
     boolean value() default true;
 }
