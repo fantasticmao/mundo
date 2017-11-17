@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
  */
 @Aspect
 @Order(1)
-public class TimeoutAspect {
+public class TimeoutAspect extends AbstractAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeoutAspect.class);
     private long startTime;
     private long endTime;
@@ -45,7 +44,7 @@ public class TimeoutAspect {
         endTime = System.nanoTime();
         long durationTime = (endTime - startTime) / 1_000_000;
 
-        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+        Method method = super.getMethod(joinPoint);
         String methodName = method.getName();
         String className = method.getDeclaringClass().getName();
         Class<?>[] parameterTypes = method.getParameterTypes();

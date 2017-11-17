@@ -21,7 +21,17 @@ public class TimeoutAspectTest {
     private TimeoutComponent timeoutComponent;
 
     @Test
-    public void testTimeoutAspect() {
-        timeoutComponent.hello("", null, null);
+    public void testTimeoutAspect1() {
+        timeoutComponent.hello1();
+    }
+
+    @Test
+    public void testTimeoutAspect2() {
+        timeoutComponent.hello2("");
+    }
+
+    @Test
+    public void testTimeoutAspect3() {
+        timeoutComponent.hello3("", null, null);
     }
 }
