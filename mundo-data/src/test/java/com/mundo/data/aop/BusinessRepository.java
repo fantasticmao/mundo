@@ -21,6 +21,9 @@ public class BusinessRepository implements PartitionSupport {
     public void test3(@Partition Long l) {
     }
 
+    public void test4(@Partition String s) {
+    }
+
     public static class PartitionBean extends AbstractPartitionDomain<Integer, Integer> {
         private Integer id;
 

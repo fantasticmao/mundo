@@ -1,6 +1,7 @@
 package com.mundo.data.aop;
 
 import com.mundo.data.ApplicationTest;
+import com.mundo.data.datasource.PartitionException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,5 +26,10 @@ public class PartitionAspectTest {
         repository.test1(new BusinessRepository.PartitionBean(1));
         repository.test2(2);
         repository.test3(3L);
+    }
+
+    @Test(expected = PartitionException.class)
+    public void testPartitionException() {
+        repository.test4("");
     }
 }
