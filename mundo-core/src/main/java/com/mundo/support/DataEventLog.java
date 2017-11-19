@@ -32,7 +32,6 @@ public class DataEventLog {
     }
 
     public void log(HttpServletRequest request) {
-
         String json = JsonUtil.toJson(map).orElse("{}");
         if (AppUtil.isApp(request)) {
             APP_SERVER_LOG.info(json);

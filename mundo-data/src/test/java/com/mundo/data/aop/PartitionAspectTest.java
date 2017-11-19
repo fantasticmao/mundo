@@ -18,10 +18,12 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class PartitionAspectTest {
     @Resource
-    private PartitionInterface partitionInterface;
+    private BusinessRepository repository;
 
     @Test
     public void testPartitionAspect() {
-        System.out.println(partitionInterface.find(1));
+        repository.test1(new BusinessRepository.PartitionBean(1));
+        repository.test2(2);
+        repository.test3(3L);
     }
 }

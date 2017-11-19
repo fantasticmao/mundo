@@ -1,7 +1,6 @@
 package com.mundo.data;
 
-import com.mundo.data.aop.PartitionComponent;
-import com.mundo.data.aop.PartitionInterface;
+import com.mundo.data.aop.BusinessRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -18,7 +17,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class ApplicationTest {
 
     @Bean
-    PartitionInterface partitionComponent() {
-        return new PartitionComponent();
+    BusinessRepository partitionComponent() {
+        return new BusinessRepository();
     }
 }

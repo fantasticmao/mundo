@@ -2,10 +2,12 @@ package com.mundo.data;
 
 import com.mundo.data.aop.PartitionAspect;
 import com.mundo.data.datasource.PartitionDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -26,23 +28,11 @@ public class MundoDataAutoConfiguration {
         return new PartitionAspect();
     }
 
-    // 数据源应从应用中加载
-    //@Bean
-    DataSource dataSource1() {
-        return DataSourceBuilder.create().build();
-    }
-
-    //@Bean
-    DataSource dataSource2() {
-        return DataSourceBuilder.create().build();
-    }
-
-    //@Bean
-    //@Primary
-    DataSource partitionDataSource() {
+    @Bean
+    @Primary
+    DataSource partitionDataSource(@Autowired ApplicationContext context) {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put("dataSource1", dataSource1());
-        targetDataSources.put("dataSource2", dataSource2());
-        return new PartitionDataSource(dataSource1(), targetDataSources);
+        // TODO get and group the instances of PartitionDataSource from the Spring applicationContext
+        return new PartitionDataSource(null, targetDataSources);
     }
 }

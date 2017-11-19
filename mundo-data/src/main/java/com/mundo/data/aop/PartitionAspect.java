@@ -20,21 +20,19 @@ import java.lang.reflect.Method;
  * @since 2017/11/14
  */
 @Aspect
-@Order(2)
+@Order(3)
 public class PartitionAspect extends AbstractAspect {
 
-    @Pointcut("@args(com.mundo.data.annotation.Partition)")
-    public void argsPointCut() {
+    @Pointcut("target(com.mundo.data.datasource.PartitionSupport)")
+    public void targetPointCut() {
 
     }
 
-    @Before("argsPointCut()")
+    @Before("targetPointCut()")
     public void before(JoinPoint joinPoint) {
-        //  获取 @Partition 注解参数
+        // 获取 @Partition 注解参数
         Method method = super.getMethod(joinPoint);
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-        Object[] args = joinPoint.getArgs();
-
         int index = -1;
         for (int i = 0; i < parameterAnnotations.length; i++) {
             for (Annotation annotation : parameterAnnotations[i]) {
@@ -47,9 +45,10 @@ public class PartitionAspect extends AbstractAspect {
 
         // 计算 PartitionSeed 数值
         if (index == -1) {
-            throw new PartitionException("Not match the @Partition argument.");
+            // 不存在 @Partition 注解参数
+            return;
         } else {
-            Object arg = args[index];
+            Object arg = joinPoint.getArgs()[index];
             long seed;
             if (arg instanceof AbstractPartitionDomain) {
                 seed = ((AbstractPartitionDomain) arg).getSeed().longValue();
@@ -64,8 +63,9 @@ public class PartitionAspect extends AbstractAspect {
             } else {
                 throw new PartitionException("the @Partition argument must be the instance of AbstractPartitionDomain or Number.");
             }
+            System.out.println(seed);
         }
-        System.out.println("hello AOP ");
+
         // TODO 选择数据源
     }
 }
