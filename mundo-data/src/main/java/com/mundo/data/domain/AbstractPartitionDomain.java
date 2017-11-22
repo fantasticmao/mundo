@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author maodh
  * @since 2017/11/15
  */
-public abstract class AbstractPartitionDomain<PK extends Serializable, SEED extends Number> extends AbstractDomain<PK> {
+public abstract class AbstractPartitionDomain<ID extends Serializable, SEED extends Number> extends AbstractDomain<ID> {
 
     public abstract SEED getSeed();
 }

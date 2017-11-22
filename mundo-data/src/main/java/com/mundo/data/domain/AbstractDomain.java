@@ -13,19 +13,19 @@ import java.sql.Timestamp;
  * @since 2017/3/5
  */
 @MappedSuperclass
-public abstract class AbstractDomain<PK extends Serializable> implements Serializable {
+public abstract class AbstractDomain<ID extends Serializable> implements Serializable {
     private static final long serialVersionUID = -8062994073459423389L;
     @Id
     @GeneratedValue
-    private PK id; // 逻辑主键
+    private ID id; // 逻辑主键
     private Timestamp createTime; // 创建时间
     private Timestamp modifyTime; // 修改时间
 
-    public PK getId() {
+    public ID getId() {
         return id;
     }
 
-    protected void setId(final PK id) {
+    protected void setId(final ID id) {
         this.id = id;
     }
 
