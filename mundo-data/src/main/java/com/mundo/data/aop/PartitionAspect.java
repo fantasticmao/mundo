@@ -2,6 +2,7 @@ package com.mundo.data.aop;
 
 import com.mundo.aop.AbstractAspect;
 import com.mundo.data.annotation.Partition;
+import com.mundo.data.datasource.PartitionContext;
 import com.mundo.data.datasource.PartitionException;
 import com.mundo.data.domain.AbstractPartitionDomain;
 import org.aspectj.lang.JoinPoint;
@@ -63,9 +64,7 @@ public class PartitionAspect extends AbstractAspect {
             } else {
                 throw new PartitionException("the @Partition argument must be the instance of AbstractPartitionDomain or Number.");
             }
-            System.out.println(seed);
+            PartitionContext.push(seed);
         }
-
-        // TODO 选择数据源
     }
 }

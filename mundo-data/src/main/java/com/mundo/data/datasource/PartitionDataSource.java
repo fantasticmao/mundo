@@ -19,6 +19,6 @@ public class PartitionDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        return null;
+        return "lang" + PartitionContext.pop();
     }
 }
