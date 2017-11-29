@@ -11,13 +11,16 @@ import java.util.Stack;
 public class PartitionContext implements AutoCloseable {
     private static final ThreadLocal<Stack<Long>> seedContext = new ThreadLocal<>();
 
-    public static Long push(Long seed) {
+    public static synchronized Long push(Long seed) {
+        if (seedContext.get() == null) {
+            seedContext.set(new Stack<>());
+        }
         return seedContext.get().push(seed);
     }
 
-    public static Long pop() {
+    public static synchronized Long pop() {
         Stack<Long> stack = seedContext.get();
-        return stack.empty() ? 0L : stack.pop();
+        return (stack != null && !stack.empty()) ? stack.pop() : 0L;
     }
 
     @Override

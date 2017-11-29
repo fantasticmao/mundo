@@ -41,6 +41,7 @@ public class MundoDataAutoConfiguration {
                 LOGGER.info("Get and group [javax.sql.Datasource] {} from the Spring applicationContext.", datasource));
         // TODO get and group the instances of PartitionDataSource from the Spring applicationContext
         LOGGER.info("Initializing [com.mundo.data.datasource.PartitionDataSource] Bean!");
-        return new PartitionDataSource(null, targetDataSources);
+        return new PartitionDataSource(null, targetDataSources,
+                seed -> (int) (seed % dataSourceMap.keySet().size()) + 1);
     }
 }

@@ -24,8 +24,8 @@ public class PartitionAspectTest {
     @Test
     public void testPartitionAspect() {
         repository.test1(new BusinessRepository.PartitionBean(1));
-        repository.test2(2);
-        repository.test3(3L);
+        //repository.test2(2);
+        //repository.test3(3L);
     }
 
     @Test(expected = PartitionException.class)
