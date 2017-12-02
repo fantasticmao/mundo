@@ -9,22 +9,22 @@ import java.util.Stack;
  * @since 2017/11/16
  */
 public class PartitionContext implements AutoCloseable {
-    private static final ThreadLocal<Stack<Long>> seedContext = new ThreadLocal<>();
+    private static final ThreadLocal<Stack<Long>> CONTEXT = new ThreadLocal<>();
 
     public static synchronized Long push(Long seed) {
-        if (seedContext.get() == null) {
-            seedContext.set(new Stack<>());
+        if (CONTEXT.get() == null) {
+            CONTEXT.set(new Stack<>());
         }
-        return seedContext.get().push(seed);
+        return CONTEXT.get().push(seed);
     }
 
     public static synchronized Long pop() {
-        Stack<Long> stack = seedContext.get();
+        Stack<Long> stack = CONTEXT.get();
         return (stack != null && !stack.empty()) ? stack.pop() : 0L;
     }
 
     @Override
     public void close() throws Exception {
-        seedContext.remove();
+        CONTEXT.remove();
     }
 }

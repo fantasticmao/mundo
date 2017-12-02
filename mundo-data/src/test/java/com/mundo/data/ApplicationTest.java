@@ -1,8 +1,8 @@
 package com.mundo.data;
 
-import com.mundo.data.aop.BusinessRepository;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
@@ -16,15 +16,26 @@ import javax.sql.DataSource;
  */
 @EnableMundoData
 @EnableAspectJAutoProxy
+@ComponentScan
 @Configuration
 public class ApplicationTest {
+
+    @Bean
+    DataSource lang() {
+        return DataSourceBuilder.create()
+                .driverClassName("com.mysql.jdbc.Driver")
+                .url("jdbc:mysql://localhost:3306/lang")
+                .username("lang")
+                .password("lang.122333")
+                .build();
+    }
 
     @Bean
     DataSource lang01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/lang01")
-                .username("lang01")
+                .username("lang")
                 .password("lang.122333")
                 .build();
     }
@@ -34,13 +45,8 @@ public class ApplicationTest {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/lang02")
-                .username("lang02")
+                .username("lang")
                 .password("lang.122333")
                 .build();
-    }
-
-    @Bean
-    BusinessRepository partitionComponent() {
-        return new BusinessRepository();
     }
 }

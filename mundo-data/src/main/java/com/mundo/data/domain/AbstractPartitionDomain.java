@@ -9,7 +9,8 @@ import java.io.Serializable;
  * @author maodh
  * @since 2017/11/15
  */
-public abstract class AbstractPartitionDomain<ID extends Serializable, SEED extends Number> extends AbstractDomain<ID> {
+public abstract class AbstractPartitionDomain<ID extends Serializable> extends AbstractDomain<ID> {
+    private static final long serialVersionUID = 6018123367595471771L;
 
-    public abstract SEED getSeed();
+    public abstract Number getSeed();
 }
