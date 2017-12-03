@@ -1,5 +1,6 @@
 package com.mundo.data.domain;
 
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
@@ -9,6 +10,7 @@ import java.io.Serializable;
  * @author maodh
  * @since 2017/11/15
  */
+@MappedSuperclass
 public abstract class AbstractPartitionDomain<ID extends Serializable> extends AbstractDomain<ID> {
     private static final long serialVersionUID = 6018123367595471771L;
 

@@ -14,12 +14,22 @@ import java.sql.Timestamp;
  */
 @MappedSuperclass
 public abstract class AbstractDomain<ID extends Serializable> implements Serializable {
-    private static final long serialVersionUID = -8062994073459423389L;
+    private static final long serialVersionUID = 1819978692581974014L;
+
     @Id
     @GeneratedValue
     private ID id; // 逻辑主键
     private Timestamp createTime; // 创建时间
     private Timestamp modifyTime; // 修改时间
+
+    @Override
+    public String toString() {
+        return "AbstractDomain{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
 
     public ID getId() {
         return id;

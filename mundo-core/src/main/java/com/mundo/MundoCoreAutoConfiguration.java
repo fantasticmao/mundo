@@ -18,7 +18,7 @@ public class MundoCoreAutoConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(MundoCoreAutoConfiguration.class);
 
     @Bean
-    @ConditionalOnMissingBean(TimeoutAspect.class)
+    @ConditionalOnMissingBean
     TimeoutAspect timeoutAspect() {
         return new TimeoutAspect();
     }

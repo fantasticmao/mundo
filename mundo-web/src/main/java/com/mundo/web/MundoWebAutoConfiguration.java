@@ -21,13 +21,13 @@ public class MundoWebAutoConfiguration extends WebMvcConfigurerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(MundoWebAutoConfiguration.class);
 
     @Bean
-    @ConditionalOnMissingBean(CheckCsrfInterceptor.class)
+    @ConditionalOnMissingBean
     CheckCsrfInterceptor checkCsrfInterceptor() {
         return new CheckCsrfInterceptor();
     }
 
     @Bean
-    @ConditionalOnMissingBean(CheckLoginInterceptor.class)
+    @ConditionalOnMissingBean
     CheckLoginInterceptor checkLoginInterceptor() {
         return new CheckLoginInterceptor();
     }

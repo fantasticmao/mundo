@@ -2,21 +2,25 @@ package com.mundo.data.aop;
 
 import com.mundo.data.domain.AbstractPartitionDomain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * UserLog
  *
  * @author maodh
  * @since 2017/12/2
  */
+@Entity
+@Table(name = "lang_user_log")
 public class UserLog extends AbstractPartitionDomain<Integer> {
     private static final long serialVersionUID = 8759267577493277201L;
 
-    private Integer id;
     private Integer userId;
     private Integer type;
     private String info;
 
-    public UserLog() {
+    protected UserLog() {
     }
 
     public UserLog(Integer userId, Integer type, String info) {
@@ -33,24 +37,13 @@ public class UserLog extends AbstractPartitionDomain<Integer> {
     @Override
     public String toString() {
         return "UserLog{" +
-                "id=" + id +
-                ", userId=" + userId +
+                "userId=" + userId +
                 ", type=" + type +
                 ", info='" + info + '\'' +
-                '}';
+                "} " + super.toString();
     }
 
     // getter and setter
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getUserId() {
         return userId;

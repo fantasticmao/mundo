@@ -2,20 +2,24 @@ package com.mundo.data.aop;
 
 import com.mundo.data.domain.AbstractDomain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * User
  *
  * @author maodh
  * @since 2017/12/2
  */
+@Entity
+@Table(name = "lang_user")
 public class User extends AbstractDomain<Integer> {
     private static final long serialVersionUID = 8813100826145776117L;
 
-    private Integer id;
     private String username;
     private String password;
 
-    public User() {
+    protected User() {
     }
 
     public User(String username, String password) {
@@ -26,20 +30,9 @@ public class User extends AbstractDomain<Integer> {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                '}';
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
+                "} " + super.toString();
     }
 
     public String getUsername() {
