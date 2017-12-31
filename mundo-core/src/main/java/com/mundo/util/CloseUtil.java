@@ -14,7 +14,9 @@ public final class CloseUtil {
     public static void close(Closeable... resources) {
         try {
             for (Closeable res : resources) {
-                res.close();
+                if (res != null) {
+                    res.close();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
