@@ -18,7 +18,7 @@ public class RegexUtilTest {
 
     @Test
     public void isUrl() throws Exception {
-        String str = "https://www.google.com";
+        String str = "HTTPS://www.google.com";
         Assert.assertTrue(RegexUtil.isUrl(str));
     }
 

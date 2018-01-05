@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class RegexUtil {
     private static final Pattern HOST = Pattern.compile("^[\\w|\\d|\\\\.]+(/[\\w|\\d|\\\\.]+)*$");
-    private static final Pattern URL = Pattern.compile("^http(s)?://[\\w|\\d|\\\\.]+(/[\\w|\\d|\\\\.]+)*$");
+    private static final Pattern URL = Pattern.compile("^http(s)?://[\\w|\\d|\\\\.]+(/[\\w|\\d|\\\\.]+)*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern TELEPHONE = Pattern.compile("^\\d{11}$");
     private static final Pattern EMAIL = Pattern.compile("^[\\w|\\d]+@[\\w|\\d]+\\.[\\w|\\d]+$");
 

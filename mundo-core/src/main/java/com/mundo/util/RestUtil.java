@@ -1,11 +1,11 @@
 package com.mundo.util;
 
 import com.mundo.constant.Beans;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.mundo.constant.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -15,25 +15,31 @@ import java.util.function.Function;
  * @since 2017/3/5
  */
 public class RestUtil {
-    protected Logger logger = LoggerFactory.getLogger(getClass());
     protected static final RestTemplate defaultTemplate = SpringUtil.getBean(Beans.REST_DEFAULT_TEMPLATE);
 
     public static RestTemplate getDefaultRestTemplate() {
         return defaultTemplate;
     }
 
-    public static <T> T getForObject(String url, Class<T> responseType, Object... uriVariables) {
-        return (defaultTemplate != null && StringUtil.isNotEmpty(url))
-                ? defaultTemplate.getForObject(url, responseType, uriVariables) : null;
+    public static <T> Optional<T> getForObject(String url, Class<T> responseType, Object... uriVariables) {
+        if (defaultTemplate != null && RegexUtil.isUrl(url)) {
+            T t = defaultTemplate.getForObject(url, responseType, uriVariables);
+            return Optional.of(t);
+        }
+        return Optional.empty();
     }
 
-    public static <T> ResponseEntity<T> getForEntity(String url, Class<T> responseType, Object... uriVariables) {
-        return (defaultTemplate != null && StringUtil.isNotEmpty(url))
-                ? defaultTemplate.getForEntity(url, responseType, uriVariables) : null;
+    public static <T> Optional<ResponseEntity<T>> getForEntity(String url, Class<T> responseType, Object... uriVariables) {
+        if (defaultTemplate != null && RegexUtil.isUrl(url)) {
+            ResponseEntity<T> entity = defaultTemplate.getForEntity(url, responseType, uriVariables);
+            return Optional.of(entity);
+        }
+        return Optional.empty();
     }
 
-    public static <T> T getForBean(String url, Function<String, T> fun) {
-        String str = getForObject(url, String.class);
-        return StringUtil.isNotEmpty(str) ? fun.apply(str) : null;
+    public static <T> Optional<T> getForBean(String url, Function<String, T> fun) {
+        String str = getForObject(url, String.class).orElse(Strings.EMPTY);
+        T t = fun.apply(str);
+        return Optional.ofNullable(t);
     }
 }
