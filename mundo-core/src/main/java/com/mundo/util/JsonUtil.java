@@ -95,14 +95,23 @@ public final class JsonUtil {
         return null;
     }
 
+    /**
+     * Json -> LinkedHashMap
+     */
     public static Map toMap(String json) {
         return toClass(json, Map.class).orElse(Collections.emptyMap());
     }
 
+    /**
+     * Json -> ArrayList
+     */
     public static List toList(String json) {
         return toClass(json, List.class).orElse(Collections.emptyList());
     }
 
+    /**
+     * Json -> HashSet
+     */
     public static Set toSet(String json) {
         return toClass(json, Set.class).orElse(Collections.emptySet());
     }
