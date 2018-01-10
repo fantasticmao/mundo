@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.BiPredicate;
 
 /**
  * MapBuilder
@@ -24,14 +25,6 @@ public class MapBuilder<K, V> {
         throw new AssertionError("No com.maomao.support.MapBuilder instances for you!");
     }
 
-    public static MapBuilder create() {
-        return new MapBuilder(Type.HASH);
-    }
-
-    public static MapBuilder create(Type type) {
-        return new MapBuilder(type);
-    }
-
     private MapBuilder(Type type) {
         switch (type) {
             case HASH:
@@ -46,8 +39,23 @@ public class MapBuilder<K, V> {
         }
     }
 
+    public static <K, V> MapBuilder<K, V> create() {
+        return new MapBuilder<>(Type.HASH);
+    }
+
+    public static <K, V> MapBuilder<K, V> create(Type type) {
+        return new MapBuilder<>(type);
+    }
+
     public MapBuilder<K, V> put(K k, V v) {
         map.put(k, v);
+        return this;
+    }
+
+    public MapBuilder<K, V> ifPut(K k, V v, BiPredicate<K, V> biPredicate) {
+        if (biPredicate.test(k, v)) {
+            map.put(k, v);
+        }
         return this;
     }
 

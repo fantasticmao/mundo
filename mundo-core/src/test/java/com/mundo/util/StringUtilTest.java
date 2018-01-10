@@ -31,20 +31,6 @@ public class StringUtilTest {
     }
 
     @Test
-    public void join1() {
-        String expected = "a,b,c";
-        String actual = StringUtil.join(new String[]{"a", "b", "c"});
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void join2() {
-        String expected = "a++b++c";
-        String actual = StringUtil.join(new String[]{"a", "b", "c"}, "++");
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void reverse() {
         String expected = "dlrow olleh";
         String actual = StringUtil.reverse(str);

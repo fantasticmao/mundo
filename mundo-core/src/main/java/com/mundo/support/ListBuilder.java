@@ -5,6 +5,7 @@ import com.mundo.util.JsonUtil;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * ListBuilder
@@ -23,14 +24,6 @@ public class ListBuilder<E> {
         throw new AssertionError("No com.maomao.support.ListBuilder instances for you!");
     }
 
-    public static ListBuilder create() {
-        return new ListBuilder(Type.ARRAY);
-    }
-
-    public static ListBuilder create(Type type) {
-        return new ListBuilder(type);
-    }
-
     private ListBuilder(Type type) {
         switch (type) {
             case ARRAY:
@@ -42,8 +35,23 @@ public class ListBuilder<E> {
         }
     }
 
+    public static <E> ListBuilder<E> create() {
+        return new ListBuilder<>(Type.ARRAY);
+    }
+
+    public static <E> ListBuilder<E> create(Type type) {
+        return new ListBuilder<>(type);
+    }
+
     public ListBuilder<E> add(E e) {
         list.add(e);
+        return this;
+    }
+
+    public ListBuilder<E> ifAdd(E e, Predicate<E> predicate) {
+        if (predicate.test(e)) {
+            list.add(e);
+        }
         return this;
     }
 

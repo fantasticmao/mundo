@@ -36,39 +36,6 @@ public final class StringUtil {
         return true;
     }
 
-    private static String trim(String str) {
-        return str == null ? null : str.trim();
-    }
-
-    public static String trimToNull(String str) {
-        return isEmpty(trim(str)) ? null : str;
-    }
-
-    public static String trimToEmpty(String str) {
-        return isEmpty(trim(str)) ? Strings.EMPTY : str;
-    }
-
-    /**
-     * 连接字符串数组，默认以逗号为分隔符
-     *
-     * @param strings 字符串数组
-     * @return 以逗号连接的字符串
-     */
-    public static String join(String[] strings) {
-        return join(strings, Strings.COMMA);
-    }
-
-    /**
-     * 连接字符串数组
-     *
-     * @param separator 分隔符
-     * @param strings   字符串数组
-     * @return 以分隔符连接的字符串
-     */
-    public static String join(String[] strings, String separator) {
-        return ArrayUtil.join(strings, separator);
-    }
-
     public static String reverse(String str) {
         StringBuilder sb = new StringBuilder(str);
         return sb.reverse().toString();
