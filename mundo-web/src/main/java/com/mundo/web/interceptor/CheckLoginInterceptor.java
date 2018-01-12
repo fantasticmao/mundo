@@ -1,8 +1,8 @@
 package com.mundo.web.interceptor;
 
+import com.mundo.constant.Words;
+import com.mundo.util.CollectionUtil;
 import com.mundo.web.annotation.CheckLogin;
-import com.mundo.data.constant.Words;
-import com.mundo.data.util.CollectionUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +21,12 @@ public class CheckLoginInterceptor extends AnnotationInterceptor<CheckLogin> {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Queue<CheckLogin> annotationQueue = getMethodAnnotationQueue(handler, CheckLogin.class);
         // TODO 接入 SSO
-        boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && handleAnnotationQueue(annotationQueue);
+        boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && processAnnotationQueue(annotationQueue);
         return !isCheck || check(request, response);
     }
 
     @Override
-    boolean handleAnnotationQueue(Queue<CheckLogin> queue) {
+    boolean processAnnotationQueue(Queue<CheckLogin> queue) {
         CheckLogin checkLogin;
         while ((checkLogin = queue.poll()) != null) {
             if (!checkLogin.value()) {

@@ -1,8 +1,8 @@
 package com.mundo.web.mvc;
 
+import com.mundo.constant.Words;
 import com.mundo.web.annotation.CheckCsrf;
 import com.mundo.web.annotation.CheckLogin;
-import com.mundo.data.constant.Words;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;

@@ -68,6 +68,6 @@ abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInter
         return new Class<?>[0];
     }
 
-    abstract boolean handleAnnotationQueue(Queue<A> queue);
+    abstract boolean processAnnotationQueue(Queue<A> queue);
 
 }

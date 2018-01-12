@@ -1,7 +1,7 @@
 package com.mundo.web.interceptor;
 
-import com.mundo.data.support.JsonApi;
-import com.mundo.data.util.AppUtil;
+import com.mundo.support.JsonApi;
+import com.mundo.util.AppUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -20,20 +20,20 @@ abstract class AbstractInterceptor extends HandlerInterceptorAdapter {
 
     void sendError(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (AppUtil.isApp(request)) {
-            sendJsonError(response);
+            sendJsonError(response, JsonApi.error(HttpStatus.BAD_REQUEST));
         } else {
-            sendWebError(response);
+            sendWebError(response, HttpStatus.BAD_REQUEST);
         }
     }
 
-    private void sendJsonError(HttpServletResponse response) throws IOException {
+    void sendJsonError(HttpServletResponse response, JsonApi jsonApi) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().write(JsonApi.error(HttpStatus.BAD_REQUEST).toJson());
+        response.getWriter().write(jsonApi.toJson());
         response.getWriter().flush();
         response.setStatus(HttpStatus.OK.value());
     }
 
-    private void sendWebError(HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.BAD_REQUEST.value());
+    void sendWebError(HttpServletResponse response, HttpStatus httpStatus) throws IOException {
+        response.sendError(httpStatus.value());
     }
 }

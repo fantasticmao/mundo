@@ -27,13 +27,13 @@ public class CheckCsrfInterceptor extends AnnotationInterceptor<CheckCsrf> {
         } else {
             // TODO 校验自定义 HTTP Header
             Queue<CheckCsrf> annotationQueue = getMethodAnnotationQueue(handler, CheckCsrf.class);
-            boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && handleAnnotationQueue(annotationQueue);
+            boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && processAnnotationQueue(annotationQueue);
             return !isCheck || check(request, response);
         }
     }
 
     @Override
-    boolean handleAnnotationQueue(Queue<CheckCsrf> queue) {
+    boolean processAnnotationQueue(Queue<CheckCsrf> queue) {
         CheckCsrf checkCsrf;
         while ((checkCsrf = queue.poll()) != null) {
             if (!checkCsrf.value()) {
