@@ -43,6 +43,12 @@ public class MundoCoreAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    SpringUtil springUtil() {
+        return new SpringUtil();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
     HttpClient httpClient() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
         SSLContext sslContext = SSLContextBuilder.create()
@@ -77,12 +83,6 @@ public class MundoCoreAutoConfiguration {
         asyncRequestFactory.setHttpClient(httpClient());
         LOGGER.info("Instantiating core bean: ansycRestTemplate.");
         return new AsyncRestTemplate(asyncRequestFactory, defaultRestTemplate());
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    SpringUtil springUtil() {
-        return new SpringUtil();
     }
 
 }
