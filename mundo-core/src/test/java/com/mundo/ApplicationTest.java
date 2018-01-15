@@ -26,17 +26,14 @@ public class ApplicationTest {
         return new TimeoutComponent();
     }
 
-    /**
-     * @see <a href="http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=167">QQ邮箱的POP3与SMTP服务器是什么？</a>
-     */
     @Bean
     JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setProtocol(JavaMailSenderImpl.DEFAULT_PROTOCOL);
-        mailSender.setHost("smtp.qq.com");
+        mailSender.setHost("${host}");
         mailSender.setPort(587);
-        mailSender.setUsername("fantasticmao@qq.com");
-        mailSender.setPassword("ebwcytkpsirqbdbg");
+        mailSender.setUsername("${username}");
+        mailSender.setPassword("${password}");
         mailSender.setDefaultEncoding("UTF-8");
 
         Properties javaMailProperties = new Properties();

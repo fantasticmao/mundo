@@ -12,10 +12,13 @@ import org.apache.http.ssl.TrustStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +27,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.Properties;
 
 /**
  * MundoCoreAutoConfiguration
@@ -47,6 +51,29 @@ public class MundoCoreAutoConfiguration {
         return new SpringUtil();
     }
 
+    /**
+     * @see <a href="http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=167">QQ邮箱的POP3与SMTP服务器是什么？</a>
+     */
+    @Bean
+    JavaMailSender javaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setProtocol(JavaMailSenderImpl.DEFAULT_PROTOCOL);
+        mailSender.setHost("smtp.qq.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("fantasticmao@qq.com");
+        mailSender.setPassword("ebwcytkpsirqbdbg");
+        mailSender.setDefaultEncoding("UTF-8");
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.auth", true);
+        javaMailProperties.put("mail.smtp.starttls.enable", true);
+
+        javaMailProperties.put("mail.smtp.connectiontimeout", 10_000); // Connection time out
+        javaMailProperties.put("mail.smtp.timeout", 10_000); // Read timed out
+        mailSender.setJavaMailProperties(javaMailProperties);
+        return mailSender;
+    }
+
     @Bean
     @ConditionalOnMissingBean
     HttpClient httpClient() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
@@ -67,11 +94,12 @@ public class MundoCoreAutoConfiguration {
     @ConditionalOnMissingBean(name = Beans.REST_DEFAULT_TEMPLATE)
     RestTemplate defaultRestTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setReadTimeout(3_000);
-        requestFactory.setConnectTimeout(3_000);
-        requestFactory.setHttpClient(httpClient());
         LOGGER.info("Instantiating core bean: defaultRestTemplate.");
-        return new RestTemplate(requestFactory);
+        return new RestTemplateBuilder()
+                .requestFactory(requestFactory)
+                .setReadTimeout(3_000)
+                .setConnectTimeout(3_000)
+                .build();
     }
 
     @Bean(name = Beans.REST_ANSYC_TEMPLATE)
