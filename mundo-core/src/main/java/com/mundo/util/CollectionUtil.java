@@ -2,6 +2,7 @@ package com.mundo.util;
 
 import com.mundo.constant.Strings;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -48,4 +49,35 @@ public final class CollectionUtil {
         String[] strArray = collection.toArray(new String[collection.size()]);
         return ArrayUtil.join(strArray, separator);
     }
+
+    /**
+     * 并集
+     */
+    public static <T> Collection<T> union(Collection<T> collection1, Collection<T> collection2) {
+        Collection<T> complementCollection = new ArrayList<>();
+        complementCollection.addAll(collection1);
+        complementCollection.addAll(collection2);
+        return complementCollection;
+    }
+
+    /**
+     * 补集、差集
+     */
+    public static <T> Collection<T> complement(Collection<T> collection1, Collection<T> collection2) {
+        Collection<T> complementCollection = new ArrayList<>();
+        complementCollection.addAll(collection1);
+        complementCollection.removeAll(collection2);
+        return complementCollection;
+    }
+
+    /**
+     * 交集
+     */
+    public static <T> Collection<T> intersection(Collection<T> collection1, Collection<T> collection2) {
+        Collection<T> intersectionCollection = new ArrayList<>();
+        intersectionCollection.addAll(collection1);
+        intersectionCollection.retainAll(collection2);
+        return intersectionCollection;
+    }
+
 }
