@@ -1,6 +1,6 @@
 package com.mundo.web.mvc;
 
-import com.mundo.constant.Words;
+import com.mundo.core.constant.Words;
 import com.mundo.web.annotation.JsonpController;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;

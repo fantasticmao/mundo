@@ -1,6 +1,6 @@
 package com.mundo.data;
 
-import com.mundo.MundoCoreAutoConfiguration;
+import com.mundo.core.MundoCoreAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

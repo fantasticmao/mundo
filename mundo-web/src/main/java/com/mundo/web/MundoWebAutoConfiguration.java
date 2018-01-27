@@ -36,9 +36,9 @@ public class MundoWebAutoConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        LOGGER.info("Registering [com.mundo.web.interceptor.CheckCsrfInterceptor] for Spring MVC!");
+        LOGGER.info("Registering [CheckCsrfInterceptor] for Spring MVC!");
         registry.addInterceptor(checkCsrfInterceptor());
-        LOGGER.info("Registering [com.mundo.web.interceptor.CheckLoginInterceptor] for Spring MVC!");
+        LOGGER.info("Registering [CheckLoginInterceptor] for Spring MVC!");
         registry.addInterceptor(checkLoginInterceptor());
     }
 }

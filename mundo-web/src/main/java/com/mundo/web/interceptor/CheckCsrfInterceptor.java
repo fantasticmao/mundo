@@ -1,7 +1,7 @@
 package com.mundo.web.interceptor;
 
+import com.mundo.core.util.CollectionUtil;
 import com.mundo.web.annotation.CheckCsrf;
-import com.mundo.util.CollectionUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 

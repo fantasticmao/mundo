@@ -1,8 +1,8 @@
 package com.mundo.data;
 
+import com.mundo.data.datasource.PartitionException;
 import com.mundo.data.aop.PartitionAspect;
 import com.mundo.data.datasource.PartitionDataSource;
-import com.mundo.data.datasource.PartitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class MundoDataAutoConfiguration {
                 LOGGER.info("Get and group [javax.sql.Datasource] {} from the Spring ApplicationContext.", datasource));
         // TODO get and group the instances of PartitionDataSource from the Spring ApplicationContext
 
-        LOGGER.info("Initializing [com.mundo.data.datasource.PartitionDataSource] Bean.");
+        LOGGER.info("Initializing [PartitionDataSource] Bean.");
         return new PartitionDataSource(defaultTargetDataSource, targetDataSources,
                 seed -> (int) (seed % dataSourceMap.keySet().size()) + 1);
     }

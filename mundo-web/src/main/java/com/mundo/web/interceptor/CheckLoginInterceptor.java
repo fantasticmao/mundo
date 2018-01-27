@@ -1,7 +1,7 @@
 package com.mundo.web.interceptor;
 
-import com.mundo.constant.Words;
-import com.mundo.util.CollectionUtil;
+import com.mundo.core.constant.Words;
+import com.mundo.core.util.CollectionUtil;
 import com.mundo.web.annotation.CheckLogin;
 
 import javax.servlet.http.HttpServletRequest;

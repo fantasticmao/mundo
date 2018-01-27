@@ -1,6 +1,6 @@
 package com.mundo.data.aop;
 
-import com.mundo.aop.AbstractAspect;
+import com.mundo.core.aop.AbstractAspect;
 import com.mundo.data.annotation.Partition;
 import com.mundo.data.datasource.PartitionContext;
 import com.mundo.data.datasource.PartitionException;

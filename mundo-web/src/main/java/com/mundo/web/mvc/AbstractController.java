@@ -1,6 +1,6 @@
 package com.mundo.web.mvc;
 
-import com.mundo.constant.Words;
+import com.mundo.core.constant.Words;
 import com.mundo.web.annotation.CheckCsrf;
 import com.mundo.web.annotation.CheckLogin;
 

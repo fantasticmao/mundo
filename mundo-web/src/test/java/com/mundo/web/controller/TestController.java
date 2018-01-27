@@ -1,7 +1,7 @@
 package com.mundo.web.controller;
 
-import com.mundo.support.JsonApi;
 import com.mundo.web.annotation.JsonpController;
+import com.mundo.core.support.JsonApi;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
