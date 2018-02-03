@@ -85,7 +85,7 @@ public final class JsonUtil {
      * Json -> JsonNode
      */
     public static JsonNode toJsonNode(String json, String fieldName) {
-        if (StringUtil.isNotEmpty(json, fieldName)) {
+        if (StringUtil.isNoneEmpty(json, fieldName)) {
             try {
                 return OBJECT_MAPPER.readTree(json).findPath(fieldName);
             } catch (IOException e) {

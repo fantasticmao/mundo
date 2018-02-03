@@ -63,7 +63,6 @@ public final class JsonApi implements Serializable {
     }
 
     public JsonApi fromJson(String json) {
-        JsonApi empty = new JsonApi();
         return JsonUtil.toClass(json, JsonApi.class).orElse(null);
     }
 

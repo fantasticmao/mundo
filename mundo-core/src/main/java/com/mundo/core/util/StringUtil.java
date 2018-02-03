@@ -8,33 +8,7 @@ import com.mundo.core.constant.Strings;
  * @author maomao
  * @since 2017/3/4
  */
-public final class StringUtil {
-
-    public static boolean isEmpty(String str) {
-        return str == null || str.length() == 0;
-    }
-
-    public static boolean isEmpty(String... str) {
-        for (String s : str) {
-            if (isEmpty(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNotEmpty(String str) {
-        return !isEmpty(str);
-    }
-
-    public static boolean isNotEmpty(String... str) {
-        for (String s : str) {
-            if (isEmpty(s)) {
-                return false;
-            }
-        }
-        return true;
-    }
+public final class StringUtil extends org.apache.commons.lang3.StringUtils {
 
     public static String reverse(String str) {
         StringBuilder sb = new StringBuilder(str);

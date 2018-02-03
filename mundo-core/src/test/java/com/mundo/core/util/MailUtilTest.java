@@ -16,13 +16,13 @@ import javax.annotation.Resource;
  * @author maodh
  * @since 14/01/2018
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class MailUtilTest {
     @Resource
     private JavaMailSender mailSender;
 
-    @Test
+    //@Test
     public void send() {
         mailSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
