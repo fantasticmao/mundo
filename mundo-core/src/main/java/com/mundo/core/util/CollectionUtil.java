@@ -1,7 +1,5 @@
 package com.mundo.core.util;
 
-import com.mundo.core.constant.Strings;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -14,19 +12,19 @@ import java.util.function.Predicate;
  * @since 2017/3/4
  */
 public final class CollectionUtil {
-    public static boolean isEmpty(Collection<?> collection) {
+    public static boolean isEmpty(final Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
 
-    public static boolean isEmpty(Map<?, ?> map) {
-        return map == null || map.isEmpty();
-    }
-
-    public static boolean isNotEmpty(Collection<?> collection) {
+    public static boolean isNotEmpty(final Collection<?> collection) {
         return !isEmpty(collection);
     }
 
-    public static boolean isNotEmpty(Map<?, ?> map) {
+    public static boolean isEmpty(final Map<?, ?> map) {
+        return map == null || map.isEmpty();
+    }
+
+    public static boolean isNotEmpty(final Map<?, ?> map) {
         return !isEmpty(map);
     }
 
@@ -39,15 +37,6 @@ public final class CollectionUtil {
             }
         }
         return null;
-    }
-
-    public static String join(Collection<String> collection) {
-        return join(collection, Strings.COMMA);
-    }
-
-    public static String join(Collection<String> collection, String separator) {
-        String[] strArray = collection.toArray(new String[collection.size()]);
-        return ArrayUtil.join(strArray, separator);
     }
 
     /**

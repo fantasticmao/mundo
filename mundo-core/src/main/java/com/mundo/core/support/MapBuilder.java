@@ -63,7 +63,7 @@ public class MapBuilder<K, V> {
     }
 
     public MapBuilder<K, V> putIfNonNull(K k, V v) {
-        return putIf(k, v, (key, val) -> ObjectUtil.nonNull(key, val));
+        return putIf(k, v, (key, val) -> ObjectUtil.allNotNull(key, val));
     }
 
     public MapBuilder<K, V> putIfKeyNonNull(K k, V v) {

@@ -6,14 +6,6 @@ package com.mundo.core.util;
  * @author maodh
  * @since 2017/8/2
  */
-public class ObjectUtil {
+public class ObjectUtil extends org.apache.commons.lang3.ObjectUtils {
 
-    public static boolean nonNull(Object... objs) {
-        for (Object obj : objs) {
-            if (obj == null) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

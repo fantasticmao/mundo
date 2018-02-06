@@ -1,7 +1,7 @@
 package com.mundo.core.aop;
 
 import com.mundo.core.annotation.Timeout;
-import com.mundo.core.util.CollectionUtil;
+import com.mundo.core.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -49,7 +49,7 @@ public class TimeoutAspect extends AbstractAspect {
         String className = method.getDeclaringClass().getName();
         Class<?>[] parameterTypes = method.getParameterTypes();
         List<String> parameterTypeList = Arrays.stream(parameterTypes).map(Class::getSimpleName).collect(Collectors.toList());
-        String signature = CollectionUtil.join(parameterTypeList, ", ");
+        String signature = StringUtil.join(parameterTypeList, ", ");
 
         Timeout timeout = method.getAnnotation(Timeout.class);
         long limitTime = timeout.time();
