@@ -20,7 +20,7 @@ public class MapBuilder<K, V> implements Builder<Map<K, V>> {
     private Map<K, V> map;
 
     private MapBuilder() {
-        throw new AssertionError("No com.maomao.support.MapBuilder instances for you!");
+        throw new AssertionError("No com.mundo.core.support.MapBuilder instances for you!");
     }
 
     private MapBuilder(Map<K, V> map) {

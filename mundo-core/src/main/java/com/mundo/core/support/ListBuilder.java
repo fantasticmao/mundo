@@ -19,7 +19,7 @@ public class ListBuilder<E> implements Builder<List<E>> {
     private List<E> list;
 
     private ListBuilder() {
-        throw new AssertionError("No com.maomao.support.ListBuilder instances for you!");
+        throw new AssertionError("No com.mundo.core.support.ListBuilder instances for you!");
     }
 
     private ListBuilder(List<E> list) {
