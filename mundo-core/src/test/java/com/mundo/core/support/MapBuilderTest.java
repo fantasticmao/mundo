@@ -2,6 +2,7 @@ package com.mundo.core.support;
 
 import org.junit.Test;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +26,7 @@ public class MapBuilderTest {
 
     @Test
     public void putIfKeyAbsent() {
-        Map<String, Object> map = MapBuilder.<String, Object>create()
+        Map<String, Object> map = MapBuilder.<String, Object>create(4)
                 .put("one", 1)
                 .putIfAbsent("aaa", 1)
                 .putIfKeyAbsent("one", 2)
@@ -36,7 +37,7 @@ public class MapBuilderTest {
 
     @Test
     public void putIfNonNull() {
-        Map<String, Object> map = MapBuilder.<String, Object>create()
+        Map<String, Object> map = MapBuilder.<String, Object>create(5)
                 .put("one", 1)
                 .putIfNonNull("two", null)
                 .putIfKeyNonNull(null, 3)
@@ -47,7 +48,7 @@ public class MapBuilderTest {
 
     @Test
     public void ifPut() {
-        Map<String, Object> map = MapBuilder.<String, Object>create(MapBuilder.Type.LINKED_HASH)
+        Map<String, Object> map = MapBuilder.<String, Object>create(LinkedHashMap::new)
                 .put("one", 1)
                 .putIf("two", 2, (k, v) -> false)
                 .putIf("three", 2, (k, v) -> true)

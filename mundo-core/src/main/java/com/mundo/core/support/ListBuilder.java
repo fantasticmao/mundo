@@ -4,10 +4,10 @@ import com.mundo.core.util.JsonUtil;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * ListBuilder
@@ -18,31 +18,24 @@ import java.util.function.Predicate;
 public class ListBuilder<E> implements Builder<List<E>> {
     private List<E> list;
 
-    public enum Type {
-        ARRAY, LINKED
-    }
-
     private ListBuilder() {
         throw new AssertionError("No com.maomao.support.ListBuilder instances for you!");
     }
 
-    private ListBuilder(Type type) {
-        switch (type) {
-            case ARRAY:
-                list = new ArrayList<>();
-                break;
-            case LINKED:
-                list = new LinkedList<>();
-                break;
-        }
+    private ListBuilder(List<E> list) {
+        this.list = list;
     }
 
     public static <E> ListBuilder<E> create() {
-        return new ListBuilder<>(Type.ARRAY);
+        return create(ArrayList::new);
     }
 
-    public static <E> ListBuilder<E> create(Type type) {
-        return new ListBuilder<>(type);
+    public static <E> ListBuilder<E> create(int capacity) {
+        return create(() -> new ArrayList<E>(capacity));
+    }
+
+    public static <E> ListBuilder<E> create(Supplier<List<E>> supplier) {
+        return new ListBuilder<>(supplier.get());
     }
 
     public ListBuilder<E> add(E e) {
