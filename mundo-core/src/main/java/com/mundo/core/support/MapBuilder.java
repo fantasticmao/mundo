@@ -2,6 +2,7 @@ package com.mundo.core.support;
 
 import com.mundo.core.util.JsonUtil;
 import com.mundo.core.util.ObjectUtil;
+import org.apache.commons.lang3.builder.Builder;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -12,7 +13,7 @@ import java.util.function.BiPredicate;
  * @author maomao
  * @since 2017/3/5
  */
-public class MapBuilder<K, V> {
+public class MapBuilder<K, V> implements Builder<Map<K, V>> {
     private Map<K, V> map;
 
     public enum Type {
@@ -81,6 +82,7 @@ public class MapBuilder<K, V> {
         return this;
     }
 
+    @Override
     public Map<K, V> build() {
         return map;
     }

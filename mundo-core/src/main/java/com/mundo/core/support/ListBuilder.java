@@ -1,6 +1,7 @@
 package com.mundo.core.support;
 
 import com.mundo.core.util.JsonUtil;
+import org.apache.commons.lang3.builder.Builder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,7 +15,7 @@ import java.util.function.Predicate;
  * @author maodh
  * @since 2017/7/25
  */
-public class ListBuilder<E> {
+public class ListBuilder<E> implements Builder<List<E>> {
     private List<E> list;
 
     public enum Type {
@@ -64,6 +65,7 @@ public class ListBuilder<E> {
         return this;
     }
 
+    @Override
     public List<E> build() {
         return list;
     }
