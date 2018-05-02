@@ -3,16 +3,16 @@ package com.mundo.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * Timeout
+ * AssertFalse
  *
  * @author maodh
- * @since 2017/11/14
+ * @since 02/05/2018
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface Timeout {
+public @interface AssertFalse {
 
-    long time() default 1_000;
+    String message() default "";
 }

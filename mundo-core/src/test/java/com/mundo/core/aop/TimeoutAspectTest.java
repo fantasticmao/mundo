@@ -1,10 +1,7 @@
 package com.mundo.core.aop;
 
-import com.mundo.core.ApplicationTest;
+import com.mundo.core.SpringTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
@@ -14,9 +11,8 @@ import javax.annotation.Resource;
  * @author maodh
  * @since 2017/11/15
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class TimeoutAspectTest {
+
+public class TimeoutAspectTest extends SpringTest {
     @Resource
     private TimeoutComponent timeoutComponent;
 

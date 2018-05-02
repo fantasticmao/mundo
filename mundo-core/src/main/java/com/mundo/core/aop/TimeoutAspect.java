@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
  * @since 2017/11/14
  */
 @Aspect
-@Order(1)
 public class TimeoutAspect extends AbstractAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeoutAspect.class);
     private long startTime;
@@ -31,11 +29,10 @@ public class TimeoutAspect extends AbstractAspect {
 
     @Pointcut("@annotation(com.mundo.core.annotation.Timeout)")
     public void annotationPointCut() {
-
     }
 
     @Before("annotationPointCut()")
-    public void before(JoinPoint joinPoint) {
+    public void before() {
         startTime = System.nanoTime();
     }
 

@@ -1,5 +1,6 @@
 package com.mundo.core;
 
+import com.mundo.core.aop.AssertFalseComponent;
 import com.mundo.core.aop.TimeoutComponent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,11 @@ public class ApplicationTest {
     @Bean
     TimeoutComponent timeoutComponent() {
         return new TimeoutComponent();
+    }
+
+    @Bean
+    AssertFalseComponent assertFalseComponent() {
+        return new AssertFalseComponent();
     }
 
     @Bean

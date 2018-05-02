@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class TimeoutComponent {
 
     @Timeout
-    public void hello1() {
+    void hello1() {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
@@ -23,7 +23,7 @@ public class TimeoutComponent {
     }
 
     @Timeout
-    public void hello2(String str) {
+    void hello2(String str) {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
@@ -32,7 +32,7 @@ public class TimeoutComponent {
     }
 
     @Timeout
-    public void hello3(String str, Map<String, Integer> map, int... ints) {
+    void hello3(String str, Map<String, Integer> map, int... ints) {
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
