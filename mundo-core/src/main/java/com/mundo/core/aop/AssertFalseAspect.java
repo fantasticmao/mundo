@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
  */
 @Aspect
 public class AssertFalseAspect extends AbstractAspect {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AssertFalseAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AssertFalse.class);
 
     @Pointcut("@annotation(com.mundo.core.annotation.AssertFalse)")
     public void annotationPointCut() {
@@ -31,7 +32,7 @@ public class AssertFalseAspect extends AbstractAspect {
         if (returnValue instanceof Boolean && !(boolean) returnValue) {
             Method method = getMethod(joinPoint);
             AssertFalse assertFalse = method.getAnnotation(AssertFalse.class);
-            String[] args = Stream.of(joinPoint.getArgs()).map(Object::toString).toArray(String[]::new);
+            String[] args = Stream.of(joinPoint.getArgs()).map(Objects::toString).toArray(String[]::new);
             String signature = StringUtil.join(args, ", ");
             LOGGER.warn(assertFalse.message());
             LOGGER.warn("arguments: {}", signature);
