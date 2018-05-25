@@ -19,22 +19,22 @@ import java.util.concurrent.TimeUnit;
 public class RestAsyncUtilTest {
 
     @Test
-    public void testAnsycGetForEntity1() throws InterruptedException {
+    public void ansycGetForEntity1() throws InterruptedException {
         RestAsyncUtil.ansycGetForEntity("http://www.dxy.com", String.class, entity -> System.out.println(entity.getStatusCode()));
         TimeUnit.SECONDS.sleep(3);
     }
 
     @Test
-    public void testAnsycGetForEntity2() throws InterruptedException {
+    public void ansycGetForEntity2() throws InterruptedException {
         RestAsyncUtil.ansycGetForEntity("https://www.bing.com", String.class, entity -> System.out.println(entity.getStatusCode()));
         TimeUnit.SECONDS.sleep(3);
     }
 
     /**
-     * 同 {@link RestUtilTest#testGetForEntity3()} 方法作比较
+     * 同 {@link RestUtilTest#getForEntity3()} 方法作比较
      */
     @Test
-    public void testAnsycGetForEntity3() throws InterruptedException {
+    public void ansycGetForEntity3() throws InterruptedException {
         long start = System.nanoTime();
         for (int i = 0; i < 20; i++) {
             RestAsyncUtil.ansycGetForEntity("http://www.dxy.com", String.class, entity -> System.out.println(entity.getStatusCode()));

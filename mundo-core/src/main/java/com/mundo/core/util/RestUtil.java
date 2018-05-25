@@ -15,23 +15,19 @@ import java.util.function.Function;
  * @since 2017/3/5
  */
 public class RestUtil {
-    protected static final RestTemplate defaultTemplate = SpringUtil.getBean(Beans.REST_DEFAULT_TEMPLATE);
-
-    public static RestTemplate getDefaultRestTemplate() {
-        return defaultTemplate;
-    }
+    public static final RestTemplate DEFAULT_REST_TEMPLATE = SpringUtil.getBean(Beans.DEFAULT_REST_TEMPLATE);
 
     public static <T> Optional<T> getForObject(String url, Class<T> responseType, Object... uriVariables) {
-        if (defaultTemplate != null && RegexUtil.isUrl(url)) {
-            T t = defaultTemplate.getForObject(url, responseType, uriVariables);
+        if (DEFAULT_REST_TEMPLATE != null && RegexUtil.isUrl(url)) {
+            T t = DEFAULT_REST_TEMPLATE.getForObject(url, responseType, uriVariables);
             return Optional.of(t);
         }
         return Optional.empty();
     }
 
     public static <T> Optional<ResponseEntity<T>> getForEntity(String url, Class<T> responseType, Object... uriVariables) {
-        if (defaultTemplate != null && RegexUtil.isUrl(url)) {
-            ResponseEntity<T> entity = defaultTemplate.getForEntity(url, responseType, uriVariables);
+        if (DEFAULT_REST_TEMPLATE != null && RegexUtil.isUrl(url)) {
+            ResponseEntity<T> entity = DEFAULT_REST_TEMPLATE.getForEntity(url, responseType, uriVariables);
             return Optional.of(entity);
         }
         return Optional.empty();

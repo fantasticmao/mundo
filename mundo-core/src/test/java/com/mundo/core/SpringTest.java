@@ -22,7 +22,7 @@ public class SpringTest {
     private ApplicationContext applicationContext;
 
     @Test
-    public void testSpring() {
+    public void spring() {
         Assert.assertNotNull(applicationContext);
     }
 }

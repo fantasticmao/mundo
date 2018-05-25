@@ -17,16 +17,12 @@ import java.util.Optional;
  * @since 2017/12/31
  */
 public class RestAsyncUtil extends RestUtil {
-    protected static final AsyncRestTemplate ansycTemplate = SpringUtil.getBean(Beans.REST_ANSYC_TEMPLATE);
-
-    public static AsyncRestTemplate getAnsycRestTemplate() {
-        return ansycTemplate;
-    }
+    public static final AsyncRestTemplate ASYNC_REST_TEMPLATE = SpringUtil.getBean(Beans.ANSYC_REST_TEMPLATE);
 
     public static <T> Optional<ListenableFuture<ResponseEntity<T>>> ansycGetForEntity(String url, Class<T> responseType,
                                                                                       Object... uriVariables) {
-        if (ansycTemplate != null && RegexUtil.isUrl(url)) {
-            ListenableFuture<ResponseEntity<T>> future = ansycTemplate.getForEntity(url, responseType, uriVariables);
+        if (ASYNC_REST_TEMPLATE != null && RegexUtil.isUrl(url)) {
+            ListenableFuture<ResponseEntity<T>> future = ASYNC_REST_TEMPLATE.getForEntity(url, responseType, uriVariables);
             return Optional.of(future);
         }
         return Optional.empty();

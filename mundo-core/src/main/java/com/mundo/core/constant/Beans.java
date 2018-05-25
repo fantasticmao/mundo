@@ -7,6 +7,6 @@ package com.mundo.core.constant;
  * @since 2017/12/31
  */
 public interface Beans {
-    String REST_DEFAULT_TEMPLATE = "defaultRestTemplate";
-    String REST_ANSYC_TEMPLATE = "ansycRestTemplate";
+    String DEFAULT_REST_TEMPLATE = "defaultRestTemplate";
+    String ANSYC_REST_TEMPLATE = "ansycRestTemplate";
 }

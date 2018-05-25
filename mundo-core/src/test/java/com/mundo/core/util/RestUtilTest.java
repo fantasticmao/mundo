@@ -17,30 +17,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RestUtilTest {
 
     @Test
-    public void testGetForObject1() {
+    public void getForObject1() {
         RestUtil.getForObject("http://www.dxy.com", String.class).ifPresent(System.out::println);
     }
 
     @Test
-    public void testGetForObject2() {
+    public void getForObject2() {
         RestUtil.getForObject("https://www.bing.com", String.class).ifPresent(System.out::println);
     }
 
     @Test
-    public void testGetForEntity1() {
+    public void getForEntity1() {
         RestUtil.getForEntity("http://www.dxy.com", String.class).ifPresent(entity -> System.out.println(entity.getStatusCode()));
     }
 
     @Test
-    public void testGetForEntity2() {
+    public void getForEntity2() {
         RestUtil.getForEntity("https://www.bing.com", String.class).ifPresent(entity -> System.out.println(entity.getStatusCode()));
     }
 
     /**
-     * 同 {@link RestAsyncUtilTest#testAnsycGetForEntity3()} 方法作比较
+     * 同 {@link RestAsyncUtilTest#ansycGetForEntity3()} 方法作比较
      */
     @Test
-    public void testGetForEntity3() {
+    public void getForEntity3() {
         long start = System.nanoTime();
         for (int i = 0; i < 20; i++) {
             RestUtil.getForEntity("http://www.dxy.com", String.class).ifPresent(entity -> System.out.println(entity.getStatusCode()));

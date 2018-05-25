@@ -11,17 +11,17 @@ import org.junit.Test;
 public class JsonUtilTest {
 
     @Test
-    public void testToMap() {
+    public void toMap() {
         System.out.println(JsonUtil.toMap("{\"key\":\"value\"}").getClass());
     }
 
     @Test
-    public void testToList() {
+    public void toList() {
         System.out.println(JsonUtil.toList("[1,2]").getClass());
     }
 
     @Test
-    public void testToSet() {
+    public void toSet() {
         System.out.println(JsonUtil.toSet("[1,2]").getClass());
     }
 }

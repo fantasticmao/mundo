@@ -6,12 +6,12 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
- * EncryptUtil
+ * HashUtil
  *
  * @author maomao
  * @since 2017/3/5
  */
-public final class EncryptUtil {
+public final class HashUtil {
 
     public enum Type {
         MD5("MD5"),

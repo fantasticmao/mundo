@@ -1,12 +1,7 @@
 package com.mundo.core.util;
 
-import com.mundo.core.ApplicationTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
@@ -16,9 +11,7 @@ import javax.annotation.Resource;
  * @author maodh
  * @since 14/01/2018
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class MailUtilTest {
+public class MailUtilTest extends SpringUtil {
     @Resource
     private JavaMailSender mailSender;
 

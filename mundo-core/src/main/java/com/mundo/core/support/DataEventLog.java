@@ -40,12 +40,16 @@ public class DataEventLog {
     }
 
     private static class Builder {
-        /* 设备属性 */
+        /**
+         * 设备属性
+         */
         private String ac; // app code
         private String av; // app version
         private String mc; // machine code
         private String os; // operating system
-        /* 行为属性 */
+        /**
+         * 行为属性
+         */
         private String api;
         private String ip;
         private String uid;
