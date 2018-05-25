@@ -5,10 +5,6 @@ import com.mundo.core.aop.TimeoutComponent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import java.util.Properties;
 
 /**
  * ApplicationTest
@@ -30,26 +26,6 @@ public class ApplicationTest {
     @Bean
     AssertFalseComponent assertFalseComponent() {
         return new AssertFalseComponent();
-    }
-
-    @Bean
-    JavaMailSender javaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setProtocol(JavaMailSenderImpl.DEFAULT_PROTOCOL);
-        mailSender.setHost("${host}");
-        mailSender.setPort(587);
-        mailSender.setUsername("${username}");
-        mailSender.setPassword("${password}");
-        mailSender.setDefaultEncoding("UTF-8");
-
-        Properties javaMailProperties = new Properties();
-        javaMailProperties.put("mail.smtp.auth", true);
-        javaMailProperties.put("mail.smtp.starttls.enable", true);
-
-        javaMailProperties.put("mail.smtp.connectiontimeout", 10_000); // Connection time out
-        javaMailProperties.put("mail.smtp.timeout", 10_000); // Read timed out
-        mailSender.setJavaMailProperties(javaMailProperties);
-        return mailSender;
     }
 
 }
