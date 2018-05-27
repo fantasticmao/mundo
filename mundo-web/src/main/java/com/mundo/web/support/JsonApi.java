@@ -1,7 +1,7 @@
-package com.mundo.core.support;
+package com.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mundo.core.constant.Strings;
+import com.mundo.core.support.Constant;
 import com.mundo.core.util.JsonUtil;
 import org.springframework.http.HttpStatus;
 
@@ -59,7 +59,7 @@ public final class JsonApi implements Serializable {
     }
 
     public String toJson() {
-        return JsonUtil.toJson(this).orElse(Strings.EMPTY);
+        return JsonUtil.toJson(this).orElse(Constant.Strings.EMPTY);
     }
 
     public JsonApi fromJson(String json) {
@@ -71,9 +71,7 @@ public final class JsonApi implements Serializable {
         return toJson();
     }
 
-    /**
-     * 默认 getter 和 setter 方法，供反射使用
-     */
+    // getter and setter
 
     public boolean getStatus() {
         return status;

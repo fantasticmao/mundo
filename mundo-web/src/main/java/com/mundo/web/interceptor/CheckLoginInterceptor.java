@@ -1,6 +1,5 @@
 package com.mundo.web.interceptor;
 
-import com.mundo.core.constant.Words;
 import com.mundo.core.util.CollectionUtil;
 import com.mundo.web.annotation.CheckLogin;
 
@@ -37,7 +36,7 @@ public class CheckLoginInterceptor extends AnnotationInterceptor<CheckLogin> {
     }
 
     private boolean check(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Object user = request.getSession().getAttribute(Words.USER);
+        Object user = request.getSession().getAttribute("user");
         if (user == null) {
             sendError(request, response);
             return false;

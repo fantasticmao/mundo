@@ -1,4 +1,4 @@
-package com.mundo.core.support;
+package com.mundo.web.support;
 
 import org.junit.Assert;
 import org.junit.Test;

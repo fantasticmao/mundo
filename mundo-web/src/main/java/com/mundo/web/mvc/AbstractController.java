@@ -1,6 +1,5 @@
 package com.mundo.web.mvc;
 
-import com.mundo.core.constant.Words;
 import com.mundo.web.annotation.CheckCsrf;
 import com.mundo.web.annotation.CheckLogin;
 
@@ -19,7 +18,7 @@ public abstract class AbstractController<User> {
 
     @SuppressWarnings("unchecked")
     protected Optional<User> getUserSession(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute(Words.USER);
+        User user = (User) request.getSession().getAttribute("user");
         return Optional.ofNullable(user);
     }
 

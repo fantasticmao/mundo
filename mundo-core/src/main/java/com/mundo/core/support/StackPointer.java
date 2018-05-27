@@ -10,7 +10,7 @@ import java.io.PrintStream;
  * @author maodh
  * @since 04/02/2018
  */
-public class StackPointer {
+public final class StackPointer {
 
     public static void printStackTrace() {
         printStackTrace(null);

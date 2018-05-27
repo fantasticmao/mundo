@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author maomao
  * @since 2017/3/5
  */
-public class Pair<T, R> implements Serializable {
+public final class Pair<T, R> implements Serializable {
     private static final long serialVersionUID = 3585194245329360293L;
 
     private T t;

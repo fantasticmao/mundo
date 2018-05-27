@@ -1,7 +1,6 @@
 package com.mundo.web.interceptor;
 
-import com.mundo.core.support.JsonApi;
-import com.mundo.core.util.AppUtil;
+import com.mundo.web.support.JsonApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -19,7 +18,8 @@ import java.io.IOException;
 abstract class AbstractInterceptor extends HandlerInterceptorAdapter {
 
     void sendError(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (AppUtil.isApp(request)) {
+        final String accept = request.getHeader("Accept");
+        if (accept.contains(MediaType.APPLICATION_JSON.getType())) {
             sendJsonError(response, JsonApi.error(HttpStatus.BAD_REQUEST));
         } else {
             sendWebError(response, HttpStatus.BAD_REQUEST);

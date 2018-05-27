@@ -1,6 +1,6 @@
 package com.mundo.web.mvc;
 
-import com.mundo.core.support.JsonApi;
+import com.mundo.web.support.JsonApi;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;

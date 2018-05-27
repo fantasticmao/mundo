@@ -1,12 +1,13 @@
-package com.mundo.core.constant;
+package com.mundo.web.support;
 
 /**
  * Beans
  *
  * @author maodh
- * @since 2017/12/31
+ * @since 27/05/2018
  */
 public interface Beans {
     String DEFAULT_REST_TEMPLATE = "defaultRestTemplate";
+
     String ANSYC_REST_TEMPLATE = "ansycRestTemplate";
 }
