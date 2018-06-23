@@ -33,9 +33,9 @@ public class AssertFalseAspect extends AbstractAspect {
             Method method = getMethod(joinPoint);
             AssertFalse assertFalse = method.getAnnotation(AssertFalse.class);
             String[] args = Stream.of(joinPoint.getArgs()).map(Objects::toString).toArray(String[]::new);
-            String signature = StringUtil.join(args, ", ");
+            String argument = StringUtil.join(args, ", ");
             LOGGER.warn(assertFalse.message());
-            LOGGER.warn("arguments: {}", signature);
+            LOGGER.warn("arguments: {}", argument);
         }
     }
 

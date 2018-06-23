@@ -1,6 +1,7 @@
 package com.mundo.core;
 
 import com.mundo.core.aop.AssertFalseComponent;
+import com.mundo.core.aop.PrintArgsComponent;
 import com.mundo.core.aop.TimeoutComponent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,13 +20,18 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class ApplicationTest {
 
     @Bean
-    TimeoutComponent timeoutComponent() {
-        return new TimeoutComponent();
+    AssertFalseComponent assertFalseComponent() {
+        return new AssertFalseComponent();
     }
 
     @Bean
-    AssertFalseComponent assertFalseComponent() {
-        return new AssertFalseComponent();
+    PrintArgsComponent printArgsComponent() {
+        return new PrintArgsComponent();
+    }
+
+    @Bean
+    TimeoutComponent timeoutComponent() {
+        return new TimeoutComponent();
     }
 
 }
