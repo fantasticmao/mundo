@@ -1,6 +1,9 @@
 package com.mundo.core.util;
 
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -13,7 +16,6 @@ import java.util.Base64;
  */
 public enum HashUtil {
     MD5("MD5"),
-    SHA("SHA"),
     SHA1("SHA1");
 
     private final String type;
@@ -22,31 +24,38 @@ public enum HashUtil {
         this.type = type;
     }
 
-    public String encode(String text) {
+    public String hash(byte[] bytes) {
         try {
             MessageDigest md = MessageDigest.getInstance(type);
-            md.update(text.getBytes());
-            return new BigInteger(1, md.digest()).toString(16);
+            byte[] newBytes = md.digest(bytes);
+            return new BigInteger(1, newBytes).toString(16);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
-    /**
-     * Base64 解码
-     */
-    public static String a2b(String text) {
-        byte[] dts = Base64.getDecoder().decode(text.getBytes());
-        return new String(dts);
+    public String hash(String str) {
+        return hash(str.getBytes());
     }
 
-    /**
-     * Base64 编码
-     */
-    public static String b2a(String text) {
-        byte[] dst = Base64.getEncoder().encode(text.getBytes());
+    public String hash(Path path) {
+        try {
+            return hash(Files.readAllBytes(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String encode(String str) {
+        byte[] dst = Base64.getEncoder().encode(str.getBytes());
         return new String(dst);
+    }
+
+    public static String decode(String str) {
+        byte[] dts = Base64.getDecoder().decode(str.getBytes());
+        return new String(dts);
     }
 
 }

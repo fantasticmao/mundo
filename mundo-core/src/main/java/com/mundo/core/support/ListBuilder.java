@@ -4,6 +4,7 @@ import com.mundo.core.util.JsonUtil;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -36,6 +37,11 @@ public class ListBuilder<E> implements Builder<List<E>> {
 
     public static <E> ListBuilder<E> create(Supplier<List<E>> supplier) {
         return new ListBuilder<>(supplier.get());
+    }
+
+    public ListBuilder<E> addAll(Collection<E> collection) {
+        list.addAll(collection);
+        return this;
     }
 
     public ListBuilder<E> add(E e) {

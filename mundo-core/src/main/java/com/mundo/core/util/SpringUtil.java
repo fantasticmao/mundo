@@ -14,7 +14,7 @@ import org.springframework.core.io.ResourceLoader;
  * @author maodh
  * @since 2017/12/31
  */
-public class SpringUtil implements ApplicationContextAware, EnvironmentAware, ResourceLoaderAware {
+public final class SpringUtil implements ApplicationContextAware, EnvironmentAware, ResourceLoaderAware {
     private static ApplicationContext applicationContext;
     private static Environment environment;
     private static ResourceLoader resourceLoader;

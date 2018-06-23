@@ -8,6 +8,6 @@ import org.apache.commons.lang3.ObjectUtils;
  * @author maodh
  * @since 2017/8/2
  */
-public class ObjectUtil extends ObjectUtils {
+public final class ObjectUtil extends ObjectUtils {
 
 }
