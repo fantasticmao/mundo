@@ -1,6 +1,7 @@
 package com.mundo.core;
 
 import com.mundo.core.aop.AssertFalseAspect;
+import com.mundo.core.aop.PrintArgsAspect;
 import com.mundo.core.aop.TimeoutAspect;
 import com.mundo.core.util.SpringUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,14 +19,20 @@ public class MundoCoreAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    TimeoutAspect timeoutAspect() {
-        return new TimeoutAspect();
+    AssertFalseAspect assertFalseAspect() {
+        return new AssertFalseAspect();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    AssertFalseAspect assertFalseAspect() {
-        return new AssertFalseAspect();
+    PrintArgsAspect printArgsAspect() {
+        return new PrintArgsAspect();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    TimeoutAspect timeoutAspect() {
+        return new TimeoutAspect();
     }
 
     @Bean

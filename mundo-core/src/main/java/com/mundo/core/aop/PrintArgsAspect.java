@@ -1,11 +1,17 @@
 package com.mundo.core.aop;
 
 import com.mundo.core.annotation.PrintArgs;
+import com.mundo.core.util.StringUtil;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Method;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * PrintArgsAspect
@@ -22,7 +28,13 @@ public class PrintArgsAspect extends AbstractAspect {
     }
 
     @Before("annotationPointCut()")
-    public void before() {
+    public void before(JoinPoint joinPoint) {
+        Method method = super.getMethod(joinPoint);
+        String methodName = method.getName();
+        String className = method.getDeclaringClass().getName();
+        String[] args = Stream.of(joinPoint.getArgs()).map(Objects::toString).toArray(String[]::new);
+        String argument = StringUtil.join(args, ", ");
+        LOGGER.info("Execute Method: {}#{}({})", className, methodName, argument);
 
     }
 }

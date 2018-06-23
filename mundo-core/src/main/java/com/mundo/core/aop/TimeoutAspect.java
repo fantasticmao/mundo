@@ -52,7 +52,7 @@ public class TimeoutAspect extends AbstractAspect {
         long limitTime = timeout.time();
 
         if (limitTime > 0 && durationTime > limitTime) {
-            LOGGER.warn("{}.{}({}) 执行超时。限时时间：{}ms，超时时间：{}ms", className, methodName, signature, limitTime, durationTime);
+            LOGGER.warn("{}#{}({}) 执行超时。限时时间：{}ms，超时时间：{}ms", className, methodName, signature, limitTime, durationTime);
         }
     }
 }
