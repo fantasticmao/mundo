@@ -20,11 +20,11 @@ public final class StackPointer {
         printStackTrace(descLine, System.out);
     }
 
-    private static void printStackTrace(String descLine, PrintStream s) {
+    private static void printStackTrace(String descLine, PrintStream printStream) {
         if (StringUtil.isNotEmpty(descLine))
-            s.println(descLine);
+            printStream.println(descLine);
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         for (StackTraceElement traceElement : trace)
-            s.println("\tat " + traceElement);
+            printStream.println("\tat " + traceElement);
     }
 }
