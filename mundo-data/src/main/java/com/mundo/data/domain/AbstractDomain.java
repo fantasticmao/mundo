@@ -1,5 +1,6 @@
 package com.mundo.data.domain;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -19,7 +20,9 @@ public abstract class AbstractDomain<ID extends Serializable> implements Seriali
     @Id
     @GeneratedValue
     private ID id; // 逻辑主键
+    @Column(insertable = false, updatable = false)
     private Timestamp createTime; // 创建时间
+    @Column(insertable = false, updatable = false)
     private Timestamp modifyTime; // 修改时间
 
     @Override
