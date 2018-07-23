@@ -4,12 +4,10 @@ import com.google.common.cache.AbstractLoadingCache;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.CacheStats;
 import net.rubyeye.xmemcached.MemcachedClient;
-import net.rubyeye.xmemcached.exception.MemcachedException;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 
 /**
@@ -19,20 +17,20 @@ import java.util.function.Function;
  * @since 2018/7/22
  */
 public class MemcacheLoadingCache<K, V> extends AbstractLoadingCache<K, V> {
-    private final MemcachedClient memcachedClient;
+    private final MemcacheClientUtil memcacheClientUtil;
     private final CacheLoader<K, V> cacheLoader;
     private final Function<Object, String> keyGenerator;
     private final int expireAfterWriteSeconds;
 
     public MemcacheLoadingCache(MemcachedClient memcachedClient, CacheLoader<K, V> cacheLoader, Function<Object, String> keyGenerator) {
-        this(memcachedClient, cacheLoader, keyGenerator, 30, TimeUnit.DAYS);
+        this(memcachedClient, cacheLoader, keyGenerator, Math.toIntExact(TimeUnit.DAYS.toSeconds(30)));
     }
 
-    public MemcacheLoadingCache(MemcachedClient memcachedClient, CacheLoader<K, V> cacheLoader, Function<Object, String> keyGenerator, long duration, TimeUnit unit) {
-        this.memcachedClient = memcachedClient;
+    public MemcacheLoadingCache(MemcachedClient memcachedClient, CacheLoader<K, V> cacheLoader, Function<Object, String> keyGenerator, int expireAfterWriteSeconds) {
+        this.memcacheClientUtil = new MemcacheClientUtil(memcachedClient);
         this.cacheLoader = cacheLoader;
         this.keyGenerator = keyGenerator;
-        this.expireAfterWriteSeconds = Math.toIntExact(unit.toSeconds(duration));
+        this.expireAfterWriteSeconds = expireAfterWriteSeconds;
     }
 
     @Override
@@ -69,33 +67,20 @@ public class MemcacheLoadingCache<K, V> extends AbstractLoadingCache<K, V> {
 
     @Override
     public V getIfPresent(Object key) {
-        try {
-            final String k = keyGenerator.apply(key);
-            return memcachedClient.get(k);
-        } catch (TimeoutException | InterruptedException | MemcachedException e) {
-            e.printStackTrace();
-            return null;
-        }
+        final String k = keyGenerator.apply(key);
+        return memcacheClientUtil.get(k);
     }
 
     @Override
     public void put(K key, V value) {
-        try {
-            final String k = keyGenerator.apply(key);
-            memcachedClient.set(k, expireAfterWriteSeconds, value);
-        } catch (TimeoutException | InterruptedException | MemcachedException e) {
-            e.printStackTrace();
-        }
+        final String k = keyGenerator.apply(key);
+        memcacheClientUtil.set(k, value, expireAfterWriteSeconds);
     }
 
     @Override
     public void invalidate(Object key) {
-        try {
-            final String k = keyGenerator.apply(key);
-            memcachedClient.delete(k);
-        } catch (TimeoutException | InterruptedException | MemcachedException e) {
-            e.printStackTrace();
-        }
+        final String k = keyGenerator.apply(key);
+        memcacheClientUtil.delete(k);
     }
 
     @Override
