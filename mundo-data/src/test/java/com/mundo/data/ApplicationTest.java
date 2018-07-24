@@ -1,6 +1,8 @@
 package com.mundo.data;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import net.rubyeye.xmemcached.command.BinaryCommandFactory;
+import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +19,11 @@ import javax.sql.DataSource;
  */
 @EnableMundoData
 @EnableAspectJAutoProxy
-@EnableJpaRepositories
+//@EnableJpaRepositories
 @Configuration
 public class ApplicationTest {
 
-    @Bean
+    //@Bean
     DataSource test() {
         return DataSourceBuilder.create()
                 .type(MysqlDataSource.class)
@@ -60,5 +62,15 @@ public class ApplicationTest {
                 .username("lang")
                 .password("lang.122333")
                 .build();
+    }
+
+    @Bean(name = "memcachedClient")
+    XMemcachedClientFactoryBean memcachedClientFactoryBean() {
+        XMemcachedClientFactoryBean factoryBean = new XMemcachedClientFactoryBean();
+        factoryBean.setServers("192.168.200.95:11211");
+        factoryBean.setCommandFactory(new BinaryCommandFactory());
+        factoryBean.setConnectionPoolSize(2);
+        factoryBean.setOpTimeout(3_000);
+        return factoryBean;
     }
 }
