@@ -2,8 +2,8 @@ package com.mundo.data.aop;
 
 import com.mundo.core.aop.AbstractAspect;
 import com.mundo.data.annotation.Partition;
-import com.mundo.data.datasource.PartitionContext;
 import com.mundo.data.datasource.PartitionException;
+import com.mundo.data.datasource.PartitionSeedContext;
 import com.mundo.data.domain.AbstractPartitionDomain;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,10 +21,10 @@ import java.lang.reflect.Method;
  * @since 2017/11/14
  */
 @Aspect
-@Order(3)
+@Order(1)
 public class PartitionAspect extends AbstractAspect {
 
-    @Pointcut("target(com.mundo.data.datasource.PartitionSupport)")
+    @Pointcut("@annotation(com.mundo.data.annotation.Partition)")
     public void targetPointCut() {
 
     }
@@ -64,7 +64,7 @@ public class PartitionAspect extends AbstractAspect {
             } else {
                 throw new PartitionException("the @Partition argument must be the instance of AbstractPartitionDomain or Number.");
             }
-            PartitionContext.push(seed);
+            PartitionSeedContext.push(seed);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.mundo.data;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -19,22 +18,11 @@ import javax.sql.DataSource;
  */
 @EnableMundoData
 @EnableAspectJAutoProxy
-//@EnableJpaRepositories
+@EnableJpaRepositories
 @Configuration
 public class ApplicationTest {
 
-    //@Bean
-    DataSource test() {
-        return DataSourceBuilder.create()
-                .type(MysqlDataSource.class)
-                .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test")
-                .username("root")
-                .password("mao.122333")
-                .build();
-    }
-
-    //@Bean
+    @Bean
     DataSource lang() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -44,7 +32,7 @@ public class ApplicationTest {
                 .build();
     }
 
-    //@Bean
+    @Bean
     DataSource lang01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -54,7 +42,7 @@ public class ApplicationTest {
                 .build();
     }
 
-    //@Bean
+    @Bean
     DataSource lang02() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
