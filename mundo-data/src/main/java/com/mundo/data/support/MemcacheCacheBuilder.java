@@ -10,6 +10,17 @@ import java.util.function.Function;
 
 /**
  * MemcacheCacheBuilder
+ * <pre>
+ * LoadingCache<Integer, String> cache = MemcacheCacheBuilder.<Integer, String>newBuilder(memcachedClient)
+ *     .expireTime(1, TimeUnit.HOURS)
+ *     .keyConvert(String::valueOf)
+ *     .build(new CacheLoader<Integer, String>() {
+ *         public String load(@Nonnull Integer key) throws Exception {
+ *             // do something ...
+ *             return null;
+ *         }
+ *      });
+ * </pre>
  *
  * @author maodh
  * @since 2018/7/22
