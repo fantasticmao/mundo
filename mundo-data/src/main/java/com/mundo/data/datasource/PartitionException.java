@@ -11,4 +11,12 @@ public class PartitionException extends RuntimeException {
     public PartitionException(String message) {
         super(message);
     }
+
+    public PartitionException(Throwable cause) {
+        super(cause);
+    }
+
+    public PartitionException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

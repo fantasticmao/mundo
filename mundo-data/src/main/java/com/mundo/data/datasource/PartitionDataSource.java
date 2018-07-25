@@ -40,14 +40,20 @@ public class PartitionDataSource extends AbstractRoutingDataSource {
 
     @Override
     protected Object resolveSpecifiedLookupKey(Object lookupKey) {
-        LOGGER.info("Loaded lookupKey \"{}\"", lookupKey);
-        return super.resolveSpecifiedLookupKey(lookupKey);
+        if (lookupKey instanceof String) {
+            LOGGER.info("Loaded lookupKey: \"{}\"", lookupKey);
+            return super.resolveSpecifiedLookupKey(lookupKey);
+        }
+        throw new PartitionException("lookupKey should be [javax.sql.DataSource] instance's bean name");
     }
 
     @Override
     protected DataSource resolveSpecifiedDataSource(Object dataSource) throws IllegalArgumentException {
-        LOGGER.info("Loaded dataSource \"{}\"", dataSource);
-        return super.resolveSpecifiedDataSource(dataSource);
+        if (dataSource instanceof DataSource) {
+            LOGGER.info("Loaded dataSource: \"{}\"", dataSource);
+            return super.resolveSpecifiedDataSource(dataSource);
+        }
+        throw new PartitionException("datasource should be [javax.sql.DataSource] instance");
     }
 
     @Override

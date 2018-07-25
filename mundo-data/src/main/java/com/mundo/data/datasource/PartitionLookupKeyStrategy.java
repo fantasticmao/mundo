@@ -8,5 +8,6 @@ import java.util.function.Function;
  * @author maodh
  * @since 2018/7/25
  */
+@FunctionalInterface
 public interface PartitionLookupKeyStrategy extends Function<Object, String> {
 }
