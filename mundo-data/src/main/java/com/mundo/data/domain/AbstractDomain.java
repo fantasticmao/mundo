@@ -1,9 +1,6 @@
 package com.mundo.data.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -18,7 +15,7 @@ public abstract class AbstractDomain<ID extends Serializable> implements Seriali
     private static final long serialVersionUID = 1819978692581974014L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id; // 逻辑主键
     @Column(insertable = false, updatable = false)
     private Timestamp createTime; // 创建时间

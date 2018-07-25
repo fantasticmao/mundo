@@ -10,10 +10,11 @@ import java.lang.annotation.*;
  * @author maodh
  * @since 2017/11/14
  */
-@Target(ElementType.PARAMETER)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
 public @interface Partition {
 
+    String field() default "";
 }

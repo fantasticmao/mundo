@@ -1,18 +1,13 @@
 package com.mundo.data.aop;
 
 import com.mundo.core.aop.AbstractAspect;
-import com.mundo.data.annotation.Partition;
-import com.mundo.data.datasource.PartitionException;
-import com.mundo.data.datasource.PartitionSeedContext;
-import com.mundo.data.domain.AbstractPartitionDomain;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
 
 /**
  * PartitionAspect
@@ -23,6 +18,7 @@ import java.lang.reflect.Method;
 @Aspect
 @Order(1)
 public class PartitionAspect extends AbstractAspect {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PartitionAspect.class);
 
     @Pointcut("@annotation(com.mundo.data.annotation.Partition)")
     public void targetPointCut() {
@@ -31,40 +27,10 @@ public class PartitionAspect extends AbstractAspect {
 
     @Before("targetPointCut()")
     public void before(JoinPoint joinPoint) {
-        // 获取 @Partition 注解参数
-        Method method = super.getMethod(joinPoint);
-        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-        int index = -1;
-        for (int i = 0; i < parameterAnnotations.length; i++) {
-            for (Annotation annotation : parameterAnnotations[i]) {
-                if (annotation.annotationType() == Partition.class) {
-                    index = i;
-                    break;
-                }
-            }
-        }
-
-        // 计算 PartitionSeed 数值
-        if (index == -1) {
-            // 不存在 @Partition 注解参数
-            return;
-        } else {
-            Object arg = joinPoint.getArgs()[index];
-            long seed;
-            if (arg instanceof AbstractPartitionDomain) {
-                seed = ((AbstractPartitionDomain) arg).getSeed().longValue();
-            } else if (arg instanceof Byte) {
-                seed = ((Byte) arg).longValue();
-            } else if (arg instanceof Short) {
-                seed = ((Short) arg).longValue();
-            } else if (arg instanceof Integer) {
-                seed = ((Integer) arg).longValue();
-            } else if (arg instanceof Long) {
-                seed = (Long) arg;
-            } else {
-                throw new PartitionException("the @Partition argument must be the instance of AbstractPartitionDomain or Number.");
-            }
-            PartitionSeedContext.push(seed);
-        }
+        // TODO 获取 @Partition 注解参数
+        // TODO 获取指定字段
+        // TODO 获取字段值
+        // TODO PartitionSeedContext.push(seed);
+        LOGGER.info("");
     }
 }

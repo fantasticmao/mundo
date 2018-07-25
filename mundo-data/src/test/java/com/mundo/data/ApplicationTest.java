@@ -1,5 +1,6 @@
 package com.mundo.data;
 
+import com.mundo.data.datasource.PartitionLookupKeyStrategy;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -18,38 +19,53 @@ import javax.sql.DataSource;
  */
 @EnableMundoData
 @EnableAspectJAutoProxy
-@EnableJpaRepositories
+//@EnableJpaRepositories
 @Configuration
 public class ApplicationTest {
 
     @Bean
-    DataSource lang() {
+    DataSource sns00() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/lang")
-                .username("lang")
-                .password("lang.122333")
+                .url("jdbc:mysql://192.168.200.77:3306/sns00")
+                .username("mydxy")
+                .password("e144(e2beae1@830d1")
                 .build();
     }
 
     @Bean
-    DataSource lang01() {
+    DataSource sns01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/lang01")
-                .username("lang")
-                .password("lang.122333")
+                .url("jdbc:mysql://192.168.200.77:3306/sns01")
+                .username("mydxy")
+                .password("e144(e2beae1@830d1")
                 .build();
     }
 
     @Bean
-    DataSource lang02() {
+    DataSource sns02() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/lang02")
-                .username("lang")
-                .password("lang.122333")
+                .url("jdbc:mysql://192.168.200.77:3306/sns02")
+                .username("mydxy")
+                .password("e144(e2beae1@830d1")
                 .build();
+    }
+
+    @Bean
+    DataSource sns03() {
+        return DataSourceBuilder.create()
+                .driverClassName("com.mysql.jdbc.Driver")
+                .url("jdbc:mysql://192.168.200.77:3306/sns03")
+                .username("mydxy")
+                .password("e144(e2beae1@830d1")
+                .build();
+    }
+
+    @Bean
+    PartitionLookupKeyStrategy lookupKeyStrategy() {
+        return key -> "lang";
     }
 
     @Bean(name = "memcachedClient")

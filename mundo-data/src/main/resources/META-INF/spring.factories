@@ -1,0 +1,5 @@
+# see https://docs.spring.io/spring-boot/docs/1.5.15.BUILD-SNAPSHOT/reference/htmlsingle/#boot-features-application-events-and-listeners
+#
+# If you want those listeners to be registered automatically regardless of the way the application is created you can
+# add a META-INF/spring.factories file to your project and reference your listener(s) using the org.springframework.context.ApplicationListener key.
+org.springframework.context.ApplicationListener=com.mundo.data.datasource.PartitionDataSourceListener
