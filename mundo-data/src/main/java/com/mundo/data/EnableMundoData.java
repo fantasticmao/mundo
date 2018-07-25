@@ -16,5 +16,4 @@ import java.lang.annotation.*;
 @Documented
 @Import({MundoCoreAutoConfiguration.class, MundoDataAutoConfiguration.class})
 public @interface EnableMundoData {
-    // TODO 制定配置文件，读取数据源
 }

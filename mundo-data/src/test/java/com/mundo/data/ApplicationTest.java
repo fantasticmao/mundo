@@ -1,13 +1,13 @@
 package com.mundo.data;
 
-import com.mundo.data.datasource.PartitionLookupKeyStrategy;
+import com.mundo.data.datasource.PartitionDataSource;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.sql.DataSource;
 
@@ -64,8 +64,9 @@ public class ApplicationTest {
     }
 
     @Bean
-    PartitionLookupKeyStrategy lookupKeyStrategy() {
-        return key -> "lang";
+    @ConditionalOnBean(DataSource.class)
+    PartitionDataSource partitionDataSource() {
+        return new PartitionDataSource(key -> "");
     }
 
     @Bean(name = "memcachedClient")
