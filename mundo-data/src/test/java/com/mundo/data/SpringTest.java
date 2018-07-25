@@ -1,11 +1,13 @@
 package com.mundo.data;
 
-import com.mundo.data.datasource.PartitionDataSource;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 /**
  * SpringTest
@@ -16,11 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class SpringTest {
-    @Autowired(required = false)
-    PartitionDataSource partitionDataSource;
+    @Resource
+    private ApplicationContext applicationContext;
 
     @Test
     public void spring() {
-        System.out.println(partitionDataSource);
+        Assert.assertNotNull(applicationContext);
     }
 }
