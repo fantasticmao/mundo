@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * JsonUtil
@@ -19,51 +21,48 @@ public final class JsonUtil {
     /**
      * Object -> JSON
      */
-    public static Optional<String> toJson(Object obj) {
+    public static String toJson(Object obj) {
         try {
-            String str = OBJECT_MAPPER.writeValueAsString(obj);
-            return Optional.ofNullable(str);
+            return OBJECT_MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 
     /**
      * Json -> Class
      */
-    public static <T> Optional<T> toClass(String json, Class<T> clazz) {
+    public static <T> T toClass(String json, Class<T> clazz) {
         try {
-            T t = OBJECT_MAPPER.readValue(json.getBytes(), clazz);
-            return Optional.ofNullable(t);
+            return OBJECT_MAPPER.readValue(json.getBytes(), clazz);
         } catch (IOException e) {
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 
     /**
      * JsonNode -> Class
      */
-    public static <T> Optional<T> toClass(JsonNode node, Class<T> clazz) {
+    public static <T> T toClass(JsonNode node, Class<T> clazz) {
         try {
-            T t = OBJECT_MAPPER.treeToValue(node, clazz);
-            return Optional.ofNullable(t);
+            return OBJECT_MAPPER.treeToValue(node, clazz);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return Optional.empty();
+            return null;
         }
     }
 
     /**
      * Json -> JsonNode -> Class
      */
-    public static <T> Optional<T> findNodeToClass(String json, String fieldName, Class<T> clazz) {
+    public static <T> T findNodeToClass(String json, String fieldName, Class<T> clazz) {
         JsonNode node = toJsonNode(json, fieldName);
         if (node != null && !node.isMissingNode()) {
             return toClass(node, clazz);
         } else {
-            return Optional.empty();
+            return null;
         }
     }
 
@@ -99,20 +98,20 @@ public final class JsonUtil {
      * Json -> LinkedHashMap
      */
     public static Map toMap(String json) {
-        return toClass(json, Map.class).orElse(Collections.emptyMap());
+        return toClass(json, Map.class);
     }
 
     /**
      * Json -> ArrayList
      */
     public static List toList(String json) {
-        return toClass(json, List.class).orElse(Collections.emptyList());
+        return toClass(json, List.class);
     }
 
     /**
      * Json -> HashSet
      */
     public static Set toSet(String json) {
-        return toClass(json, Set.class).orElse(Collections.emptySet());
+        return toClass(json, Set.class);
     }
 }

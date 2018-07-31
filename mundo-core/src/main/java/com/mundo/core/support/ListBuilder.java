@@ -70,7 +70,7 @@ public class ListBuilder<E> implements Builder<List<E>> {
     }
 
     public String toJson() {
-        return JsonUtil.toJson(list).orElse(null);
+        return JsonUtil.toJson(list);
     }
 
     @Override
