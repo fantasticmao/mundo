@@ -81,7 +81,7 @@ public class MapBuilder<K, V> implements Builder<Map<K, V>> {
     }
 
     public String toJson() {
-        return JsonUtil.toJson(map).orElse(null);
+        return JsonUtil.toJson(map);
     }
 
     @Override

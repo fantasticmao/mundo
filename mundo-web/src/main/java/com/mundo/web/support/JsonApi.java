@@ -3,6 +3,7 @@ package com.mundo.web.support;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mundo.core.support.Constant;
 import com.mundo.core.util.JsonUtil;
+import com.mundo.core.util.ObjectUtil;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
@@ -59,11 +60,11 @@ public final class JsonApi implements Serializable {
     }
 
     public String toJson() {
-        return JsonUtil.toJson(this).orElse(Constant.Strings.EMPTY);
+        return ObjectUtil.defaultIfNull(JsonUtil.toJson(this), Constant.Strings.EMPTY);
     }
 
     public JsonApi fromJson(String json) {
-        return JsonUtil.toClass(json, JsonApi.class).orElse(null);
+        return JsonUtil.toClass(json, JsonApi.class);
     }
 
     @Override
