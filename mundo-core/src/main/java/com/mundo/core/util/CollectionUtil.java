@@ -1,9 +1,13 @@
 package com.mundo.core.util;
 
+import com.mundo.core.support.Constant;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * CollectionUtil
@@ -12,19 +16,32 @@ import java.util.function.Predicate;
  * @since 2017/3/4
  */
 public interface CollectionUtil {
-    static boolean isEmpty(final Collection<?> collection) {
+
+    static String toString(Collection<?> collection) {
+        return toString(collection, Constant.Strings.COMMA);
+    }
+
+    /**
+     * @see java.lang.String#join(CharSequence, CharSequence...)
+     * @see java.lang.String#join(CharSequence, Iterable)
+     */
+    static String toString(Collection<?> collection, String delimiter) {
+        return collection.stream().map(Objects::toString).collect(Collectors.joining(delimiter));
+    }
+
+    static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
 
-    static boolean isNotEmpty(final Collection<?> collection) {
+    static boolean isNotEmpty(Collection<?> collection) {
         return !isEmpty(collection);
     }
 
-    static boolean isEmpty(final Map<?, ?> map) {
+    static boolean isEmpty(Map<?, ?> map) {
         return map == null || map.isEmpty();
     }
 
-    static boolean isNotEmpty(final Map<?, ?> map) {
+    static boolean isNotEmpty(Map<?, ?> map) {
         return !isEmpty(map);
     }
 
