@@ -32,6 +32,7 @@ public class GeneralControllerAdvice {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public JsonApi exceptionHandler(RuntimeException e) {
-        return JsonApi.error(HttpStatus.INTERNAL_SERVER_ERROR).message(e.getMessage());
+        e.printStackTrace();
+        return JsonApi.error(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
