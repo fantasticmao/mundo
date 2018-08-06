@@ -1,11 +1,10 @@
 package com.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mundo.core.support.Constant;
 import com.mundo.core.util.JsonUtil;
-import com.mundo.core.util.ObjectUtil;
 import org.springframework.http.HttpStatus;
 
+import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
 
 /**
@@ -18,17 +17,18 @@ import java.io.Serializable;
  * @author MaoMao
  * @since 2017/3/19
  */
+@Immutable
 public final class JsonApi implements Serializable {
     private static final long serialVersionUID = 6126929533373437316L;
 
-    private boolean status;
-    private int code;
-    private String message;
+    private final boolean status;
+    private final int code;
+    private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
     private JsonApi() {
-        // 默认构造器，为反射提供
+        throw new AssertionError("No com.mundo.web.support.JsonApi instances for you!");
     }
 
     private JsonApi(boolean status, int code, String message) {
@@ -45,26 +45,17 @@ public final class JsonApi implements Serializable {
         return new JsonApi(false, httpStatus.value(), httpStatus.getReasonPhrase());
     }
 
-    public JsonApi message(String message) {
-        if (message != null) {
-            this.message = message;
-        }
-        return this;
-    }
-
     public JsonApi data(Object data) {
-        if (data != null) {
+        if (this.data == null) {
             this.data = data;
+            return this;
+        } else {
+            return new JsonApi(this.status, this.code, this.message).data(data);
         }
-        return this;
     }
 
     public String toJson() {
-        return ObjectUtil.defaultIfNull(JsonUtil.toJson(this), Constant.Strings.EMPTY);
-    }
-
-    public JsonApi fromJson(String json) {
-        return JsonUtil.toClass(json, JsonApi.class);
+        return JsonUtil.toJson(this);
     }
 
     @Override
@@ -74,36 +65,19 @@ public final class JsonApi implements Serializable {
 
     // getter and setter
 
-    public boolean getStatus() {
+    public boolean isStatus() {
         return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Object getData() {
         return data;
     }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
 }

@@ -51,4 +51,11 @@ public class JsonApiTest {
         String actual = JsonApi.success().data(map).toString();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testJsonApi7() {
+        String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":false}";
+        String actual = JsonApi.success().data(true).data(false).toString();
+        Assert.assertEquals(expected, actual);
+    }
 }
