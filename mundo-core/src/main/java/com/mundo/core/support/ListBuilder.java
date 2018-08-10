@@ -3,6 +3,7 @@ package com.mundo.core.support;
 import com.mundo.core.util.JsonUtil;
 import org.apache.commons.lang3.builder.Builder;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
  * @author maodh
  * @since 2017/7/25
  */
+@NotThreadSafe
 public class ListBuilder<E> implements Builder<List<E>> {
     private List<E> list;
 

@@ -4,6 +4,7 @@ import com.mundo.core.util.JsonUtil;
 import com.mundo.core.util.ObjectUtil;
 import org.apache.commons.lang3.builder.Builder;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
  * @author maomao
  * @since 2017/3/5
  */
+@NotThreadSafe
 public class MapBuilder<K, V> implements Builder<Map<K, V>> {
     private Map<K, V> map;
 
