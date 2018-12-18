@@ -21,13 +21,14 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.time.Duration;
 
 /**
  * MundoWebAutoConfiguration
@@ -37,7 +38,7 @@ import java.security.cert.X509Certificate;
  */
 @Configuration
 @ComponentScan(value = "com.mundo.web.mvc")
-public class MundoWebAutoConfiguration extends WebMvcConfigurerAdapter {
+public class MundoWebAutoConfiguration implements WebMvcConfigurer {
     private static final Logger LOGGER = LoggerFactory.getLogger(MundoWebAutoConfiguration.class);
 
     @Override
@@ -60,6 +61,17 @@ public class MundoWebAutoConfiguration extends WebMvcConfigurerAdapter {
         return new CheckLoginInterceptor();
     }
 
+    @Bean(name = Beans.DEFAULT_REST_TEMPLATE)
+    @ConditionalOnMissingBean(name = Beans.DEFAULT_REST_TEMPLATE)
+    RestTemplate defaultRestTemplate() {
+        LOGGER.info("Instantiating core bean: defaultRestTemplate");
+        return new RestTemplateBuilder()
+                .requestFactory(HttpComponentsClientHttpRequestFactory.class)
+                .setReadTimeout(Duration.ofSeconds(5))
+                .setConnectTimeout(Duration.ofSeconds(5))
+                .build();
+    }
+
     @Bean
     @ConditionalOnMissingBean
     HttpClient httpClient() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
@@ -76,20 +88,9 @@ public class MundoWebAutoConfiguration extends WebMvcConfigurerAdapter {
         return httpClient;
     }
 
-    @Bean(name = Beans.DEFAULT_REST_TEMPLATE)
-    @ConditionalOnMissingBean(name = Beans.DEFAULT_REST_TEMPLATE)
-    RestTemplate defaultRestTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        LOGGER.info("Instantiating core bean: defaultRestTemplate");
-        return new RestTemplateBuilder()
-                .requestFactory(requestFactory)
-                .setReadTimeout(5_000)
-                .setConnectTimeout(5_000)
-                .build();
-    }
-
     @Bean(name = Beans.ANSYC_REST_TEMPLATE)
     @ConditionalOnMissingBean(name = Beans.ANSYC_REST_TEMPLATE)
+    @Deprecated
     AsyncRestTemplate ansycRestTemplate() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
         HttpComponentsAsyncClientHttpRequestFactory asyncRequestFactory = new HttpComponentsAsyncClientHttpRequestFactory();
         asyncRequestFactory.setReadTimeout(5_000);
