@@ -11,7 +11,7 @@ import java.util.Stack;
 public class PartitionSeedContext implements AutoCloseable {
     private static final ThreadLocal<Stack<Object>> SEED_STACK = ThreadLocal.withInitial(Stack::new);
 
-    public static Object push(Long seed) {
+    public static Object push(Object seed) {
         return SEED_STACK.get().push(seed);
     }
 

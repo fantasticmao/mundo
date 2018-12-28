@@ -37,7 +37,7 @@ public class ApplicationTest {
     DataSource sns01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.77:3306/sns01")
+                .url("jdbc:mysql://192.168.200.59:3306/sns01")
                 .username("mydxy")
                 .password("e144(e2beae1@830d1")
                 .build();
@@ -47,7 +47,7 @@ public class ApplicationTest {
     DataSource sns02() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.77:3306/sns02")
+                .url("jdbc:mysql://192.168.200.59:3306/sns02")
                 .username("mydxy")
                 .password("e144(e2beae1@830d1")
                 .build();
@@ -57,7 +57,7 @@ public class ApplicationTest {
     DataSource sns03() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.77:3306/sns03")
+                .url("jdbc:mysql://192.168.200.59:3306/sns03")
                 .username("mydxy")
                 .password("e144(e2beae1@830d1")
                 .build();
@@ -66,7 +66,7 @@ public class ApplicationTest {
     @Bean
     @ConditionalOnBean(DataSource.class)
     PartitionDataSource partitionDataSource() {
-        return new PartitionDataSource(key -> "");
+        return new PartitionDataSource(key -> String.format("sns%02d", Integer.valueOf(key.toString())));
     }
 
     @Bean(name = "memcachedClient")

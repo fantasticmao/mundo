@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  * PartitionDataSourceTest
  *
@@ -16,8 +19,11 @@ public class PartitionDataSourceTest extends SpringTest {
     PartitionDataSource partitionDataSource;
 
     @Test
-    public void inject() {
-        System.out.println(partitionDataSource);
+    public void inject() throws SQLException {
         Assert.assertNotNull(partitionDataSource);
+        System.out.println(partitionDataSource);
+        PartitionSeedContext.push(1);
+        Connection connection = partitionDataSource.getConnection();
+        System.out.println(connection);
     }
 }
