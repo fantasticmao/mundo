@@ -24,55 +24,65 @@ import javax.sql.DataSource;
 public class ApplicationTest {
 
     @Bean
-    DataSource sns00() {
+    DataSource test00() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.77:3306/sns00")
-                .username("mydxy")
-                .password("e144(e2beae1@830d1")
+                .url("jdbc:mysql://localhost:3306/test00")
+                .username("test")
+                .password("123456")
                 .build();
     }
 
     @Bean
-    DataSource sns01() {
+    DataSource test01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.59:3306/sns01")
-                .username("mydxy")
-                .password("e144(e2beae1@830d1")
+                .url("jdbc:mysql://localhost:3306/test01")
+                .username("test")
+                .password("123456")
                 .build();
     }
 
     @Bean
-    DataSource sns02() {
+    DataSource test02() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.59:3306/sns02")
-                .username("mydxy")
-                .password("e144(e2beae1@830d1")
+                .url("jdbc:mysql://localhost:3306/test02")
+                .username("test")
+                .password("123456")
                 .build();
     }
 
     @Bean
-    DataSource sns03() {
+    DataSource test03() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
-                .url("jdbc:mysql://192.168.200.59:3306/sns03")
-                .username("mydxy")
-                .password("e144(e2beae1@830d1")
+                .url("jdbc:mysql://localhost:3306/test03")
+                .username("test")
+                .password("123456")
+                .build();
+    }
+
+    @Bean
+    DataSource test04() {
+        return DataSourceBuilder.create()
+                .driverClassName("com.mysql.jdbc.Driver")
+                .url("jdbc:mysql://localhost:3306/test04")
+                .username("test")
+                .password("123456")
                 .build();
     }
 
     @Bean
     @ConditionalOnBean(DataSource.class)
     PartitionDataSource partitionDataSource() {
-        return new PartitionDataSource(key -> String.format("sns%02d", Integer.valueOf(key.toString())));
+        return new PartitionDataSource(key -> String.format("test%02d", Integer.valueOf(key.toString())));
     }
 
     @Bean(name = "memcachedClient")
     XMemcachedClientFactoryBean memcachedClientFactoryBean() {
         XMemcachedClientFactoryBean factoryBean = new XMemcachedClientFactoryBean();
-        factoryBean.setServers("192.168.200.95:11211");
+        factoryBean.setServers("localhost:11211");
         factoryBean.setCommandFactory(new BinaryCommandFactory());
         factoryBean.setConnectionPoolSize(2);
         factoryBean.setOpTimeout(3_000);

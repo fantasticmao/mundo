@@ -20,7 +20,7 @@ public class PartitionSeedContext implements AutoCloseable {
         if (!stack.empty()) {
             return stack.pop();
         }
-        throw new PartitionException("seed stack is null or empty");
+        throw new PartitionException("seed stack is empty");
     }
 
     @Override
