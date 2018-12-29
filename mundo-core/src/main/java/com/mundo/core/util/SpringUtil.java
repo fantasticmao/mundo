@@ -6,7 +6,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+
+import javax.annotation.Nonnull;
 
 /**
  * SpringUtil
@@ -20,30 +23,34 @@ public final class SpringUtil implements ApplicationContextAware, EnvironmentAwa
     private static ResourceLoader resourceLoader;
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@Nonnull ApplicationContext applicationContext) throws BeansException {
         SpringUtil.applicationContext = applicationContext;
     }
 
     @Override
-    public void setEnvironment(Environment environment) {
+    public void setEnvironment(@Nonnull Environment environment) {
         SpringUtil.environment = environment;
     }
 
     @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
+    public void setResourceLoader(@Nonnull ResourceLoader resourceLoader) {
         SpringUtil.resourceLoader = resourceLoader;
     }
 
     public static <T> T getBean(Class<T> clazz) {
-        return applicationContext != null ? applicationContext.getBean(clazz) : null;
+        return applicationContext.getBean(clazz);
     }
 
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) {
-        return applicationContext != null ? (T) applicationContext.getBean(name) : null;
+        return (T) applicationContext.getBean(name);
     }
 
     public static String getProperty(String key) {
-        return environment != null ? environment.getProperty(key) : null;
+        return environment.getProperty(key);
+    }
+
+    public static Resource getResource(String location) {
+        return resourceLoader.getResource(location);
     }
 }

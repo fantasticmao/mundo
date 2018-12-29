@@ -35,6 +35,5 @@ public class PrintArgsAspect extends AbstractAspect {
         String[] args = Stream.of(joinPoint.getArgs()).map(Objects::toString).toArray(String[]::new);
         String argument = StringUtil.join(args, ", ");
         LOGGER.info("Execute Method: {}#{}({})", className, methodName, argument);
-
     }
 }
