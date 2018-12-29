@@ -1,15 +1,17 @@
 package com.mundo.data;
 
+import com.mundo.core.support.MapBuilder;
 import com.mundo.data.datasource.PartitionDataSource;
+import com.mundo.data.datasource.PartitionLookupKeyStrategy;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * ApplicationTest
@@ -23,7 +25,6 @@ import javax.sql.DataSource;
 @Configuration
 public class ApplicationTest {
 
-    @Bean
     DataSource test00() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -33,7 +34,6 @@ public class ApplicationTest {
                 .build();
     }
 
-    @Bean
     DataSource test01() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -43,7 +43,6 @@ public class ApplicationTest {
                 .build();
     }
 
-    @Bean
     DataSource test02() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -53,7 +52,6 @@ public class ApplicationTest {
                 .build();
     }
 
-    @Bean
     DataSource test03() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -63,7 +61,6 @@ public class ApplicationTest {
                 .build();
     }
 
-    @Bean
     DataSource test04() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.jdbc.Driver")
@@ -74,9 +71,16 @@ public class ApplicationTest {
     }
 
     @Bean
-    @ConditionalOnBean(DataSource.class)
     PartitionDataSource partitionDataSource() {
-        return new PartitionDataSource(key -> String.format("test%02d", Integer.valueOf(key.toString())));
+        Map<String, DataSource> dataSources = MapBuilder.<String, DataSource>create(5)
+                .put("test00", test00())
+                .put("test01", test01())
+                .put("test02", test02())
+                .put("test03", test03())
+                .put("test04", test04())
+                .build();
+        PartitionLookupKeyStrategy lookupKeyStrategy = key -> String.format("test%02d", Integer.valueOf(key.toString()));
+        return new PartitionDataSource(dataSources, null, lookupKeyStrategy);
     }
 
     @Bean(name = "memcachedClient")
