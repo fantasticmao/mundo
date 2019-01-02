@@ -1,4 +1,4 @@
-package com.mundo.data.datasource;
+package com.mundo.data.partition;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PartitionDataSource
- * 动态选择数据源 <code>DataSource</code>
+ * 从 {@link PartitionSeedContext} 获取 <code>PartitionSeed</code>，再由 {@link PartitionSeedToDataSourceKeyStrategy}
+ * 转换成对应 {@link javax.sql.DataSource} 的 Lookup Key，再从 {@link #resolvedDataSources} 中动态选择数据源。
  *
  * @author maodh
  * @since 2017/11/16
@@ -21,25 +21,25 @@ import java.util.Map;
 public class PartitionDataSource extends AbstractRoutingDataSource {
     private static final Logger LOGGER = LoggerFactory.getLogger(PartitionDataSource.class);
 
-    private PartitionLookupKeyStrategy lookupKeyStrategy;
+    private PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy;
 
     public PartitionDataSource(@Nonnull Map<String, DataSource> dataSources,
                                @Nullable DataSource defaultDataSource,
-                               @Nonnull PartitionLookupKeyStrategy lookupKeyStrategy) {
+                               @Nonnull PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy) {
         initTargetDataSources(dataSources);
         initDefaultTargetDataSource(defaultDataSource);
-        this.lookupKeyStrategy = lookupKeyStrategy;
+        this.partitionSeedToDataSourceKeyStrategy = partitionSeedToDataSourceKeyStrategy;
     }
 
     @Override
     protected Object determineCurrentLookupKey() {
-        Assert.notNull(lookupKeyStrategy, "lookupKeyStrategy must not be null");
+        Assert.notNull(partitionSeedToDataSourceKeyStrategy, "partitionSeedToDataSourceKeyStrategy must not be null");
         Object seedObject = PartitionSeedContext.pop();
-        String lookupKey = lookupKeyStrategy.apply(seedObject);
+        String dataSourceKey = partitionSeedToDataSourceKeyStrategy.apply(seedObject);
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("use seed \"{}\" to determine the current lookup key \"{}\"", seedObject, lookupKey);
+            LOGGER.debug("use seed \"{}\" to determine the current lookup key \"{}\"", seedObject, dataSourceKey);
         }
-        return lookupKey;
+        return dataSourceKey;
     }
 
     // init method
