@@ -44,4 +44,9 @@ public class PartitionDataSourceTest extends SpringTest {
         System.out.println(userRepository.findTop(4));
         System.out.println(userRepository.findTop(null));
     }
+
+    @Test
+    public void test3() {
+        System.out.println(userRepository.findAll());
+    }
 }

@@ -1,10 +1,10 @@
 package com.mundo.data;
 
 import com.mundo.core.support.MapBuilder;
-import com.mundo.data.partition.User;
 import com.mundo.data.partition.PartitionDataSource;
 import com.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import com.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
+import com.mundo.data.partition.User;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;

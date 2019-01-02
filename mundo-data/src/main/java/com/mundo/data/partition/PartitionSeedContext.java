@@ -17,10 +17,7 @@ public class PartitionSeedContext {
 
     public static Object pop() {
         Stack<Object> stack = SEED_STACK.get();
-        if (!stack.empty()) {
-            return stack.pop();
-        }
-        throw new PartitionException("seed stack is empty");
+        return !stack.empty() ? stack.pop() : null;
     }
 
     public static void clear() {
