@@ -1,4 +1,4 @@
-package com.mundo.data.datasource;
+package com.mundo.data.partition;
 
 /**
  * PartitionException

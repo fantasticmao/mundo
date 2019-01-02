@@ -1,16 +1,27 @@
 package com.mundo.data;
 
 import com.mundo.core.support.MapBuilder;
-import com.mundo.data.datasource.PartitionDataSource;
-import com.mundo.data.datasource.PartitionLookupKeyStrategy;
+import com.mundo.data.partition.PartitionDataSource;
+import com.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
+import com.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -21,13 +32,13 @@ import java.util.Map;
  */
 @EnableMundoData
 @EnableAspectJAutoProxy
-//@EnableJpaRepositories
+@EnableJpaRepositories(repositoryFactoryBeanClass = PartitionJpaRepositoryFactoryBean.class)
 @Configuration
 public class ApplicationTest {
 
     DataSource test00() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/test00")
                 .username("test")
                 .password("123456")
@@ -36,7 +47,7 @@ public class ApplicationTest {
 
     DataSource test01() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/test01")
                 .username("test")
                 .password("123456")
@@ -45,7 +56,7 @@ public class ApplicationTest {
 
     DataSource test02() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/test02")
                 .username("test")
                 .password("123456")
@@ -54,7 +65,7 @@ public class ApplicationTest {
 
     DataSource test03() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/test03")
                 .username("test")
                 .password("123456")
@@ -63,7 +74,7 @@ public class ApplicationTest {
 
     DataSource test04() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.jdbc.Driver")
+                .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/test04")
                 .username("test")
                 .password("123456")
@@ -73,14 +84,31 @@ public class ApplicationTest {
     @Bean
     PartitionDataSource partitionDataSource() {
         Map<String, DataSource> dataSources = MapBuilder.<String, DataSource>create(5)
-                .put("test00", test00())
                 .put("test01", test01())
                 .put("test02", test02())
                 .put("test03", test03())
                 .put("test04", test04())
                 .build();
-        PartitionLookupKeyStrategy lookupKeyStrategy = key -> String.format("test%02d", Integer.valueOf(key.toString()));
-        return new PartitionDataSource(dataSources, null, lookupKeyStrategy);
+        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
+                key -> String.format("test%02d", Integer.valueOf(key.toString()));
+        return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
+    }
+
+    @Bean
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        jpaVendorAdapter.setShowSql(true);
+        jpaVendorAdapter.setGenerateDdl(false);
+        jpaVendorAdapter.setDatabase(Database.MYSQL);
+        return new EntityManagerFactoryBuilder(jpaVendorAdapter, Collections.emptyMap(), null)
+                .dataSource(dataSource)
+                .packages(User.class)
+                .build();
+    }
+
+    @Bean
+    PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
     @Bean(name = "memcachedClient")

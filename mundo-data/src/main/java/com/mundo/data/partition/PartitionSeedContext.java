@@ -1,14 +1,15 @@
-package com.mundo.data.datasource;
+package com.mundo.data.partition;
 
 import java.util.Stack;
 
 /**
  * PartitionSeedContext
+ * 使用 {@link java.lang.ThreadLocal} 管理 {@link PartitionParam} 参数生成的 <code>PartitionSeed</code>
  *
  * @author maodh
  * @since 2017/11/16
  */
-public class PartitionSeedContext implements AutoCloseable {
+public class PartitionSeedContext {
     private static final ThreadLocal<Stack<Object>> SEED_STACK = ThreadLocal.withInitial(Stack::new);
 
     public static Object push(Object seed) {
@@ -23,8 +24,7 @@ public class PartitionSeedContext implements AutoCloseable {
         throw new PartitionException("seed stack is empty");
     }
 
-    @Override
-    public void close() throws Exception {
+    public static void clear() {
         PartitionSeedContext.SEED_STACK.remove();
     }
 }
