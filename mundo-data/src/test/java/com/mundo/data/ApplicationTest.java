@@ -90,15 +90,8 @@ public class ApplicationTest {
                 .put("test03", test03())
                 .put("test04", test04())
                 .build();
-        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy = seedObject -> {
-            if (seedObject instanceof Number) {
-                Number seedNumber = (Number) seedObject;
-                return String.format("test%02d", (seedNumber.longValue() % dataSources.size()) + 1);
-            } else {
-                // 选择默认数据源
-                return null;
-            }
-        };
+        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
+                new PartitionSeedToDataSourceKeyStrategy.NumberModulusStrategy("test%02d", dataSources.size());
         return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
     }
 
