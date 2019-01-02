@@ -1,6 +1,7 @@
 package com.mundo.data;
 
 import com.mundo.core.support.MapBuilder;
+import com.mundo.data.partition.User;
 import com.mundo.data.partition.PartitionDataSource;
 import com.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import com.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
@@ -89,8 +90,15 @@ public class ApplicationTest {
                 .put("test03", test03())
                 .put("test04", test04())
                 .build();
-        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
-                key -> String.format("test%02d", Integer.valueOf(key.toString()));
+        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy = seedObject -> {
+            if (seedObject instanceof Number) {
+                Number seedNumber = (Number) seedObject;
+                return String.format("test%02d", (seedNumber.longValue() % dataSources.size()) + 1);
+            } else {
+                // 选择默认数据源
+                return null;
+            }
+        };
         return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
     }
 

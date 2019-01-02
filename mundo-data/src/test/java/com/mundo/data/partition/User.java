@@ -1,4 +1,4 @@
-package com.mundo.data;
+package com.mundo.data.partition;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

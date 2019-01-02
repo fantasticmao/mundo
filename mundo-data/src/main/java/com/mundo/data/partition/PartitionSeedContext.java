@@ -3,8 +3,7 @@ package com.mundo.data.partition;
 import java.util.Stack;
 
 /**
- * PartitionSeedContext
- * 使用 {@link java.lang.ThreadLocal} 管理 {@link PartitionParam} 参数生成的 <code>PartitionSeed</code>
+ * 使用 {@link java.lang.ThreadLocal} 管理 {@link PartitionParam} 参数生成的 <code>PartitionSeed</code>。
  *
  * @author maodh
  * @since 2017/11/16

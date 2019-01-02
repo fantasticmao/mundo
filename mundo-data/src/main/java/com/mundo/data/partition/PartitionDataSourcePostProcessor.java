@@ -10,6 +10,7 @@ import org.springframework.data.repository.core.support.RepositoryProxyPostProce
 
 import javax.annotation.Nonnull;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 /**
  * PartitionDataSourcePostProcessor
@@ -31,7 +32,8 @@ public class PartitionDataSourcePostProcessor implements RepositoryProxyPostProc
 
         @Override
         public Object invoke(MethodInvocation invocation) throws Throwable {
-            Annotation[][] annotations = invocation.getMethod().getParameterAnnotations();
+            Method method = invocation.getMethod();
+            Annotation[][] annotations = method.getParameterAnnotations();
             int pos = -1;
             posFlag:
             for (int i = 0; i < annotations.length; i++) {
@@ -46,14 +48,22 @@ public class PartitionDataSourcePostProcessor implements RepositoryProxyPostProc
 
             if (pos >= 0) {
                 Object[] arguments = invocation.getArguments();
-                Object argument = arguments[pos];
-                if (argument instanceof Integer) {
-                    PartitionSeedContext.push(((Integer) argument) % 4);
+                Object partitionSeed = arguments[pos];
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("found @PartitionParam argument \"{}\" at {}", partitionSeed, method.toString());
+                }
+                PartitionSeedContext.push(partitionSeed);
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("push partition seed object \"{}\" to PartitionSeedContext", partitionSeed);
                 }
             }
-
             Object result = invocation.proceed();
-            PartitionSeedContext.clear();
+            if (pos >= 0) {
+                PartitionSeedContext.clear();
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("clear partition seed object from PartitionSeedContext");
+                }
+            }
             return result;
         }
     }

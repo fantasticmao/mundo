@@ -1,6 +1,5 @@
-package com.mundo.data;
+package com.mundo.data.partition;
 
-import com.mundo.data.partition.PartitionParam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
