@@ -3,7 +3,7 @@ package com.mundo.data.partition;
 import java.lang.annotation.*;
 
 /**
- * 获取 {@link org.springframework.stereotype.Repository} 方法中的第一个 {@link PartitionParam} 注解参数，
+ * 获取 {@link org.springframework.data.repository.Repository} 方法中的第一个 {@link PartitionParam} 注解参数，
  * 用于计算 <code>PartitionSeed</code>。
  *
  * <code>PartitionSeed</code> 将会被托管于 {@link PartitionSeedContext}

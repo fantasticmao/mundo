@@ -49,4 +49,13 @@ public class PartitionDataSourceTest extends SpringTest {
     public void test3() {
         System.out.println(userRepository.findAll());
     }
+
+    @Test
+    public void test4() {
+        User user = new User(5, "Emma");
+        if (userRepository.existsById(user.getId())) {
+            userRepository.delete(user);
+        }
+        userRepository.save(user);
+    }
 }

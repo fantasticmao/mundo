@@ -12,10 +12,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "test_user")
-public class User {
+public class User implements PartitionSeedProvider<Integer> {
     @Id
     private int id;
     private String name;
+
+    public User() {
+    }
+
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public String toString() {
@@ -23,6 +31,11 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public Integer getSeed() {
+        return id;
     }
 
     public int getId() {
