@@ -1,9 +1,6 @@
-package com.mundo.data.datasource;
+package com.mundo.data.partition;
 
 import com.mundo.data.SpringTest;
-import com.mundo.data.UserRepository;
-import com.mundo.data.partition.PartitionDataSource;
-import com.mundo.data.partition.PartitionSeedContext;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -21,6 +18,8 @@ import java.sql.SQLException;
 public class PartitionDataSourceTest extends SpringTest {
     @Resource
     private PartitionDataSource partitionDataSource;
+    @Resource
+    private UserRepository userRepository;
 
     @Test
     public void test1() throws SQLException {
@@ -37,12 +36,12 @@ public class PartitionDataSourceTest extends SpringTest {
         }
     }
 
-    @Resource
-    private UserRepository userRepository;
-
     @Test
     public void test2() {
         System.out.println(userRepository.findTop(1));
         System.out.println(userRepository.findTop(2));
+        System.out.println(userRepository.findTop(3));
+        System.out.println(userRepository.findTop(4));
+        System.out.println(userRepository.findTop(null));
     }
 }
