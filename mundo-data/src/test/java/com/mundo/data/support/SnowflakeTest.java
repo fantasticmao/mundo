@@ -11,7 +11,10 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -40,21 +43,19 @@ public class SnowflakeTest {
     }
 
     @Test
-    public void testIfWork() throws IOException, ExecutionException, InterruptedException {
+    public void testIfWork() throws IOException, InterruptedException {
         Snowflake snowflake = Snowflake.generateId(1);
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<List<Long>> future = executorService.submit(() -> {
-            List<Long> idList = new ArrayList<>();
-            while (!Thread.currentThread().isInterrupted()) {
+        List<Long> idList = new ArrayList<>();
+        Thread thread = new Thread(() -> {
+            while (!Thread.interrupted()) {
                 idList.add(snowflake.nextId());
             }
-            return idList;
         });
+        thread.start();
         TimeUnit.SECONDS.sleep(1);
-        executorService.shutdownNow();
+        thread.interrupt();
 
-        List<Long> idList = future.get();
         List<String> idStrList = idList.stream().map(String::valueOf).collect(Collectors.toList());
 
         Path path = Paths.get(Object.class.getResource("/").getPath(), "snowflake.log");
@@ -66,15 +67,16 @@ public class SnowflakeTest {
         Snowflake snowflake = Snowflake.generateId(1);
         List<Long> idList = new CopyOnWriteArrayList<>();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
-        for (int i = 0; i < 3; i++) {
+        final int poolSize = 10;
+        ExecutorService executorService = Executors.newFixedThreadPool(poolSize);
+        for (int i = 0; i < poolSize; i++) {
             executorService.submit(() -> {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!Thread.interrupted()) {
                     idList.add(snowflake.nextId());
                 }
             });
         }
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(10);
         executorService.shutdownNow();
 
         Assert.assertEquals(idList.size(), idList.stream().distinct().collect(Collectors.toList()).size());
