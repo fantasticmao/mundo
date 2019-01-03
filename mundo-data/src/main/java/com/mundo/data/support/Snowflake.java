@@ -2,26 +2,27 @@ package com.mundo.data.support;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Snowflake
  *
  * @author maodh
- * @see <a href="https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html">Announcing Snowflake</a>
  * @since 2018/7/22
  */
 public interface Snowflake {
 
     long nextId();
 
+    /**
+     * @see <a href="https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html">Announcing Snowflake</a>
+     * @see <a href="https://github.com/twitter-archive/snowflake/blob/b3f6a3c6ca8e1b6847baa6ff42bf72201e2c2231/src/main/scala/com/twitter/service/snowflake/IdWorker.scala">twitter-archive snowflake</a>
+     */
     @ThreadSafe
     class TwitterSnowflake implements Snowflake {
         private static final int BIT_NOT_USED = 1; // 尚未使用
         private static final int BIT_TIMESTAMP = 41; // 时间戳占用位数
-        private static final int BIT_WORKER_NUMBER = 7; // 机器号占用位数
-        private static final int BIT_SEQUENCE_NUMBER = 15; // 序列号占用位数
+        private static final int BIT_WORKER_NUMBER = 10; // 机器号占用位数
+        private static final int BIT_SEQUENCE_NUMBER = 12; // 序列号占用位数
 
         private static final int LEFT_SEQUENCE_NUMBER = 0; // 左偏移量：序列号
         private static final int LEFT_WORKER_NUMBER = LEFT_SEQUENCE_NUMBER + BIT_SEQUENCE_NUMBER; // 左偏移量：机器号
@@ -31,25 +32,24 @@ public interface Snowflake {
         private static final int RIGHT_WORKER_NUMBER = RIGHT_TIMESTAMP + BIT_TIMESTAMP; // 右偏移量：机器号
         private static final int RIGHT_SEQUENCE_NUMBER = RIGHT_WORKER_NUMBER + BIT_WORKER_NUMBER; // 右偏移量：序列号
 
-        private static final long MAX_TIMESTAMP = 1L << BIT_TIMESTAMP; // 最大值：时间戳
-        private static final long MAX_WORKER_NUMBER = 1L << BIT_WORKER_NUMBER; // 最大值：机器号
-        private static final long MAX_SEQUENCE_NUMBER = 1L << BIT_SEQUENCE_NUMBER; // 最大值：序列号
+        private static final long MAX_TIMESTAMP = -1L ^ (-1L << BIT_TIMESTAMP); // 最大值：时间戳
+        private static final long MAX_WORKER_NUMBER = -1L ^ (-1L << BIT_WORKER_NUMBER); // 最大值：机器号
+        private static final long MAX_SEQUENCE_NUMBER = -1L ^ (1L << BIT_SEQUENCE_NUMBER); // 最大值：序列号
 
         private static final long START_TIMESTAMP = 1546272000000L; // Tue Jan 01 2019 00:00:00 GMT+0800 (China Standard Time)
 
         private final long workerNumber;
         private long lastTimestamp;
-        private long lastSequenceNumber;
-        private final Lock lock = new ReentrantLock();
+        private long sequence;
 
         private TwitterSnowflake(long workerNumber) {
             this.workerNumber = workerNumber;
             this.lastTimestamp = 0L;
-            this.lastSequenceNumber = 0L;
+            this.sequence = 0L;
         }
 
         public static Snowflake getInstance(long workerNumber) {
-            if (workerNumber < 0 || workerNumber >= MAX_WORKER_NUMBER) {
+            if (workerNumber < 0 || workerNumber > MAX_WORKER_NUMBER) {
                 throw new IllegalArgumentException();
             }
             return new TwitterSnowflake(workerNumber);
@@ -72,39 +72,37 @@ public interface Snowflake {
         }
 
         @Override
-        public long nextId() {
-            final long workerNumber = this.workerNumber;
-
-            final long thisTimestamp = this.getThisTimestamp();
-            if (thisTimestamp >= MAX_TIMESTAMP) {
-                throw new IllegalArgumentException();
+        public synchronized long nextId() {
+            long timestamp = this.timeGen();
+            if (timestamp < lastTimestamp) {
+                throw new IllegalArgumentException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds",
+                        lastTimestamp - timestamp));
             }
 
-            final long thisSequenceNumber = this.getSequenceNumber(thisTimestamp);
-            if (thisSequenceNumber >= MAX_SEQUENCE_NUMBER) {
-                throw new IllegalArgumentException();
-            }
-
-            return thisTimestamp << LEFT_TIMESTAMP | workerNumber << LEFT_WORKER_NUMBER | thisSequenceNumber;
-        }
-
-        private long getThisTimestamp() {
-            long currentTimestamp = System.currentTimeMillis();
-            return currentTimestamp - START_TIMESTAMP;
-        }
-
-        private long getSequenceNumber(long thisTimestamp) {
-            lock.lock();
-            try {
-                if (thisTimestamp > this.lastTimestamp && this.lastTimestamp != 0L) {
-                    this.lastSequenceNumber = 0L;
+            if (lastTimestamp == timestamp) {
+                sequence = (sequence + 1) & MAX_SEQUENCE_NUMBER;
+                if (sequence == 0) {
+                    timestamp = this.tilNextMillis(lastTimestamp);
                 }
-                this.lastTimestamp = thisTimestamp;
-                this.lastSequenceNumber = this.lastSequenceNumber + 1;
-                return this.lastSequenceNumber;
-            } finally {
-                lock.unlock();
+            } else {
+                sequence = 0;
             }
+
+            lastTimestamp = timestamp;
+
+            return (timestamp - START_TIMESTAMP) << LEFT_TIMESTAMP | workerNumber << LEFT_WORKER_NUMBER | sequence;
+        }
+
+        private long timeGen() {
+            return System.currentTimeMillis();
+        }
+
+        private long tilNextMillis(long lastTimestamp) {
+            long timestamp = timeGen();
+            while (timestamp <= lastTimestamp) {
+                timestamp = timeGen();
+            }
+            return timestamp;
         }
     }
 }
