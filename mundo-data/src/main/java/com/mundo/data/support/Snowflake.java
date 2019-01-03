@@ -45,13 +45,13 @@ public final class Snowflake {
         return new Snowflake(workerNumber);
     }
 
-    public long nextId() {
+    public synchronized long nextId() {
         final long workerNumber = this.workerNumber;
 
         long currentTimestamp = System.currentTimeMillis();
         final long thisTimestamp = currentTimestamp - START_TIMESTAMP;
 
-        if (thisTimestamp != this.lastTimestamp && this.lastTimestamp != 0L) {
+        if (thisTimestamp > this.lastTimestamp && this.lastTimestamp != 0L) {
             Snowflake.atomicInteger.set(1);
         }
         final long sequenceNumber = Snowflake.atomicInteger.getAndIncrement();
