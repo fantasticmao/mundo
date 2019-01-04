@@ -2,4 +2,4 @@ Mundo Root
 ---
 
 # Feature
-- dependencies
+- 定义 Maven 基础依赖
