@@ -28,6 +28,6 @@ public class UserInfoParserTest {
         String iv = "r7BXXKkLb8qrSNn05n0qiA==";
         UserInfo userInfo = UserInfoParser.decryptData(sessionKey, encryptedData, iv);
         Assert.assertNotNull(userInfo);
-        System.out.println(userInfo);
+        Assert.assertEquals(appId, userInfo.getWatermark().getAppid());
     }
 }
