@@ -13,14 +13,28 @@ public class HashUtilTest {
 
     @Test
     public void encode() {
-        String expected = HashUtil.encode("s6BhdRkqt3:7Fjfp0ZBr1KtDRbnfVdmIw");
+        byte[] expected = HashUtil.encode("s6BhdRkqt3:7Fjfp0ZBr1KtDRbnfVdmIw");
+        byte[] actual = "czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3".getBytes();
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void decode() {
+        byte[] expected = HashUtil.decode("czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3");
+        byte[] actual = "s6BhdRkqt3:7Fjfp0ZBr1KtDRbnfVdmIw".getBytes();
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void encodeToString() {
+        String expected = HashUtil.encodeToString("s6BhdRkqt3:7Fjfp0ZBr1KtDRbnfVdmIw");
         String actual = "czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3";
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void decode() {
-        String expected = HashUtil.decode("czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3");
+    public void decodeToString() {
+        String expected = HashUtil.decodeToString("czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3");
         String actual = "s6BhdRkqt3:7Fjfp0ZBr1KtDRbnfVdmIw";
         Assert.assertEquals(expected, actual);
     }

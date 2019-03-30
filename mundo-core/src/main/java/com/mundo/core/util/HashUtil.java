@@ -48,14 +48,20 @@ public enum HashUtil {
         }
     }
 
-    public static String encode(String str) {
-        byte[] dst = Base64.getEncoder().encode(str.getBytes());
-        return new String(dst);
+    public static byte[] encode(String str) {
+        return Base64.getEncoder().encode(str.getBytes());
     }
 
-    public static String decode(String str) {
-        byte[] dts = Base64.getDecoder().decode(str.getBytes());
-        return new String(dts);
+    public static byte[] decode(String str) {
+        return Base64.getDecoder().decode(str.getBytes());
+    }
+
+    public static String encodeToString(String str) {
+        return new String(encode(str));
+    }
+
+    public static String decodeToString(String str) {
+        return new String(decode(str));
     }
 
 }
