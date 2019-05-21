@@ -39,13 +39,8 @@ public enum HashUtil {
         return hash(str.getBytes());
     }
 
-    public String hash(Path path) {
-        try {
-            return hash(Files.readAllBytes(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public String hash(Path path) throws IOException {
+        return hash(Files.readAllBytes(path));
     }
 
     public static byte[] encode(String str) {
