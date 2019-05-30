@@ -1,7 +1,6 @@
 package com.mundo.core.util;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -27,8 +26,7 @@ public enum HashUtil {
     public String hash(byte[] bytes) {
         try {
             MessageDigest md = MessageDigest.getInstance(type);
-            byte[] newBytes = md.digest(bytes);
-            return new BigInteger(1, newBytes).toString(16);
+            return getFormattedText(md.digest(bytes));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
@@ -57,6 +55,18 @@ public enum HashUtil {
 
     public static String decodeToString(String str) {
         return new String(decode(str));
+    }
+
+    private static final char[] HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+    private static String getFormattedText(byte[] bytes) {
+        int len = bytes.length;
+        StringBuilder buf = new StringBuilder(len * 2);
+        for (int j = 0; j < len; j++) {
+            buf.append(HEX[(bytes[j] >> 4) & 0x0f]);
+            buf.append(HEX[bytes[j] & 0x0f]);
+        }
+        return buf.toString();
     }
 
 }
