@@ -14,7 +14,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @author maodh
  * @since 2017/11/15
  */
-@EnableMundoCore
 @EnableAspectJAutoProxy
 @Configuration
 public class ApplicationTest {
