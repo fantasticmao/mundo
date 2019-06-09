@@ -18,9 +18,9 @@ public class CheckLoginInterceptor extends AnnotationInterceptor<CheckLogin> {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Queue<CheckLogin> annotationQueue = getMethodAnnotationQueue(handler, CheckLogin.class);
+        Queue<CheckLogin> annotationQueue = super.getMethodAnnotationQueue(handler, CheckLogin.class);
         // TODO 接入 SSO
-        boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && processAnnotationQueue(annotationQueue);
+        boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
         return !isCheck || check(request, response);
     }
 

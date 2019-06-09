@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
  * @author maodh
  * @since 16/01/2018
  */
-@EnableMundoWeb
 @EnableAutoConfiguration(exclude = {JdbcTemplateAutoConfiguration.class,
         DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @Configuration
