@@ -5,6 +5,7 @@ import com.google.common.cache.LoadingCache;
 import com.mundo.data.SpringTest;
 import net.rubyeye.xmemcached.MemcachedClient;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @author maodh
  * @since 2018/7/24
  */
+@Ignore
 public class MemcacheLoadingCacheTest extends SpringTest {
     @Resource(name = "memcachedClient")
     private MemcachedClient memcachedClient;
