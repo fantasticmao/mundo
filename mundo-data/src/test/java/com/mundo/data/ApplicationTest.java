@@ -31,7 +31,6 @@ import java.util.Map;
  * @author maodh
  * @since 2017/11/17
  */
-@EnableMundoData
 @EnableAspectJAutoProxy
 @EnableJpaRepositories(repositoryFactoryBeanClass = PartitionJpaRepositoryFactoryBean.class)
 @Configuration
