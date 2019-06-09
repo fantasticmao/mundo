@@ -26,8 +26,8 @@ public class CheckCsrfInterceptor extends AnnotationInterceptor<CheckCsrf> {
             return true;
         } else {
             // TODO 校验自定义 HTTP Header
-            Queue<CheckCsrf> annotationQueue = getMethodAnnotationQueue(handler, CheckCsrf.class);
-            boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && processAnnotationQueue(annotationQueue);
+            Queue<CheckCsrf> annotationQueue = super.getMethodAnnotationQueue(handler, CheckCsrf.class);
+            boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
             return !isCheck || check(request, response);
         }
     }
