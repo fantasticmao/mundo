@@ -1,6 +1,7 @@
 package com.mundo.data.partition;
 
 import com.mundo.data.SpringTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
  * @author maodh
  * @since 2018/7/25
  */
+@Ignore
 public class PartitionDataSourceTest extends SpringTest {
     @Resource
     private PartitionDataSource partitionDataSource;
