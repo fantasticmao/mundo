@@ -18,6 +18,7 @@ public interface Constant {
         float[] FLOATS = new float[0];
         double[] DOUBLES = new double[0];
         Object[] OBJECTS = new Object[0];
+        String[] STRINGS = new String[0];
     }
 
     interface Strings {
