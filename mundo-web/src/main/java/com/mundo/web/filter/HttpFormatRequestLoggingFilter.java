@@ -59,7 +59,7 @@ public class HttpFormatRequestLoggingFilter extends CommonsRequestLoggingFilter 
 
         final String payload = super.getMessagePayload(request);
         if (payload != null) {
-            msg.append(LINE_SEPARATOR).append(payload);
+            msg.append(LINE_SEPARATOR).append(payload).append(LINE_SEPARATOR);
         }
         return msg.toString();
     }
