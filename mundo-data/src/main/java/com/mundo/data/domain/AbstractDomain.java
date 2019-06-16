@@ -17,7 +17,7 @@ public abstract class AbstractDomain<ID extends Serializable> implements Seriali
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id; // 逻辑主键
-    @Column(updatable = false)
+    @Column(insertable = false, updatable = false)
     private Timestamp createTime; // 创建时间
     @Column(insertable = false, updatable = false)
     private Timestamp modifyTime; // 修改时间
