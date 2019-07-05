@@ -2,6 +2,8 @@ package com.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mundo.core.util.JsonUtil;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.concurrent.Immutable;
@@ -18,14 +20,19 @@ import java.io.Serializable;
  * @since 2017/3/19
  */
 @Immutable
-public final class JsonApi implements Serializable {
+@ApiModel
+public final class JsonApi<T> implements Serializable {
     private static final long serialVersionUID = 6126929533373437316L;
 
+    @ApiModelProperty(example = "true", required = true)
     private final boolean status;
+    @ApiModelProperty(example = "200", required = true)
     private final int code;
+    @ApiModelProperty(example = "OK", required = true)
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object data;
+    @ApiModelProperty
+    private T data;
 
     private JsonApi() {
         throw new AssertionError("No com.mundo.web.support.JsonApi instances for you!");
@@ -37,20 +44,20 @@ public final class JsonApi implements Serializable {
         this.message = message;
     }
 
-    public static JsonApi success() {
-        return new JsonApi(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+    public static <T> JsonApi<T> success() {
+        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
     }
 
-    public static JsonApi error(HttpStatus httpStatus) {
-        return new JsonApi(false, httpStatus.value(), httpStatus.getReasonPhrase());
+    public static <T> JsonApi<T> error(HttpStatus httpStatus) {
+        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase());
     }
 
-    public JsonApi data(Object data) {
+    public JsonApi<T> data(T data) {
         if (this.data == null) {
             this.data = data;
             return this;
         } else {
-            return new JsonApi(this.status, this.code, this.message).data(data);
+            return new JsonApi<T>(this.status, this.code, this.message).data(data);
         }
     }
 
@@ -77,7 +84,7 @@ public final class JsonApi implements Serializable {
         return message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 }
