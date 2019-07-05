@@ -25,6 +25,8 @@
         <commons-lang3.version>3.6</commons-lang3.version>
         <guava.version>25.0-jre</guava.version>
         <xmemcached.version>2.4.5</xmemcached.version>
+        <springfox-swagger2.version>2.9.0</springfox-swagger2.version>
+        <springfox-swagger-ui.version>2.9.0</springfox-swagger-ui.version>
     </properties>
 
     <modules>
@@ -121,6 +123,18 @@
                 <groupId>com.googlecode.xmemcached</groupId>
                 <artifactId>xmemcached</artifactId>
                 <version>${xmemcached.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger-ui.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
