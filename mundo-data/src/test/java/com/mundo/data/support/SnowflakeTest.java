@@ -33,15 +33,19 @@ public class SnowflakeTest {
     public void testIfWork() throws IOException, InterruptedException {
         Snowflake snowflake = Snowflake.TwitterSnowflake.getInstance(1);
 
+        CountDownLatch count = new CountDownLatch(1);
         List<Long> idList = Collections.synchronizedList(new ArrayList<>());
         Thread thread = new Thread(() -> {
             while (!Thread.interrupted()) {
                 idList.add(snowflake.nextId());
             }
+            count.countDown();
         });
         thread.start();
-        TimeUnit.SECONDS.sleep(1);
+
+        TimeUnit.MILLISECONDS.sleep(50);
         thread.interrupt();
+        count.await();
 
         List<String> idStrList = idList.stream().map(String::valueOf).collect(Collectors.toList());
 

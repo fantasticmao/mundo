@@ -15,12 +15,50 @@
     <packaging>pom</packaging>
 
     <name>mundo-all ${project.version}</name>
-    <description>Mundo All</description>
+    <url>https://github.com/fantasticmao/mundo</url>
+    <description>
+        Mundo is a tiny component for business programming that is out of the box (and maybe useless).
+    </description>
+    <inceptionYear>2017</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>fantasticmao</id>
+            <name>Mao Mao</name>
+            <email>maomao8017@gmail.com</email>
+            <roles>
+                <role>Owner</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/fantasticmao/mundo/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/fantasticmao/mundo/issues/</url>
+    </issueManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub fantasticmao Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/fantasticmao/mundo</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <commons-lang3.version>3.6</commons-lang3.version>
         <guava.version>25.0-jre</guava.version>
@@ -52,42 +90,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>aliyun</id>
-
-            <properties>
-                <maven.compiler.source>1.8</maven.compiler.source>
-                <maven.compiler.target>1.8</maven.compiler.target>
-                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-            </properties>
-
-            <repositories>
-                <repository>
-                    <id>nexus</id>
-                    <name>aliyun nexus</name>
-                    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-                    <releases>
-                        <enabled>true</enabled>
-                        <updatePolicy>daily</updatePolicy>
-                        <checksumPolicy>fail</checksumPolicy>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub fantasticmao Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/fantasticmao/mundo</url>
-        </repository>
-    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>

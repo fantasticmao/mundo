@@ -11,7 +11,6 @@
     <artifactId>mundo-data</artifactId>
     <packaging>jar</packaging>
     <name>mundo-data ${project.version}</name>
-    <description>Mundo Data</description>
 
     <dependencies>
         <dependency>
