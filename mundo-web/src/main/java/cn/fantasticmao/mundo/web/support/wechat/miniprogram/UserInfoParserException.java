@@ -4,6 +4,7 @@ package cn.fantasticmao.mundo.web.support.wechat.miniprogram;
  * UserInfoParserException
  *
  * @author maomao
+ * @version 1.0
  * @since 2019-03-31
  */
 public class UserInfoParserException extends RuntimeException {

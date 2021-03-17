@@ -15,6 +15,7 @@ import java.util.Set;
  * JsonUtil
  *
  * @author maomao
+ * @version 1.0
  * @since 2017/3/5
  */
 public final class JsonUtil {
@@ -113,6 +114,7 @@ public final class JsonUtil {
      *
      * @param json      JSON
      * @param fieldName Node field
+     * @return JSON Node
      */
     public static JsonNode toJsonNode(String json, String fieldName) {
         if (StringUtils.isNoneEmpty(json, fieldName)) {

@@ -12,6 +12,7 @@ import java.util.Queue;
  * CheckLoginInterceptor
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/8/2
  */
 public class CheckLoginInterceptor extends AnnotationInterceptor<CheckLogin> {

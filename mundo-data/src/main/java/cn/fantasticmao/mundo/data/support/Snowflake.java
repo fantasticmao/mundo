@@ -7,6 +7,7 @@ import java.util.Arrays;
  * Snowflake
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/22
  */
 public interface Snowflake {

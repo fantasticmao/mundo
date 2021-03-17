@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * WeChatConfigController
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/12/5
  */
 public abstract class WeChatConfigController {

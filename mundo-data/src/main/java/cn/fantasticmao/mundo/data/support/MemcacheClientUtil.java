@@ -11,6 +11,7 @@ import java.util.concurrent.TimeoutException;
  * MemcacheClientUtil
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/22
  */
 public class MemcacheClientUtil {

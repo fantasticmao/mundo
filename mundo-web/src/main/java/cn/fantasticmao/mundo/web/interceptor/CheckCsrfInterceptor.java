@@ -15,6 +15,7 @@ import java.util.Queue;
  * CheckCsrfInterceptor
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/8/2
  */
 public class CheckCsrfInterceptor extends AnnotationInterceptor<CheckCsrf> {

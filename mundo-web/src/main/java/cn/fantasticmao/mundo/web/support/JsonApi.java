@@ -11,12 +11,14 @@ import java.io.Serializable;
 
 /**
  * JsonApi
+ *
  * <pre>
  * 成功：<code>JsonApi.success()</code>
  * 失败：<code>JsonApi.error(HttpStatus.NOT_FOUND)</code>
  * </pre>
  *
  * @author MaoMao
+ * @version 1.0
  * @since 2017/3/19
  */
 @Immutable

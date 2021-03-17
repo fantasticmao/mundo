@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
  * PartitionJpaRepositoryFactoryBean
  *
  * @author maodh
+ * @version 1.0
  * @since 2019/1/2
  */
 public class PartitionJpaRepositoryFactoryBean extends JpaRepositoryFactoryBean {

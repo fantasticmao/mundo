@@ -24,6 +24,7 @@ import java.util.function.Function;
  * </pre>
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/22
  */
 public class MemcacheCacheBuilder<K, V extends Serializable> {

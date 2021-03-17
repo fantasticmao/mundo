@@ -20,6 +20,7 @@ import java.util.Objects;
  * UserInfoParser
  *
  * @author maomao
+ * @version 1.0
  * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">开放数据校验与解密</a>
  * @since 2019-03-30
  */

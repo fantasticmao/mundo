@@ -4,6 +4,7 @@ package cn.fantasticmao.mundo.web.support.wechat;
  * WeChatMessage
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/12/5
  */
 public class WeChatMessage {
@@ -30,12 +31,12 @@ public class WeChatMessage {
     @Override
     public String toString() {
         return "WeChatMessage{" +
-                "toUserName='" + toUserName + '\'' +
-                ", fromUserName='" + fromUserName + '\'' +
-                ", createTime=" + createTime +
-                ", msgId=" + msgId +
-                ", msgType=" + msgType +
-                '}';
+            "toUserName='" + toUserName + '\'' +
+            ", fromUserName='" + fromUserName + '\'' +
+            ", createTime=" + createTime +
+            ", msgId=" + msgId +
+            ", msgType=" + msgType +
+            '}';
     }
 
     // getter

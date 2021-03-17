@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
  * WeChatTextMessage
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/12/5
  */
 public class WeChatTextMessage extends WeChatMessage {

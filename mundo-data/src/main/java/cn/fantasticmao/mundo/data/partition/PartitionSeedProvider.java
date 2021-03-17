@@ -14,6 +14,7 @@ package cn.fantasticmao.mundo.data.partition;
  * </pre>
  *
  * @author maodh
+ * @version 1.0
  * @since 2019/1/2
  */
 public interface PartitionSeedProvider<SEED> {
