@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.mundo.data.MundoDataAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.fantasticmao.mundo.data.MundoDataAutoConfiguration
