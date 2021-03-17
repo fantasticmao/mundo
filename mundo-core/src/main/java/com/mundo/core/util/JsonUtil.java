@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -75,7 +76,7 @@ public final class JsonUtil {
      * Json -> JsonNode
      */
     public static JsonNode toJsonNode(String json) {
-        if (StringUtil.isNotEmpty(json)) {
+        if (StringUtils.isNotEmpty(json)) {
             try {
                 return OBJECT_MAPPER.readTree(json);
             } catch (IOException e) {
@@ -89,7 +90,7 @@ public final class JsonUtil {
      * Json -> JsonNode
      */
     public static JsonNode toJsonNode(String json, String fieldName) {
-        if (StringUtil.isNoneEmpty(json, fieldName)) {
+        if (StringUtils.isNoneEmpty(json, fieldName)) {
             try {
                 return OBJECT_MAPPER.readTree(json).findPath(fieldName);
             } catch (IOException e) {

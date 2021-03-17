@@ -23,7 +23,7 @@ public class PartitionJpaRepositoryFactoryBean extends JpaRepositoryFactoryBean 
     protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
         RepositoryFactorySupport repositoryFactorySupport = super.createRepositoryFactory(entityManager);
 
-        PartitionDataSourcePostProcessor partitionDataSourcePostProcessor= new PartitionDataSourcePostProcessor();
+        PartitionDataSourcePostProcessor partitionDataSourcePostProcessor = new PartitionDataSourcePostProcessor();
         repositoryFactorySupport.addRepositoryProxyPostProcessor(partitionDataSourcePostProcessor);
         return repositoryFactorySupport;
     }

@@ -24,8 +24,8 @@ public class HttpFormatRequestLoggingFilterTest {
 
         String msg = filter.createMessage(request, null, null);
         String expected = "POST /login?a=1&b=2&c=3 HTTP/1.1" + System.lineSeparator() +
-                "Content-Type: application/x-www-form-urlencoded" + System.lineSeparator() +
-                "Cache-Control: no-cache" + System.lineSeparator();
+            "Content-Type: application/x-www-form-urlencoded" + System.lineSeparator() +
+            "Cache-Control: no-cache" + System.lineSeparator();
         Assert.assertEquals(expected, msg);
     }
 }

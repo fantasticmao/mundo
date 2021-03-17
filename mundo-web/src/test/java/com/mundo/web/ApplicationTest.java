@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 16/01/2018
  */
 @EnableAutoConfiguration(exclude = {JdbcTemplateAutoConfiguration.class,
-        DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+    DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @Configuration
 @ComponentScan
 public class ApplicationTest {

@@ -1,6 +1,6 @@
 package com.mundo.core.support;
 
-import com.mundo.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.PrintStream;
 
@@ -21,7 +21,7 @@ public final class StackPointer {
     }
 
     private static void printStackTrace(String descLine, PrintStream printStream) {
-        if (StringUtil.isNotEmpty(descLine))
+        if (StringUtils.isNotEmpty(descLine))
             printStream.println(descLine);
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         for (StackTraceElement traceElement : trace)
