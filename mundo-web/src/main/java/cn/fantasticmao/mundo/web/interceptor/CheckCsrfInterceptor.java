@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.web.interceptor;
 
-import cn.fantasticmao.mundo.core.util.CollectionUtil;
 import cn.fantasticmao.mundo.web.annotation.CheckCsrf;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 
@@ -27,7 +27,7 @@ public class CheckCsrfInterceptor extends AnnotationInterceptor<CheckCsrf> {
         } else {
             // TODO 校验自定义 HTTP Header
             Queue<CheckCsrf> annotationQueue = super.getMethodAnnotationQueue(handler, CheckCsrf.class);
-            boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
+            boolean isCheck = CollectionUtils.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
             return !isCheck || check(request, response);
         }
     }

@@ -2,8 +2,9 @@ package cn.fantasticmao.mundo.data.partition;
 
 /**
  * 指定分库实体的种子字段，使用方式例如：
+ *
  * <pre>
- * public class User implements PartitionSeedProvider<Integer> {
+ * public class User implements PartitionSeedProvider&lt;Integer&gt; {
  *     private int id;
  *
  *     public Integer getSeed() {

@@ -11,26 +11,25 @@ import java.util.Enumeration;
 
 /**
  * HttpFormatRequestLoggingFilter
- * <p>
+ *
  * 开启 HttpFormatRequestLoggingFilter 功能，需要在 logback.xml 中配置对应的 logger，示例配置如下：
  * <pre>
- *     <appender name="http_request_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
- *         <file>${log_home}/http-request.log</file>
- *         <encoder>
- *             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{5}:%L%n%message%n###%n%n</pattern>
- *             <charset>UTF-8</charset>
- *         </encoder>
- *         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
- *             <maxHistory>30</maxHistory>
- *             <fileNamePattern>${log_home}/http-request.%d{yyyy-MM-dd}.log</fileNamePattern>
- *         </rollingPolicy>
- *     </appender>
+ *     &lt;appender name="http_request_info" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
+ *         &lt;file&gt;${log_home}/http-request.log&lt;/file&gt;
+ *         &lt;encoder&gt;
+ *             &lt;pattern&gt;%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{5}:%L%n%message%n###%n%n&lt;/pattern&gt;
+ *             &lt;charset&gt;UTF-8&lt;/charset&gt;
+ *         &lt;/encoder&gt;
+ *         &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
+ *             &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+ *             &lt;fileNamePattern&gt;${log_home}/http-request.%d{yyyy-MM-dd}.log&lt;/fileNamePattern&gt;
+ *         &lt;/rollingPolicy&gt;
+ *     &lt;/appender&gt;
  *
- *     <logger name="HttpFormatRequestLoggingFilter" level="TRACE" additivity="false">
- *         <appender-ref ref="http_request_info"/>
- *     </logger>
+ *     &lt;logger name="HttpFormatRequestLoggingFilter" level="TRACE" additivity="false"&gt;
+ *         &lt;appender-ref ref="http_request_info"/&gt;
+ *     &lt;/logger&gt;
  * </pre>
- * </p>
  *
  * @author maomao
  * @since 2019-06-14

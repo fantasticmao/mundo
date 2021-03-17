@@ -25,7 +25,10 @@ public final class JsonUtil {
     }
 
     /**
-     * Object -> JSON
+     * Object -&gt; JSON
+     *
+     * @param obj object
+     * @return JSON
      */
     public static String toJson(Object obj) {
         try {
@@ -37,7 +40,12 @@ public final class JsonUtil {
     }
 
     /**
-     * Json -> Class
+     * JSON -&gt; Class
+     *
+     * @param json  JSON
+     * @param clazz class
+     * @param <T>   Type
+     * @return Object
      */
     public static <T> T toClass(String json, Class<T> clazz) {
         try {
@@ -49,7 +57,12 @@ public final class JsonUtil {
     }
 
     /**
-     * JsonNode -> Class
+     * JSON Node -&gt; Class
+     *
+     * @param node  JSON Node
+     * @param clazz class
+     * @param <T>   Type
+     * @return Object
      */
     public static <T> T toClass(JsonNode node, Class<T> clazz) {
         try {
@@ -61,7 +74,13 @@ public final class JsonUtil {
     }
 
     /**
-     * Json -> JsonNode -> Class
+     * JSON -&gt; JSON Node -&gt; Class
+     *
+     * @param json      JSON
+     * @param fieldName NODE field
+     * @param clazz     class
+     * @param <T>       Type
+     * @return Object
      */
     public static <T> T findNodeToClass(String json, String fieldName, Class<T> clazz) {
         JsonNode node = toJsonNode(json, fieldName);
@@ -73,7 +92,10 @@ public final class JsonUtil {
     }
 
     /**
-     * Json -> JsonNode
+     * JSON -&gt; JSON Node
+     *
+     * @param json JSON
+     * @return JSON Node
      */
     public static JsonNode toJsonNode(String json) {
         if (StringUtils.isNotEmpty(json)) {
@@ -87,7 +109,10 @@ public final class JsonUtil {
     }
 
     /**
-     * Json -> JsonNode
+     * JSON -&gt; JSON Node
+     *
+     * @param json      JSON
+     * @param fieldName Node field
      */
     public static JsonNode toJsonNode(String json, String fieldName) {
         if (StringUtils.isNoneEmpty(json, fieldName)) {
@@ -101,21 +126,30 @@ public final class JsonUtil {
     }
 
     /**
-     * Json -> LinkedHashMap
+     * JSON -&gt; LinkedHashMap
+     *
+     * @param json JSON
+     * @return Map
      */
     public static Map toMap(String json) {
         return toClass(json, Map.class);
     }
 
     /**
-     * Json -> ArrayList
+     * JSON -&gt; ArrayList
+     *
+     * @param json JSON
+     * @return List
      */
     public static List toList(String json) {
         return toClass(json, List.class);
     }
 
     /**
-     * Json -> HashSet
+     * JSON -&gt; HashSet
+     *
+     * @param json JSON
+     * @return Set
      */
     public static Set toSet(String json) {
         return toClass(json, Set.class);

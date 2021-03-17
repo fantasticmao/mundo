@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -19,6 +22,6 @@ jobs:
         with:
           java-version: 1.8
       - name: Deploy with Maven
-        run: ./mvnw deploy -B
+        run: ./mvnw test -B
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
