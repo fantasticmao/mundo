@@ -13,6 +13,7 @@ import java.io.IOException;
  * AbstractInterceptor
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/8/4
  */
 abstract class AbstractInterceptor extends HandlerInterceptorAdapter {

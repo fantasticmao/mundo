@@ -11,6 +11,7 @@ import java.io.Serializable;
  * Pair
  *
  * @author maomao
+ * @version 1.0
  * @since 2017/3/5
  */
 @Getter

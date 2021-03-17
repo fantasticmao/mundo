@@ -7,6 +7,7 @@ import java.util.stream.Stream;
  * WeChatMessageType
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/12/5
  */
 public enum WeChatMessageType {

@@ -8,6 +8,7 @@ import java.io.PrintStream;
  * StackPointer
  *
  * @author maodh
+ * @version 1.0
  * @since 04/02/2018
  */
 public final class StackPointer {

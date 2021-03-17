@@ -9,6 +9,7 @@ import java.lang.annotation.*;
  * <code>PartitionSeed</code> 将会被托管于 {@link PartitionSeedContext}
  *
  * @author maodh
+ * @version 1.0
  * @see PartitionSeedContext
  * @since 2017/11/14
  */

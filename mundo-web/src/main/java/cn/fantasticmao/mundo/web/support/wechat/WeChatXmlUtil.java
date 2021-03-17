@@ -19,6 +19,7 @@ import java.io.StringReader;
  * WeChatXmlUtil
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/12/5
  */
 class WeChatXmlUtil {

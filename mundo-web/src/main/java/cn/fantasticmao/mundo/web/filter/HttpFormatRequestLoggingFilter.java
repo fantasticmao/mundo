@@ -32,6 +32,7 @@ import java.util.Enumeration;
  * </pre>
  *
  * @author maomao
+ * @version 1.0
  * @since 2019-06-14
  */
 public class HttpFormatRequestLoggingFilter extends CommonsRequestLoggingFilter {

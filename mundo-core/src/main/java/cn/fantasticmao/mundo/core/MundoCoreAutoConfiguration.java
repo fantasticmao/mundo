@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  * MundoCoreAutoConfiguration
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/15
  */
 @Configuration

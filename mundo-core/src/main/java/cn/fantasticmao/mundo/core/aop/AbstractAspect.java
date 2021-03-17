@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  * AbstractAspect
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/17
  */
 public abstract class AbstractAspect {

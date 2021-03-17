@@ -15,6 +15,7 @@ import java.util.function.Supplier;
  * SetBuilder
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/10/11
  */
 @NotThreadSafe

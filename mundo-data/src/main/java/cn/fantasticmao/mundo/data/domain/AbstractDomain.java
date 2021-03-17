@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * AbstractDomain
  *
  * @author maomao
+ * @version 1.0
  * @since 2017/3/5
  */
 @MappedSuperclass
@@ -25,10 +26,10 @@ public abstract class AbstractDomain<ID extends Serializable> implements Seriali
     @Override
     public String toString() {
         return "AbstractDomain{" +
-                "id=" + id +
-                ", createTime=" + createTime +
-                ", modifyTime=" + modifyTime +
-                '}';
+            "id=" + id +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
+            '}';
     }
 
     public ID getId() {

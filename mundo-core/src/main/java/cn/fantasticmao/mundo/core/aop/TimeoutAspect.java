@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  * TimeoutAspect
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/14
  */
 @Aspect

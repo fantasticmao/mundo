@@ -15,6 +15,7 @@ import javax.annotation.Nonnull;
  * SpringUtil
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/12/31
  */
 public final class SpringUtil implements ApplicationContextAware, EnvironmentAware, ResourceLoaderAware {

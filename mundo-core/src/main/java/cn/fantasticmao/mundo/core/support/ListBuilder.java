@@ -15,6 +15,7 @@ import java.util.function.Supplier;
  * ListBuilder
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/7/25
  */
 @NotThreadSafe

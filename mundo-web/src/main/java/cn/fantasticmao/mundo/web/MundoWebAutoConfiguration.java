@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * MundoWebAutoConfiguration
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/8/2
  */
 @Configuration

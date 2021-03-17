@@ -13,6 +13,7 @@ import java.util.Queue;
  * AnnotationInterceptor
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/8/3
  */
 abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInterceptor {

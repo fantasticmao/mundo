@@ -11,6 +11,7 @@ import java.util.Base64;
  * HashUtil
  *
  * @author maomao
+ * @version 1.0
  * @since 2017/3/5
  */
 public enum HashUtil {

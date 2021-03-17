@@ -6,6 +6,7 @@ import lombok.*;
  * UserInfo
  *
  * @author maomao
+ * @version 1.0
  * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/api/UserInfo.html">小程序用户信息</a>
  * @since 2019-03-31
  */

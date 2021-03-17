@@ -16,6 +16,7 @@ import java.util.Map;
  * 转换成对应 {@link javax.sql.DataSource} 的 Lookup Key，再从 {@link #resolvedDataSources} 中动态选择数据源。
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/16
  */
 public class PartitionDataSource extends AbstractRoutingDataSource {

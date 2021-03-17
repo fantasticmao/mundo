@@ -14,6 +14,7 @@ import java.util.function.Function;
  * MemcacheLoadingCache
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/22
  */
 public class MemcacheLoadingCache<K, V> extends AbstractLoadingCache<K, V> {

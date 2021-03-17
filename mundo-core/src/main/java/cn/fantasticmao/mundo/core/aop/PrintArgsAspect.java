@@ -18,6 +18,7 @@ import java.util.stream.Stream;
  * PrintArgsAspect
  *
  * @author maodh
+ * @version 1.0
  * @since 23/06/2018
  */
 @Aspect
