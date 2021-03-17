@@ -2,8 +2,8 @@
 
 > The naming of Mundo was inspired by a champion in the League of Legends who was always beaten: the madman of Zaun - Dr. Mundo.
 
-Mundo is a small business component that is out of the box (and maybe useless). It can provide some basic business
-implementation and programming conventions for Spring Boot applications. Its main content comes from some special needs
+Mundo is a tiny business development component that is out of the box (and maybe useless). It can provide some basic business
+implementation and programming conventions for Spring Boot applications. It's main content comes from some personal requirements
 in my study and work, so you probably don't need it.
 
 ## Features
@@ -12,7 +12,7 @@ in my study and work, so you probably don't need it.
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` support printing log in the annotation-driven mode
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` support using the Builder design-pattern to create useful collections
-- [x] `com.mundo.core.util.*` support some simple and tiny business util classes
+- [x] `com.mundo.core.util.*` support some simple business util classes
 - [x] `StackPointer` support printing the call stack of the current thread
 
 ### mundo-data
