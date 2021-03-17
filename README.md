@@ -2,7 +2,7 @@
 
 > The naming of Mundo was inspired by a champion in the League of Legends who was always beaten: the madman of Zaun - Dr. Mundo.
 
-Mundo is a tiny component for business programming that is out of the box (and maybe useless). It can provide some basic
+Mundo is a tiny and out-of-the-box (also maybe useless) component for business programming. It can provide some basic
 business implementation and programming conventions for [Spring Boot](https://spring.io/projects/spring-boot)
 applications. Its main content comes from some personal requirements that I meet in my daily study and work, so you
 probably don't need it.
@@ -13,7 +13,7 @@ probably don't need it.
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` support printing log with the annotation-driven mode
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` support using the Builder design-pattern to create useful collections
-- [x] `com.mundo.core.util.*` implement some simple business util classes
+- [x] `cn.fantasticmao.mundo.core.util.*` implement some simple business util classes
 - [x] `StackPointer` support printing the call stack of the current thread
 
 ### mundo-data

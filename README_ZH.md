@@ -11,7 +11,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` 支持注解驱动方式的日志打印
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` 支持使用 Builder 模式来创建常用集合类
-- [x] `com.mundo.core.util.*` 实现一些简单的业务工具类
+- [x] `cn.fantasticmao.mundo.core.util.*` 实现一些简单的业务工具类
 - [x] `StackPointer` 打印当前线程的调用栈
 
 ### mundo-data
