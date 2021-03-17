@@ -84,8 +84,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub FantasticMao Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/FantasticMao/mundo</url>
+            <name>GitHub fantasticmao Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/fantasticmao/mundo</url>
         </repository>
     </distributionManagement>
 
