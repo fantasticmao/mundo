@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.web.interceptor;
 
-import cn.fantasticmao.mundo.core.util.CollectionUtil;
 import cn.fantasticmao.mundo.web.annotation.CheckLogin;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ public class CheckLoginInterceptor extends AnnotationInterceptor<CheckLogin> {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Queue<CheckLogin> annotationQueue = super.getMethodAnnotationQueue(handler, CheckLogin.class);
         // TODO 接入 SSO
-        boolean isCheck = CollectionUtil.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
+        boolean isCheck = CollectionUtils.isNotEmpty(annotationQueue) && this.processAnnotationQueue(annotationQueue);
         return !isCheck || check(request, response);
     }
 

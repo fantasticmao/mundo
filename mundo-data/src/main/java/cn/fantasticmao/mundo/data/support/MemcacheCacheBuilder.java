@@ -10,11 +10,12 @@ import java.util.function.Function;
 
 /**
  * MemcacheCacheBuilder
+ *
  * <pre>
- * LoadingCache<Integer, String> cache = MemcacheCacheBuilder.<Integer, String>newBuilder(memcachedClient)
+ * LoadingCache&lt;Integer, String&gt; cache = MemcacheCacheBuilder.&lt;Integer, String&gt;newBuilder(memcachedClient)
  *     .expireTime(1, TimeUnit.HOURS)
  *     .keyConvert(String::valueOf)
- *     .build(new CacheLoader<Integer, String>() {
+ *     .build(new CacheLoader&lt;Integer, String&gt;() {
  *         public String load(@Nonnull Integer key) throws Exception {
  *             // do something ...
  *             return null;

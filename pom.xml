@@ -15,22 +15,11 @@
     <packaging>pom</packaging>
 
     <name>mundo-all ${project.version}</name>
-    <url>https://github.com/fantasticmao/mundo</url>
     <description>
         Mundo is a tiny component for business programming that is out of the box (and maybe useless).
     </description>
+    <url>https://github.com/fantasticmao/mundo</url>
     <inceptionYear>2017</inceptionYear>
-
-    <developers>
-        <developer>
-            <id>fantasticmao</id>
-            <name>Mao Mao</name>
-            <email>maomao8017@gmail.com</email>
-            <roles>
-                <role>Owner</role>
-            </roles>
-        </developer>
-    </developers>
 
     <licenses>
         <license>
@@ -40,16 +29,36 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>fantasticmao</name>
+            <email>maomao8017@gmail.com</email>
+            <roles>
+                <role>Owner</role>
+            </roles>
+            <timezone>UTC+8</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:fantasticmao/mundo.git</connection>
+        <developerConnection>scm:git:git@github.com:fantasticmao/mundo.git</developerConnection>
+        <url>https://github.com/fantasticmao/mundo</url>
+    </scm>
+
     <issueManagement>
         <system>github</system>
         <url>https://github.com/fantasticmao/mundo/issues/</url>
     </issueManagement>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub Packages: fantasticmao/mundo</name>
-            <url>https://maven.pkg.github.com/fantasticmao/mundo</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
@@ -60,7 +69,8 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <commons-lang3.version>3.6</commons-lang3.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>25.0-jre</guava.version>
         <xmemcached.version>2.4.5</xmemcached.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
@@ -78,15 +88,56 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -115,6 +166,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
             </dependency>
 
             <dependency>

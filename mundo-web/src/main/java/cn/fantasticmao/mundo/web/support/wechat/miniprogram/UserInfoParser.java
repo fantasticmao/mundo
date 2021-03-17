@@ -45,7 +45,7 @@ public class UserInfoParser {
      * @param rawData    不包括敏感信息的原始数据字符串，用于计算签名
      * @param signature  使用 sha1( rawData + sessionKey ) 得到字符串，用于校验用户信息
      * @return true 校验成功；false 校验失败
-     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html#数据签名校验">数据签名校验</a>
+     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">数据签名校验</a>
      */
     public static boolean checkSignature(final String sessionKey, final String rawData, final String signature) {
         LOGGER.debug("rawData: {}", rawData);
@@ -62,7 +62,7 @@ public class UserInfoParser {
      * @param encryptedData 包括敏感数据在内的完整用户信息的加密数据
      * @param iv            加密算法的初始向量
      * @return 小程序用户信息 {@link UserInfo}
-     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html#加密数据解密算法">加密数据解密算法</a>
+     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">加密数据解密算法</a>
      */
     public static UserInfo decryptData(final String sessionKey, final String encryptedData, final String iv) {
         final byte[] sessionKeyBase64 = HashUtil.decode(sessionKey);
