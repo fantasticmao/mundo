@@ -1,7 +1,8 @@
 package com.mundo.core.aop;
 
 import com.mundo.core.annotation.PrintArgs;
-import com.mundo.core.util.StringUtil;
+import com.mundo.core.support.Constant;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -33,7 +34,7 @@ public class PrintArgsAspect extends AbstractAspect {
         String methodName = method.getName();
         String className = method.getDeclaringClass().getName();
         String[] args = Stream.of(joinPoint.getArgs()).map(Objects::toString).toArray(String[]::new);
-        String argument = StringUtil.join(args, ", ");
+        String argument = StringUtils.join(args, Constant.Strings.COMMA_WITH_SPACE);
         LOGGER.info("Execute Method: {}#{}({})", className, methodName, argument);
     }
 }

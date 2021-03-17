@@ -3,7 +3,7 @@ package com.mundo.web.mvc;
 import com.mundo.core.support.Constant;
 import com.mundo.core.util.HashUtil;
 import com.mundo.core.util.SpringUtil;
-import com.mundo.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +50,7 @@ public abstract class WeChatConfigController {
     }
 
     protected boolean verifyParameters(final String signature, final String timestamp, final String nonce) {
-        if (StringUtil.isAnyEmpty(signature, timestamp, nonce)) {
+        if (StringUtils.isAnyEmpty(signature, timestamp, nonce)) {
             return false;
         }
 
@@ -63,7 +63,7 @@ public abstract class WeChatConfigController {
 
     protected String getToken() {
         final String weChatToken = SpringUtil.getBean(TOKEN_BEAN_NAME);
-        if (StringUtil.isEmpty(weChatToken)) {
+        if (StringUtils.isEmpty(weChatToken)) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("微信服务器 Token 配置异常，weChatToken={}", weChatToken);
             }

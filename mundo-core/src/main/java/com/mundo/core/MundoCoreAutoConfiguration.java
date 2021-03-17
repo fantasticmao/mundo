@@ -56,16 +56,16 @@ public class MundoCoreAutoConfiguration {
     @ConditionalOnMissingBean
     CloseableHttpClient httpClient() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContextBuilder.create()
-                .loadTrustMaterial(null, (X509Certificate[] chain, String authType) -> true)
-                .build();
+            .loadTrustMaterial(null, (X509Certificate[] chain, String authType) -> true)
+            .build();
         RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout((int) TimeUnit.SECONDS.toMillis(30))
-                .setSocketTimeout((int) TimeUnit.SECONDS.toMillis(30))
-                .build();
+            .setConnectTimeout((int) TimeUnit.SECONDS.toMillis(30))
+            .setSocketTimeout((int) TimeUnit.SECONDS.toMillis(30))
+            .build();
         return HttpClients.custom()
-                .setSSLContext(sslContext)
-                .setDefaultRequestConfig(requestConfig)
-                .build();
+            .setSSLContext(sslContext)
+            .setDefaultRequestConfig(requestConfig)
+            .build();
     }
 
 }

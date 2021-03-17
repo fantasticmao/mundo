@@ -25,7 +25,6 @@ public interface Constant {
         String EMPTY = "";
         String SPACE = " ";
         String COMMA = ",";
-        String LT = "<";
-        String GT = ">";
+        String COMMA_WITH_SPACE = ", ";
     }
 }
