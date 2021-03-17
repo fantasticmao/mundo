@@ -2,17 +2,18 @@
 
 > The naming of Mundo was inspired by a champion in the League of Legends who was always beaten: the madman of Zaun - Dr. Mundo.
 
-Mundo is a tiny business development component that is out of the box (and maybe useless). It can provide some basic business
-implementation and programming conventions for Spring Boot applications. It's main content comes from some personal requirements
-in my study and work, so you probably don't need it.
+Mundo is a tiny component for business programming that is out of the box (and maybe useless). It can provide some basic
+business implementation and programming conventions for [Spring Boot](https://spring.io/projects/spring-boot)
+applications. Its main content comes from some personal requirements that I meet in my daily study and work, so you
+probably don't need it.
 
 ## Features
 
 ### mundo-core
 
-- [x] `@AssertFalse` `@PrintArgs` `@Timeout` support printing log in the annotation-driven mode
+- [x] `@AssertFalse` `@PrintArgs` `@Timeout` support printing log with the annotation-driven mode
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` support using the Builder design-pattern to create useful collections
-- [x] `com.mundo.core.util.*` support some simple business util classes
+- [x] `com.mundo.core.util.*` implement some simple business util classes
 - [x] `StackPointer` support printing the call stack of the current thread
 
 ### mundo-data
@@ -24,7 +25,7 @@ in my study and work, so you probably don't need it.
 
 ### mundo-web
 
-- [ ] `@CheckCsrf` `@CheckLogin` support session validation in the annotation-driven mode
+- [ ] `@CheckCsrf` `@CheckLogin` support session validation with the annotation-driven mode
 - [x] `WeChatConfigController` support signature verification when programming with WeChat open platform
 - [x] `JsonApi` specifies JSON basic fields in the HTTP API response
 

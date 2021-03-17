@@ -2,7 +2,8 @@
 
 > Mundo 命名的灵感来源于英雄联盟中一个经常被挨揍的英雄：祖安狂人——蒙多医生。
 
-Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它可以为 Spring Boot 应用提供一些基础业务实现和编程规范约定。它的主要内容来源于我自己平时学习和工作过程中的一些个人需求，所以你很大可能是用不上它的......
+Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它可以为 [Spring Boot](https://spring.io/projects/spring-boot)
+应用提供一些基础业务实现和编程规范约定。它的主要内容来源于我自己日常学习和工作过程中遇到的一些个人需求，所以你很大可能是不需要它的......
 
 ## 特性列表
 
@@ -10,7 +11,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` 支持注解驱动方式的日志打印
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` 支持使用 Builder 模式来创建常用集合类
-- [x] `com.mundo.core.util.*` 支持一些简单的业务工具类
+- [x] `com.mundo.core.util.*` 实现一些简单的业务工具类
 - [x] `StackPointer` 打印当前线程的调用栈
 
 ### mundo-data
