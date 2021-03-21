@@ -7,6 +7,7 @@ import org.junit.Test;
  * HashUtilTest
  *
  * @author maomao
+ * @version 1.0
  * @since 17-4-24
  */
 public class HashUtilTest {

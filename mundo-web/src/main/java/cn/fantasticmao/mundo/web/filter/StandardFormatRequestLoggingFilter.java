@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 /**
- * HttpFormatRequestLoggingFilter
- *
- * 开启 HttpFormatRequestLoggingFilter 功能，需要在 logback.xml 中配置对应的 logger，示例配置如下：
+ * The HTTP request logging filter supports logging in the standard format.
+ * <p>
+ * When using this class, you'd better provide a logger configuration explicitly.
+ * The recommended configuration format such as:
  * <pre>
  *     &lt;appender name="http_request_info" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
  *         &lt;file&gt;${log_home}/http-request.log&lt;/file&gt;
@@ -26,7 +27,7 @@ import java.util.Enumeration;
  *         &lt;/rollingPolicy&gt;
  *     &lt;/appender&gt;
  *
- *     &lt;logger name="HttpFormatRequestLoggingFilter" level="TRACE" additivity="false"&gt;
+ *     &lt;logger name="StandardFormatRequestLoggingFilter" level="TRACE" additivity="false"&gt;
  *         &lt;appender-ref ref="http_request_info"/&gt;
  *     &lt;/logger&gt;
  * </pre>
@@ -35,24 +36,24 @@ import java.util.Enumeration;
  * @version 1.0
  * @since 2019-06-14
  */
-public class HttpFormatRequestLoggingFilter extends CommonsRequestLoggingFilter {
+public class StandardFormatRequestLoggingFilter extends CommonsRequestLoggingFilter {
     private final Logger logger;
 
     private static final String SPACE = Constant.Strings.SPACE;
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final int DEFAULT_MAX_PAYLOAD_LENGTH = 256;
-    private static final String DEFAULT_LOGGER_NAME = "HttpFormatRequestLoggingFilter";
+    private static final String DEFAULT_LOGGER_NAME = "StandardFormatRequestLoggingFilter";
 
-    public HttpFormatRequestLoggingFilter() {
+    public StandardFormatRequestLoggingFilter() {
         this(DEFAULT_MAX_PAYLOAD_LENGTH);
     }
 
-    public HttpFormatRequestLoggingFilter(int maxPayloadLength) {
-        this(maxPayloadLength, DEFAULT_LOGGER_NAME);
+    public StandardFormatRequestLoggingFilter(int maxPayloadLength) {
+        this(maxPayloadLength, LoggerFactory.getLogger(DEFAULT_LOGGER_NAME));
     }
 
-    public HttpFormatRequestLoggingFilter(int maxPayloadLength, String loggerName) {
-        this.logger = LoggerFactory.getLogger(loggerName);
+    public StandardFormatRequestLoggingFilter(int maxPayloadLength, Logger logger) {
+        this.logger = logger;
         maxPayloadLength = Math.max(maxPayloadLength, 1024);
         super.setMaxPayloadLength(maxPayloadLength);
     }
@@ -96,7 +97,7 @@ public class HttpFormatRequestLoggingFilter extends CommonsRequestLoggingFilter 
 
     @Override
     protected void beforeRequest(HttpServletRequest request, String message) {
-        // 忽略请求处理之前的日志
+        // ignored
     }
 
     @Override

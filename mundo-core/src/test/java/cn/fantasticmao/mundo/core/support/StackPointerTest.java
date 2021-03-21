@@ -6,6 +6,7 @@ import org.junit.Test;
  * StackPointerTest
  *
  * @author maodh
+ * @version 1.0
  * @since 04/02/2018
  */
 public class StackPointerTest {

@@ -7,6 +7,7 @@ import org.junit.Test;
  * RegexUtilTest
  *
  * @author maomao
+ * @version 1.0
  * @since 17-4-23
  */
 public class RegexUtilTest {

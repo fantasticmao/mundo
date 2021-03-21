@@ -1,8 +1,8 @@
 package cn.fantasticmao.mundo.data.support;
 
+import cn.fantasticmao.mundo.data.SpringTest;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import cn.fantasticmao.mundo.data.SpringTest;
 import net.rubyeye.xmemcached.MemcachedClient;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * MemcacheLoadingCacheTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/24
  */
 @Ignore
@@ -34,14 +35,14 @@ public class MemcacheLoadingCacheTest extends SpringTest {
     @PostConstruct
     public void init() {
         this.cache = MemcacheCacheBuilder.<Integer, String>newBuilder(memcachedClient)
-                .expireTime(1, TimeUnit.MINUTES)
-                .keyConvert(String::valueOf)
-                .build(new CacheLoader<Integer, String>() {
-                    @Override
-                    public String load(@Nonnull Integer key) {
-                        return TEST1;
-                    }
-                });
+            .expireTime(1, TimeUnit.MINUTES)
+            .keyConvert(String::valueOf)
+            .build(new CacheLoader<Integer, String>() {
+                @Override
+                public String load(@Nonnull Integer key) {
+                    return TEST1;
+                }
+            });
     }
 
     @Test

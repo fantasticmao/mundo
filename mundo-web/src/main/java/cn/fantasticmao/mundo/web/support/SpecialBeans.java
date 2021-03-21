@@ -1,13 +1,13 @@
 package cn.fantasticmao.mundo.web.support;
 
 /**
- * Beans
+ * SpecialBeans
  *
  * @author maodh
  * @version 1.0
  * @since 27/05/2018
  */
-public interface Beans {
+public interface SpecialBeans {
     String DEFAULT_REST_TEMPLATE = "defaultRestTemplate";
 
     String ANSYC_REST_TEMPLATE = "ansycRestTemplate";

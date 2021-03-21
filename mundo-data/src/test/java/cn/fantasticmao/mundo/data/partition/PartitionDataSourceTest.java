@@ -14,6 +14,7 @@ import java.sql.SQLException;
  * PartitionDataSourceTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/7/25
  */
 @Ignore

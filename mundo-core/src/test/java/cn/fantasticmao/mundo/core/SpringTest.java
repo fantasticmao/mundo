@@ -13,6 +13,7 @@ import javax.annotation.Resource;
  * SpringTest
  *
  * @author maodh
+ * @version 1.0
  * @since 02/05/2018
  */
 @RunWith(SpringRunner.class)

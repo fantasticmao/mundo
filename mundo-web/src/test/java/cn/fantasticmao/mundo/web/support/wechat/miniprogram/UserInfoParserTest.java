@@ -7,6 +7,7 @@ import org.junit.Test;
  * UserInfoParserTest
  *
  * @author maomao
+ * @version 1.0
  * @since 2019-03-31
  */
 public class UserInfoParserTest {

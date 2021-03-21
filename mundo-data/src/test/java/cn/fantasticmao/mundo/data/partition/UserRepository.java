@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
  * UserRepository
  *
  * @author maodh
+ * @version 1.0
  * @since 2019/1/1
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
