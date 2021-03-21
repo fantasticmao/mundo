@@ -9,6 +9,7 @@ import javax.annotation.Resource;
  * PrintArgsAspectTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/6/24
  */
 public class PrintArgsAspectTest extends SpringTest {

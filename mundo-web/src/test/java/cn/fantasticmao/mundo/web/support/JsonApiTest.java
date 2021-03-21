@@ -6,6 +6,13 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * JsonApiTest
+ *
+ * @author MaoMao
+ * @version 1.0
+ * @since 2017/3/19
+ */
 public class JsonApiTest {
 
     @Test

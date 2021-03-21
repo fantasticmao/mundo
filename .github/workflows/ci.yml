@@ -1,16 +1,14 @@
-name: action
+name: ci
 
 on:
   push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
 
 jobs:
-  deploy:
-    name: Deploy
+  ci:
+    name: Continuous Delivery
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout Project
@@ -23,5 +21,3 @@ jobs:
           java-version: 1.8
       - name: Deploy with Maven
         run: ./mvnw test -B
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

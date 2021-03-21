@@ -6,6 +6,7 @@ import org.junit.Test;
  * JsonUtilTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/1/6
  */
 public class JsonUtilTest {

@@ -1,8 +1,11 @@
-# Mundo [![Actions Status](https://github.com/fantasticmao/mundo/workflows/action/badge.svg)](https://github.com/fantasticmao/mundo/actions) [![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
+# Mundo
+
+[![Actions Status](https://github.com/fantasticmao/mundo/workflows/ci/badge.svg)](https://github.com/fantasticmao/mundo/actions)
+[![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
 > The naming of Mundo was inspired by a champion in the League of Legends who was always beaten: the madman of Zaun - Dr. Mundo.
 
-Mundo is a tiny and out-of-the-box (also maybe useless) component for business programming. It can provide some basic
+Mundo is a tiny and out-of-the-box (also maybe useless) component for business programming. It provides some basic
 business implementation and programming conventions for [Spring Boot](https://spring.io/projects/spring-boot)
 applications. Its main content comes from some personal requirements that I meet in my daily study and work, so you
 probably don't need it.
@@ -11,7 +14,7 @@ probably don't need it.
 
 ### mundo-core
 
-- [x] `@AssertFalse` `@PrintArgs` `@Timeout` support printing log with the annotation-driven mode
+- [x] `@AssertFalse` `@PrintArgs` `@Timeout` support logging with the annotation-driven mode
 - [x] `ListBuilder` `SetBuilder` `MapBuilder` support using the Builder design-pattern to create useful collections
 - [x] `cn.fantasticmao.mundo.core.util.*` implement some simple business util classes
 - [x] `StackPointer` support printing the call stack of the current thread
@@ -26,8 +29,9 @@ probably don't need it.
 ### mundo-web
 
 - [ ] `@CheckCsrf` `@CheckLogin` support session validation with the annotation-driven mode
-- [x] `WeChatConfigController` support signature verification when programming with WeChat open platform
 - [x] `JsonApi` specifies JSON basic fields in the HTTP API response
+- [x] `WeChatConfigController` support signature verification when programming with WeChat open platform
+- [x] `StandardFormatRequestLoggingFilter` support logging http requests in the standard format
 
 ## Feedback
 

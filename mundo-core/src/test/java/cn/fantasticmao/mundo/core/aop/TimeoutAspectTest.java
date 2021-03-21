@@ -9,6 +9,7 @@ import javax.annotation.Resource;
  * TimeoutAspectTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/15
  */
 

@@ -7,16 +7,17 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
- * HttpFormatRequestLoggingFilterTest
+ * StandardFormatRequestLoggingFilterTest
  *
  * @author maomao
+ * @version 1.0
  * @since 2019-06-15
  */
-public class HttpFormatRequestLoggingFilterTest {
+public class StandardFormatRequestLoggingFilterTest {
 
     @Test
     public void createMessage() {
-        HttpFormatRequestLoggingFilter filter = new HttpFormatRequestLoggingFilter();
+        StandardFormatRequestLoggingFilter filter = new StandardFormatRequestLoggingFilter();
         MockHttpServletRequest request = new MockHttpServletRequest(HttpMethod.POST.name(), "/login");
         request.setQueryString("a=1&b=2&c=3");
         request.setContentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);

@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.support;
 
 import cn.fantasticmao.mundo.core.util.JsonUtil;
-import cn.fantasticmao.mundo.core.util.ObjectUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.Builder;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -60,7 +60,7 @@ public class MapBuilder<K, V> implements Builder<Map<K, V>> {
     }
 
     public MapBuilder<K, V> putIfNonNull(K k, V v) {
-        return putIf(k, v, (key, val) -> ObjectUtil.allNotNull(key, val));
+        return putIf(k, v, ObjectUtils::allNotNull);
     }
 
     public MapBuilder<K, V> putIfKeyNonNull(K k, V v) {

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * SnowflakeTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2019/1/2
  */
 public class SnowflakeTest {
