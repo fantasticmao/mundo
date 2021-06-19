@@ -1,8 +1,8 @@
 package cn.fantasticmao.mundo.data.partition;
 
 import cn.fantasticmao.mundo.data.SpringTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @version 1.0
  * @since 2018/7/25
  */
-@Ignore
+@Disabled
 public class PartitionDataSourceTest extends SpringTest {
     @Resource
     private PartitionDataSource partitionDataSource;

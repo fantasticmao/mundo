@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.web.filter;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -27,6 +27,6 @@ public class StandardFormatRequestLoggingFilterTest {
         String expected = "POST /login?a=1&b=2&c=3 HTTP/1.1" + System.lineSeparator() +
             "Content-Type: application/x-www-form-urlencoded" + System.lineSeparator() +
             "Cache-Control: no-cache" + System.lineSeparator();
-        Assert.assertEquals(expected, msg);
+        Assertions.assertEquals(expected, msg);
     }
 }

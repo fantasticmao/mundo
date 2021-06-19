@@ -27,5 +27,6 @@ public interface Constant {
         String SPACE = " ";
         String COMMA = ",";
         String COMMA_WITH_SPACE = ", ";
+        String SEMICOLON = ";";
     }
 }

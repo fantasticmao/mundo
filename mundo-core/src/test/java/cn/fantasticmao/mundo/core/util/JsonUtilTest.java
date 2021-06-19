@@ -1,6 +1,6 @@
 package cn.fantasticmao.mundo.core.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * JsonUtilTest

@@ -4,9 +4,9 @@ import cn.fantasticmao.mundo.data.SpringTest;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import net.rubyeye.xmemcached.MemcachedClient;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @since 2018/7/24
  */
-@Ignore
+@Disabled
 public class MemcacheLoadingCacheTest extends SpringTest {
     @Resource(name = "memcachedClient")
     private MemcachedClient memcachedClient;
@@ -48,47 +48,47 @@ public class MemcacheLoadingCacheTest extends SpringTest {
     @Test
     public void get() throws ExecutionException {
         cache.invalidate(key);
-        Assert.assertEquals(TEST1, cache.get(key));
+        Assertions.assertEquals(TEST1, cache.get(key));
     }
 
     @Test
     public void getCallable() throws ExecutionException {
         cache.invalidate(key);
-        Assert.assertNull(cache.getIfPresent(key));
+        Assertions.assertNull(cache.getIfPresent(key));
 
-        Assert.assertEquals(TEST2, cache.get(key, () -> TEST2));
+        Assertions.assertEquals(TEST2, cache.get(key, () -> TEST2));
     }
 
     @Test
     public void getIfPresent() {
         cache.invalidate(key);
-        Assert.assertNull(cache.getIfPresent(key));
+        Assertions.assertNull(cache.getIfPresent(key));
 
         cache.put(key, TEST2);
-        Assert.assertEquals(TEST2, cache.getIfPresent(key));
+        Assertions.assertEquals(TEST2, cache.getIfPresent(key));
     }
 
     @Test
     public void put() {
         cache.invalidate(key);
-        Assert.assertNull(cache.getIfPresent(key));
+        Assertions.assertNull(cache.getIfPresent(key));
 
         cache.put(key, TEST2);
-        Assert.assertEquals(TEST2, cache.getIfPresent(key));
+        Assertions.assertEquals(TEST2, cache.getIfPresent(key));
     }
 
     @Test
     public void invalidate() {
         cache.invalidate(key);
-        Assert.assertNull(cache.getIfPresent(key));
+        Assertions.assertNull(cache.getIfPresent(key));
     }
 
     @Test
     public void refresh() {
         cache.invalidate(key);
         cache.put(key, TEST2);
-        Assert.assertEquals(TEST2, cache.getIfPresent(key));
+        Assertions.assertEquals(TEST2, cache.getIfPresent(key));
         cache.refresh(key);
-        Assert.assertEquals(TEST1, cache.getIfPresent(key));
+        Assertions.assertEquals(TEST1, cache.getIfPresent(key));
     }
 }
