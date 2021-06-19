@@ -1,11 +1,9 @@
 package cn.fantasticmao.mundo.core;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
@@ -16,7 +14,6 @@ import javax.annotation.Resource;
  * @version 1.0
  * @since 02/05/2018
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class SpringTest {
     @Resource
@@ -24,6 +21,6 @@ public class SpringTest {
 
     @Test
     public void spring() {
-        Assert.assertNotNull(applicationContext);
+        Assertions.assertNotNull(applicationContext);
     }
 }

@@ -1,6 +1,6 @@
 package cn.fantasticmao.mundo.core.support;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * StackPointerTest

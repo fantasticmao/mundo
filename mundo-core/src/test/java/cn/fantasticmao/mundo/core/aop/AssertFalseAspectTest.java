@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.aop;
 
 import cn.fantasticmao.mundo.core.SpringTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 
