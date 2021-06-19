@@ -1,6 +1,6 @@
 package cn.fantasticmao.mundo.core.support;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
  * ListBuilderTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/1/10
  */
 public class ListBuilderTest {

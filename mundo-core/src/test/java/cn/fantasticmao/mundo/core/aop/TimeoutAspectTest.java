@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.aop;
 
 import cn.fantasticmao.mundo.core.SpringTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 
@@ -9,6 +9,7 @@ import javax.annotation.Resource;
  * TimeoutAspectTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/15
  */
 

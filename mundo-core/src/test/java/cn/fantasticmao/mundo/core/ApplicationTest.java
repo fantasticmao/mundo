@@ -9,9 +9,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * ApplicationTest
+ * <p>
  * 附：可以使用 <code>@TestConfiguration</code> 覆盖 <code>@Configuration</code> 中已存在的 Bean
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/15
  */
 @EnableAspectJAutoProxy

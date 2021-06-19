@@ -6,6 +6,7 @@ import cn.fantasticmao.mundo.core.annotation.AssertFalse;
  * AssertFalseComponent
  *
  * @author maodh
+ * @version 1.0
  * @since 02/05/2018
  */
 public class AssertFalseComponent {

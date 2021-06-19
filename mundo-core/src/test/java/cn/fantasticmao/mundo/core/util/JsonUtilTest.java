@@ -1,11 +1,12 @@
 package cn.fantasticmao.mundo.core.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * JsonUtilTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/1/6
  */
 public class JsonUtilTest {

@@ -1,8 +1,8 @@
 package cn.fantasticmao.mundo.data;
 
 import cn.fantasticmao.mundo.core.support.MapBuilder;
-import cn.fantasticmao.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import cn.fantasticmao.mundo.data.partition.PartitionDataSource;
+import cn.fantasticmao.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import cn.fantasticmao.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
 import cn.fantasticmao.mundo.data.partition.User;
 import net.rubyeye.xmemcached.command.BinaryCommandFactory;
@@ -29,6 +29,7 @@ import java.util.Map;
  * ApplicationTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2017/11/17
  */
 @EnableAspectJAutoProxy
@@ -38,59 +39,59 @@ public class ApplicationTest {
 
     DataSource test00() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test00")
-                .username("test")
-                .password("123456")
-                .build();
+            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url("jdbc:mysql://localhost:3306/test00")
+            .username("test")
+            .password("123456")
+            .build();
     }
 
     DataSource test01() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test01")
-                .username("test")
-                .password("123456")
-                .build();
+            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url("jdbc:mysql://localhost:3306/test01")
+            .username("test")
+            .password("123456")
+            .build();
     }
 
     DataSource test02() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test02")
-                .username("test")
-                .password("123456")
-                .build();
+            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url("jdbc:mysql://localhost:3306/test02")
+            .username("test")
+            .password("123456")
+            .build();
     }
 
     DataSource test03() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test03")
-                .username("test")
-                .password("123456")
-                .build();
+            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url("jdbc:mysql://localhost:3306/test03")
+            .username("test")
+            .password("123456")
+            .build();
     }
 
     DataSource test04() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/test04")
-                .username("test")
-                .password("123456")
-                .build();
+            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url("jdbc:mysql://localhost:3306/test04")
+            .username("test")
+            .password("123456")
+            .build();
     }
 
     @Bean
     PartitionDataSource partitionDataSource() {
         Map<String, DataSource> dataSources = MapBuilder.<String, DataSource>create(5)
-                .put("test01", test01())
-                .put("test02", test02())
-                .put("test03", test03())
-                .put("test04", test04())
-                .build();
+            .put("test01", test01())
+            .put("test02", test02())
+            .put("test03", test03())
+            .put("test04", test04())
+            .build();
         PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
-                new PartitionSeedToDataSourceKeyStrategy.NumberModulusStrategy("test%02d", dataSources.size());
+            new PartitionSeedToDataSourceKeyStrategy.NumberModulusStrategy("test%02d", dataSources.size());
         return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
     }
 
@@ -101,9 +102,9 @@ public class ApplicationTest {
         jpaVendorAdapter.setGenerateDdl(false);
         jpaVendorAdapter.setDatabase(Database.MYSQL);
         return new EntityManagerFactoryBuilder(jpaVendorAdapter, Collections.emptyMap(), null)
-                .dataSource(dataSource)
-                .packages(User.class)
-                .build();
+            .dataSource(dataSource)
+            .packages(User.class)
+            .build();
     }
 
     @Bean

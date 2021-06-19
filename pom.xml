@@ -4,19 +4,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.1.RELEASE</version>
+        <version>2.5.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>mundo-all ${project.version}</name>
     <description>
-        Mundo is a tiny component for business programming that is out of the box (and maybe useless).
+        Mundo is a tiny and out-of-the-box component for business programming.
     </description>
     <url>https://github.com/fantasticmao/mundo</url>
     <inceptionYear>2017</inceptionYear>
@@ -71,10 +71,10 @@
 
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <guava.version>25.0-jre</guava.version>
-        <xmemcached.version>2.4.5</xmemcached.version>
-        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+        <guava.version>30.0-jre</guava.version>
+        <xmemcached.version>2.4.7</xmemcached.version>
+        <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+        <springfox-swagger-ui.version>3.0.0</springfox-swagger-ui.version>
     </properties>
 
     <modules>
@@ -136,7 +136,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>

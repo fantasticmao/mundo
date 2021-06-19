@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.data.support;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * SnowflakeTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2019/1/2
  */
 public class SnowflakeTest {
@@ -80,7 +81,7 @@ public class SnowflakeTest {
         }
 
         List<Long> distinctIdList = idList.stream().distinct().collect(Collectors.toList());
-        Assert.assertEquals(idList.size(), distinctIdList.size());
+        Assertions.assertEquals(idList.size(), distinctIdList.size());
 
         //List<String> idStrList = idList.stream().map(String::valueOf).collect(Collectors.toList());
         //Path path = Paths.get(Object.class.getResource("/").getPath(), "snowflake.log");

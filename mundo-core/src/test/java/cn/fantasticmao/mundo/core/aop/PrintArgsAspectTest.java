@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.aop;
 
 import cn.fantasticmao.mundo.core.SpringTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
 
@@ -9,6 +9,7 @@ import javax.annotation.Resource;
  * PrintArgsAspectTest
  *
  * @author maodh
+ * @version 1.0
  * @since 2018/6/24
  */
 public class PrintArgsAspectTest extends SpringTest {
