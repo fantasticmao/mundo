@@ -4,14 +4,14 @@
     <parent>
         <groupId>cn.fantasticmao.mundo</groupId>
         <artifactId>mundo-all</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mundo-web</artifactId>
     <packaging>jar</packaging>
 
-    <name>mundo-web ${project.version}</name>
+    <name>mundo-web</name>
     <description>
         Mundo is a tiny and out-of-the-box component for business programming.
     </description>
@@ -47,12 +47,7 @@
 
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
