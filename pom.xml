@@ -11,10 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
 
-    <name>mundo-all ${project.version}</name>
+    <name>mundo-all</name>
     <description>
         Mundo is a tiny and out-of-the-box component for business programming.
     </description>
@@ -73,8 +73,7 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>30.0-jre</guava.version>
         <xmemcached.version>2.4.7</xmemcached.version>
-        <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
-        <springfox-swagger-ui.version>3.0.0</springfox-swagger-ui.version>
+        <springfox.version>3.0.0</springfox.version>
     </properties>
 
     <modules>
@@ -194,14 +193,8 @@
 
             <dependency>
                 <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger2.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox-swagger-ui.version}</version>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
