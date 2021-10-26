@@ -15,6 +15,8 @@ public interface Snowflake {
     long nextId();
 
     /**
+     * TwitterSnowflake
+     *
      * @see <a href="https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html">Announcing Snowflake</a>
      * @see <a href="https://github.com/twitter-archive/snowflake/blob/b3f6a3c6ca8e1b6847baa6ff42bf72201e2c2231/src/main/scala/com/twitter/service/snowflake/IdWorker.scala">twitter-archive snowflake</a>
      */
@@ -64,12 +66,12 @@ public interface Snowflake {
 
             final String binaryString = new String(chars);
             return String.format("raw id: %s", id) + System.lineSeparator() +
-                    String.format("binary string: %s", binaryString) + System.lineSeparator() +
-                    String.format("segment string: %s, %s, %s, %s",
-                            binaryString.substring(0, TwitterSnowflake.RIGHT_TIMESTAMP),
-                            binaryString.substring(TwitterSnowflake.RIGHT_TIMESTAMP, TwitterSnowflake.RIGHT_WORKER_NUMBER),
-                            binaryString.substring(TwitterSnowflake.RIGHT_WORKER_NUMBER, TwitterSnowflake.RIGHT_SEQUENCE_NUMBER),
-                            binaryString.substring(TwitterSnowflake.RIGHT_SEQUENCE_NUMBER, 64));
+                String.format("binary string: %s", binaryString) + System.lineSeparator() +
+                String.format("segment string: %s, %s, %s, %s",
+                    binaryString.substring(0, TwitterSnowflake.RIGHT_TIMESTAMP),
+                    binaryString.substring(TwitterSnowflake.RIGHT_TIMESTAMP, TwitterSnowflake.RIGHT_WORKER_NUMBER),
+                    binaryString.substring(TwitterSnowflake.RIGHT_WORKER_NUMBER, TwitterSnowflake.RIGHT_SEQUENCE_NUMBER),
+                    binaryString.substring(TwitterSnowflake.RIGHT_SEQUENCE_NUMBER, 64));
         }
 
         @Override
@@ -77,7 +79,7 @@ public interface Snowflake {
             long timestamp = this.timeGen();
             if (timestamp < lastTimestamp) {
                 throw new IllegalArgumentException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds",
-                        lastTimestamp - timestamp));
+                    lastTimestamp - timestamp));
             }
 
             if (lastTimestamp == timestamp) {
