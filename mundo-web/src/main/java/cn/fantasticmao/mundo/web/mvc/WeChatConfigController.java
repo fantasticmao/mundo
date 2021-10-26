@@ -2,17 +2,12 @@ package cn.fantasticmao.mundo.web.mvc;
 
 import cn.fantasticmao.mundo.core.support.Constant;
 import cn.fantasticmao.mundo.core.util.HashUtil;
-import cn.fantasticmao.mundo.core.util.SpringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * WeChatConfigController
@@ -23,8 +18,6 @@ import java.util.stream.Collectors;
  */
 public abstract class WeChatConfigController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatConfigController.class);
-
-    public static final String TOKEN_BEAN_NAME = "weChatToken";
 
     public String configServer(HttpServletRequest request) {
         String signature = request.getParameter("signature");
@@ -57,20 +50,26 @@ public abstract class WeChatConfigController {
 
         List<String> list = Arrays.asList(getToken(), timestamp, nonce);
         Collections.sort(list);
-        final String str = list.stream().collect(Collectors.joining());
+        final String str = String.join(Constant.Strings.EMPTY, list);
         final String strAfterHash = HashUtil.SHA1.hash(str);
         return Objects.equals(signature, strAfterHash);
     }
 
     protected String getToken() {
-        final String weChatToken = SpringUtil.getBean(TOKEN_BEAN_NAME);
-        if (StringUtils.isEmpty(weChatToken)) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("微信服务器 Token 配置异常，weChatToken={}", weChatToken);
-            }
-            throw new IllegalArgumentException("微信服务器 Token 配置异常");
-        } else {
-            return weChatToken;
+        ServiceLoader<TokenProvider> serviceLoader = ServiceLoader.load(TokenProvider.class);
+        for (TokenProvider provider : serviceLoader) {
+            return provider.token();
         }
+        throw new IllegalArgumentException("获取微信服务器配置令牌异常");
+    }
+
+    public interface TokenProvider {
+
+        /**
+         * 获取微信服务器配置令牌
+         *
+         * @return 配置令牌
+         */
+        String token();
     }
 }
