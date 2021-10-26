@@ -32,7 +32,6 @@ probably don't need it.
 - [ ] `@CheckCsrf` `@CheckLogin` support session validation with the annotation-driven mode
 - [x] `JsonApi` specifies JSON basic fields in the HTTP API response
 - [x] `WeChatConfigController` support signature verification when programming with WeChat open platform
-- [x] `StandardFormatRequestLoggingFilter` support logging http requests in the standard format
 
 ## Feedback
 

@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>mundo-all</name>
@@ -73,7 +73,6 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>30.0-jre</guava.version>
         <xmemcached.version>2.4.7</xmemcached.version>
-        <springfox.version>3.0.0</springfox.version>
     </properties>
 
     <modules>
@@ -189,12 +188,6 @@
                 <groupId>com.googlecode.xmemcached</groupId>
                 <artifactId>xmemcached</artifactId>
                 <version>${xmemcached.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${springfox.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
