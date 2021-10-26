@@ -43,4 +43,4 @@ probably don't need it.
 
 [MIT License](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
-Copyright (c) 2017 Mao Mao
+Copyright (c) 2017 fantasticmao

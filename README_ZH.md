@@ -41,4 +41,4 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 [MIT License](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
-Copyright (c) 2017 Mao Mao
+Copyright (c) 2017 fantasticmao
