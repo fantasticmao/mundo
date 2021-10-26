@@ -35,7 +35,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 - [GitHub Issues](https://github.com/fantasticmao/mundo/issues/)
 - [Telegram](https://t.me/fantasticmao)
-- [WeChat](https://blog.fantasticmao.cn/images/weixin.png)
+- [WeChat](https://fantasticmao.cn/wechat.png)
 
 ## 许可证
 
