@@ -29,7 +29,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 - [ ] `@CheckCsrf` `@CheckLogin` 支持注解驱动方式的 session 校验
 - [x] `JsonApi` 约定 RESTful API 响应中的 JSON 基本字段
-- [x] `WeChatConfigController` 支持对接微信开放平台时的 signature 验证
+- [x] `WeChatServerConfig` 支持对接微信开放平台时的 signature 验证
 
 ## 反馈问题
 
