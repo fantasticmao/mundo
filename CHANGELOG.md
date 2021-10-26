@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.2-SNAPSHOT - 2021-10-26
+## 1.0.2 - 2021-10-27
 
 - Code cleanup
 - Remove Dependency `springfox-boot-starter`
