@@ -37,7 +37,7 @@ probably don't need it.
 
 - [GitHub Issues](https://github.com/fantasticmao/mundo/issues/)
 - [Telegram](https://t.me/fantasticmao)
-- [WeChat](https://blog.fantasticmao.cn/images/weixin.png)
+- [WeChat](https://fantasticmao.cn/wechat.png)
 
 ## License
 
