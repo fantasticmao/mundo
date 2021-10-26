@@ -4,10 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,30 +27,6 @@ public class SnowflakeTest {
     }
 
     @Test
-    public void testIfWork() throws IOException, InterruptedException {
-        Snowflake snowflake = Snowflake.TwitterSnowflake.getInstance(1);
-
-        CountDownLatch count = new CountDownLatch(1);
-        List<Long> idList = Collections.synchronizedList(new ArrayList<>());
-        Thread thread = new Thread(() -> {
-            while (!Thread.interrupted()) {
-                idList.add(snowflake.nextId());
-            }
-            count.countDown();
-        });
-        thread.start();
-
-        TimeUnit.MILLISECONDS.sleep(50);
-        thread.interrupt();
-        count.await();
-
-        List<String> idStrList = idList.stream().map(String::valueOf).collect(Collectors.toList());
-
-        Path path = Paths.get(Object.class.getResource("/").getPath(), "snowflake.log");
-        Files.write(path, idStrList, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-    }
-
-    @Test
     public void testConcurrency() throws InterruptedException, ExecutionException, IOException {
         Snowflake snowflake = Snowflake.TwitterSnowflake.getInstance(1);
 
@@ -71,7 +43,7 @@ public class SnowflakeTest {
             });
         }
 
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(3);
         executorService.shutdownNow();
 
         List<Long> idList = new ArrayList<>();
@@ -82,9 +54,5 @@ public class SnowflakeTest {
 
         List<Long> distinctIdList = idList.stream().distinct().collect(Collectors.toList());
         Assertions.assertEquals(idList.size(), distinctIdList.size());
-
-        //List<String> idStrList = idList.stream().map(String::valueOf).collect(Collectors.toList());
-        //Path path = Paths.get(Object.class.getResource("/").getPath(), "snowflake.log");
-        //Files.write(path, idStrList, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
     }
 }
