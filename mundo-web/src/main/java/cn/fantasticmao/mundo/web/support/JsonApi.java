@@ -2,8 +2,6 @@ package cn.fantasticmao.mundo.web.support;
 
 import cn.fantasticmao.mundo.core.util.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.concurrent.Immutable;
@@ -24,18 +22,13 @@ import java.io.Serializable;
  * @since 2017/3/19
  */
 @Immutable
-@ApiModel
 public final class JsonApi<T> implements Serializable {
     private static final long serialVersionUID = 6126929533373437316L;
 
-    @ApiModelProperty(example = "true", required = true)
     private final boolean status;
-    @ApiModelProperty(example = "200", required = true)
     private final int code;
-    @ApiModelProperty(example = "OK", required = true)
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @ApiModelProperty
     private T data;
 
     private JsonApi() {

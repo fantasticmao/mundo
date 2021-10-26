@@ -9,7 +9,7 @@ on:
 jobs:
   ci:
     name: Continuous Delivery
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -19,5 +19,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Deploy with Maven
+      - name: Run Maven Test
         run: ./mvnw test -B
