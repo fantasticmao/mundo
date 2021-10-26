@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -70,6 +71,7 @@ public abstract class WeChatConfigController {
          *
          * @return 配置令牌
          */
+        @Nonnull
         String token();
     }
 }
