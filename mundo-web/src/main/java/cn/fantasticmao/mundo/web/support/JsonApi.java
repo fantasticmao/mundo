@@ -10,7 +10,6 @@ import java.io.Serializable;
 /**
  * JsonApi
  * <p>
- * <p>
  * usages:
  * <ol>
  *     <li>{@code return JsonApi.success()}</li>
