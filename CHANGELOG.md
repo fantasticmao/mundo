@@ -5,7 +5,7 @@
 - Code cleanup
 - Remove Dependency `springfox-boot-starter`
 - Remove Java Class `StandardFormatRequestLoggingFilter`
-- Update Java Class `WeChatConfigController`
+- Update Java Class `WeChatServerConfig`
 - Upgrade Maven Plugin `maven-compiler-plugin` to `3.8.1`
 - Upgrade Maven Plugin `maven-gpg-plugin` to `3.0.1`
 

@@ -1,4 +1,4 @@
-package cn.fantasticmao.mundo.web.mvc;
+package cn.fantasticmao.mundo.web.support.wechat;
 
 import cn.fantasticmao.mundo.core.support.Constant;
 import cn.fantasticmao.mundo.core.util.HashUtil;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
- * WeChatConfigController
+ * WeChatServerConfig
  *
  * @author maodh
  * @version 1.0
  * @since 2018/12/5
  */
-public abstract class WeChatConfigController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WeChatConfigController.class);
+public abstract class WeChatServerConfig {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeChatServerConfig.class);
 
-    public String configServer(HttpServletRequest request) {
+    public String config(HttpServletRequest request) {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
         String nonce = request.getParameter("nonce");
