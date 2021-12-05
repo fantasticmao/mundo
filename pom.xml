@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>mundo-all</name>

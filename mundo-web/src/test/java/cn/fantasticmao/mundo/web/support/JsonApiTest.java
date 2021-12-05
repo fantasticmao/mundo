@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * JsonApiTest
  *
- * @author MaoMao
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/3/19
  */

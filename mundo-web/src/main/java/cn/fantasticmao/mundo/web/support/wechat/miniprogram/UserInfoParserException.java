@@ -3,7 +3,7 @@ package cn.fantasticmao.mundo.web.support.wechat.miniprogram;
 /**
  * UserInfoParserException
  *
- * @author maomao
+ * @author fantasticmao
  * @version 1.0
  * @since 2019-03-31
  */

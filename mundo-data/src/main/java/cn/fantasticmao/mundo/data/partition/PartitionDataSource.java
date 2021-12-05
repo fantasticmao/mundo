@@ -15,7 +15,7 @@ import java.util.Map;
  * 从 {@link PartitionSeedContext} 获取 <code>PartitionSeed</code>，再由 {@link PartitionSeedToDataSourceKeyStrategy}
  * 转换成对应 {@link javax.sql.DataSource} 的 Lookup Key，再从 {@link #resolvedDataSources} 中动态选择数据源。
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/11/16
  */

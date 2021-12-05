@@ -6,7 +6,7 @@ import java.util.function.Function;
 /**
  * 将 {@link PartitionSeedContext} 托管的 <code>PartitionSeed</code> 转换成对应 {@link javax.sql.DataSource} 的 Lookup Key。
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @see org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource#determineTargetDataSource()
  * @since 2018/7/25

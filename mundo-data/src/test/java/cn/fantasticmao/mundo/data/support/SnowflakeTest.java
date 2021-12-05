@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * SnowflakeTest
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2019/1/2
  */

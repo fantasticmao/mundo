@@ -13,7 +13,7 @@ import java.sql.SQLException;
 /**
  * PartitionDataSourceTest
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2018/7/25
  */
