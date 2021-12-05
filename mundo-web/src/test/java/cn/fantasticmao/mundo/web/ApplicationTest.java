@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * ApplicationTest
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 16/01/2018
  */

@@ -3,7 +3,7 @@ package cn.fantasticmao.mundo.web.support.wechat;
 /**
  * WeChatMessage
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2018/12/5
  */

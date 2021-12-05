@@ -3,7 +3,7 @@ package cn.fantasticmao.mundo.core.support;
 /**
  * Constant
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 27/05/2018
  */

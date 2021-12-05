@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * WeChatTextMessage
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2018/12/5
  */

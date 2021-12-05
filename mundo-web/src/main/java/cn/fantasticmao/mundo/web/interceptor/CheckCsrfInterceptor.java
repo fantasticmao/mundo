@@ -14,7 +14,7 @@ import java.util.Queue;
 /**
  * CheckCsrfInterceptor
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/8/2
  */

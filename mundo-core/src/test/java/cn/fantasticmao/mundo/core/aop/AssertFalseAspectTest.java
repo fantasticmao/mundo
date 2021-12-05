@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 /**
  * AssertFalseAspectTest
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 02/05/2018
  */
