@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 /**
  * ListBuilder
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/7/25
  */

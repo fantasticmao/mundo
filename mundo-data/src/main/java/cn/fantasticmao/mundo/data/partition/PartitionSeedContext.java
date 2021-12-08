@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * 使用 {@link java.lang.ThreadLocal} 管理 {@link PartitionParam} 参数生成的 <code>PartitionSeed</code>。
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/11/16
  */

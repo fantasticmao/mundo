@@ -7,7 +7,7 @@ import javax.persistence.Table;
 /**
  * User
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2019/1/1
  */

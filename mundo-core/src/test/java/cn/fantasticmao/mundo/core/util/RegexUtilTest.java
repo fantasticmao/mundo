@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 /**
  * RegexUtilTest
  *
- * @author maomao
+ * @author fantasticmao
  * @version 1.0
  * @since 17-4-23
  */

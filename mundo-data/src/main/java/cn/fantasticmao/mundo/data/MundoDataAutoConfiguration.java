@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MundoDataAutoConfiguration
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/11/16
  */
