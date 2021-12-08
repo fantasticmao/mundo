@@ -4,7 +4,7 @@
     <parent>
         <groupId>cn.fantasticmao.mundo</groupId>
         <artifactId>mundo-all</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -36,6 +36,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
         <dependency>

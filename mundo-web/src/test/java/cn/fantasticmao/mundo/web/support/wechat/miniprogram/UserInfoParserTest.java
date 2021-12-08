@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 /**
  * UserInfoParserTest
  *
- * @author maomao
+ * @author fantasticmao
  * @version 1.0
  * @since 2019-03-31
  */

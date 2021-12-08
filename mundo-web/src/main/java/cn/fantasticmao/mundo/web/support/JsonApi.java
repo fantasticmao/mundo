@@ -16,7 +16,7 @@ import java.io.Serializable;
  *     <li>{@code return JsonApi.error(HttpStatus.NOT_FOUND)}</li>
  * </ol>
  *
- * @author MaoMao
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/3/19
  */

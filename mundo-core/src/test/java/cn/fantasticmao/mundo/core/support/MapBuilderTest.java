@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * MapBuilderTest
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2018/1/8
  */

@@ -13,7 +13,7 @@ package cn.fantasticmao.mundo.data.partition;
  * }
  * </pre>
  *
- * @author maodh
+ * @author fantasticmao
  * @version 1.0
  * @since 2019/1/2
  */

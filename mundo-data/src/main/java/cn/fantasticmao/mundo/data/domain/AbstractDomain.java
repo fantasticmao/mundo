@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 /**
  * AbstractDomain
  *
- * @author maomao
+ * @author fantasticmao
  * @version 1.0
  * @since 2017/3/5
  */
