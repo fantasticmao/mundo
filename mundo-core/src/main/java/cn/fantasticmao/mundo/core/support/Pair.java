@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /**
  * Pair
  *
@@ -18,9 +16,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @EqualsAndHashCode
-public final class Pair<T, R> implements Serializable {
-    private static final long serialVersionUID = 3585194245329360293L;
-
+public final class Pair<T, R> {
     private T t;
     private R r;
 
