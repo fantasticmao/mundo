@@ -1,11 +1,9 @@
 package cn.fantasticmao.mundo.web.support;
 
-import cn.fantasticmao.mundo.core.util.JsonUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.concurrent.Immutable;
-import java.io.Serializable;
 
 /**
  * JsonApi
@@ -21,20 +19,18 @@ import java.io.Serializable;
  * @since 2017/3/19
  */
 @Immutable
-public final class JsonApi<T> implements Serializable {
-    private static final long serialVersionUID = 6126929533373437316L;
-
+public final class JsonApi<T> {
     private final boolean status;
     private final int code;
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
-    private JsonApi() {
-        throw new AssertionError("No JsonApi instances for you!");
+    public JsonApi() {
+        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
     }
 
-    private JsonApi(boolean status, int code, String message) {
+    public JsonApi(boolean status, int code, String message) {
         this.status = status;
         this.code = code;
         this.message = message;
@@ -57,13 +53,14 @@ public final class JsonApi<T> implements Serializable {
         }
     }
 
-    public String toJson() {
-        return JsonUtil.toJson(this);
-    }
-
     @Override
     public String toString() {
-        return toJson();
+        return "JsonApi{" +
+            "status=" + status +
+            ", code=" + code +
+            ", message='" + message + '\'' +
+            ", data=" + data +
+            '}';
     }
 
     // getter and setter

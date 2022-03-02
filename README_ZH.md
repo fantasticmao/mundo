@@ -1,6 +1,7 @@
 # Mundo
 
 [![Actions Status](https://github.com/fantasticmao/mundo/workflows/ci/badge.svg)](https://github.com/fantasticmao/mundo/actions)
+![JDK Version](https://img.shields.io/badge/JDK-11%2B-blue)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.fantasticmao.mundo/mundo-all.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22cn.fantasticmao.mundo%22)
 [![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
@@ -14,9 +15,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 ### mundo-core
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` 支持以注解驱动方式的日志打印
-- [x] `ListBuilder` `SetBuilder` `MapBuilder` 支持使用 Builder 模式来创建常用集合类
 - [x] `cn.fantasticmao.mundo.core.util.*` 实现一些简单的业务工具类
-- [x] `StackPointer` 打印当前线程的调用栈
 
 ### mundo-data
 
@@ -28,7 +27,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 ### mundo-web
 
 - [ ] `@CheckCsrf` `@CheckLogin` 支持注解驱动方式的 session 校验
-- [x] `JsonApi` 约定 RESTful API 响应中的 JSON 基本字段
+- [x] `JsonApi` 约定 RESTFul API 响应中的 JSON 基本字段
 - [x] `WeChatServerConfig` 支持对接微信开放平台时的 signature 验证
 
 ## 反馈问题

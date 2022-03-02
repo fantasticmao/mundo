@@ -1,6 +1,7 @@
 # Mundo
 
 [![Actions Status](https://github.com/fantasticmao/mundo/workflows/ci/badge.svg)](https://github.com/fantasticmao/mundo/actions)
+![JDK Version](https://img.shields.io/badge/JDK-11%2B-blue)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.fantasticmao.mundo/mundo-all.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22cn.fantasticmao.mundo%22)
 [![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
@@ -16,9 +17,7 @@ probably don't need it.
 ### mundo-core
 
 - [x] `@AssertFalse` `@PrintArgs` `@Timeout` support logging with the annotation-driven mode
-- [x] `ListBuilder` `SetBuilder` `MapBuilder` support using the Builder design-pattern to create useful collections
 - [x] `cn.fantasticmao.mundo.core.util.*` implement some simple business util classes
-- [x] `StackPointer` support printing the call stack of the current thread
 
 ### mundo-data
 
@@ -30,7 +29,7 @@ probably don't need it.
 ### mundo-web
 
 - [ ] `@CheckCsrf` `@CheckLogin` support session validation with the annotation-driven mode
-- [x] `JsonApi` specifies JSON basic fields in the HTTP API response
+- [x] `JsonApi` specifies JSON basic fields in the RESTFul API response
 - [x] `WeChatServerConfig` support signature verification when programming with WeChat open platform
 
 ## Feedback

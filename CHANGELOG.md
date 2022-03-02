@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.4-SNAPSHOT
+
+- Update JDK Version to `11`
+- Code cleanup
+- Update Java Class `JsonUtil`
+
+## 1.0.3 - 2021-12-08
+
+- Add Java Class `PageUtil`
+
 ## 1.0.2 - 2021-10-27
 
 - Code cleanup
