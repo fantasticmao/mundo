@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.4-SNAPSHOT
+## 1.0.4 - 2022-03-03
 
 - Update JDK Version to `11`
 - Code cleanup
