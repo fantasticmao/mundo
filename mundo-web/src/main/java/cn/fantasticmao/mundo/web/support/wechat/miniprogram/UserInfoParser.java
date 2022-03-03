@@ -2,6 +2,7 @@ package cn.fantasticmao.mundo.web.support.wechat.miniprogram;
 
 import cn.fantasticmao.mundo.core.util.HashUtil;
 import cn.fantasticmao.mundo.core.util.JsonUtil;
+import com.fasterxml.jackson.core.JacksonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Objects;
 
 /**
@@ -66,9 +68,9 @@ public class UserInfoParser {
      * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">加密数据解密算法</a>
      */
     public static UserInfo decryptData(final String sessionKey, final String encryptedData, final String iv) {
-        final byte[] sessionKeyBase64 = HashUtil.decode(sessionKey);
-        final byte[] encryptedDataBase64 = HashUtil.decode(encryptedData);
-        final byte[] ivBase64 = HashUtil.decode(iv);
+        final byte[] sessionKeyBase64 = Base64.getDecoder().decode(sessionKey);
+        final byte[] encryptedDataBase64 = Base64.getDecoder().decode(encryptedData);
+        final byte[] ivBase64 = Base64.getDecoder().decode(iv);
 
         try {
             SecretKeySpec secretKeySpec = new SecretKeySpec(sessionKeyBase64, "AES");
@@ -78,8 +80,9 @@ public class UserInfoParser {
             byte[] userInfoBytes = CIPHER.doFinal(encryptedDataBase64);
             String userInfoJson = new String(userInfoBytes);
             LOGGER.debug("decrypt user info data: {}", userInfoJson);
-            return JsonUtil.toClass(userInfoJson, UserInfo.class);
-        } catch (IllegalBlockSizeException | BadPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+            return JsonUtil.fromJson(userInfoJson, UserInfo.class);
+        } catch (JacksonException | InvalidAlgorithmParameterException | IllegalBlockSizeException
+            | BadPaddingException | InvalidKeyException e) {
             throw new UserInfoParserException(e);
         }
     }

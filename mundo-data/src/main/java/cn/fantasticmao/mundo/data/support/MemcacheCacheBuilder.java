@@ -4,7 +4,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import net.rubyeye.xmemcached.MemcachedClient;
 
-import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -27,7 +26,7 @@ import java.util.function.Function;
  * @version 1.0
  * @since 2018/7/22
  */
-public class MemcacheCacheBuilder<K, V extends Serializable> {
+public class MemcacheCacheBuilder<K, V> {
     private MemcachedClient memcachedClient;
     private Function<Object, String> keyConvert;
     private int expireAfterWriteSeconds;
@@ -38,7 +37,7 @@ public class MemcacheCacheBuilder<K, V extends Serializable> {
         this.expireAfterWriteSeconds = Math.toIntExact(TimeUnit.DAYS.toSeconds(30));
     }
 
-    public static <K, V extends Serializable> MemcacheCacheBuilder<K, V> newBuilder(MemcachedClient memcachedClient) {
+    public static <K, V> MemcacheCacheBuilder<K, V> newBuilder(MemcachedClient memcachedClient) {
         return new MemcacheCacheBuilder<>(memcachedClient);
     }
 

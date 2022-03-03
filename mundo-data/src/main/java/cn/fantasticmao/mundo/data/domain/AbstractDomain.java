@@ -1,7 +1,6 @@
 package cn.fantasticmao.mundo.data.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -12,9 +11,7 @@ import java.sql.Timestamp;
  * @since 2017/3/5
  */
 @MappedSuperclass
-public abstract class AbstractDomain<ID extends Serializable> implements Serializable {
-    private static final long serialVersionUID = 1819978692581974014L;
-
+public abstract class AbstractDomain<ID extends Number> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id; // 逻辑主键

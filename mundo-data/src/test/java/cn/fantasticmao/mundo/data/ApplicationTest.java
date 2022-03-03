@@ -1,6 +1,5 @@
 package cn.fantasticmao.mundo.data;
 
-import cn.fantasticmao.mundo.core.support.MapBuilder;
 import cn.fantasticmao.mundo.data.partition.PartitionDataSource;
 import cn.fantasticmao.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import cn.fantasticmao.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
@@ -84,12 +83,10 @@ public class ApplicationTest {
 
     @Bean
     PartitionDataSource partitionDataSource() {
-        Map<String, DataSource> dataSources = MapBuilder.<String, DataSource>create(5)
-            .put("test01", test01())
-            .put("test02", test02())
-            .put("test03", test03())
-            .put("test04", test04())
-            .build();
+        Map<String, DataSource> dataSources = Map.of("test01", test01(),
+            "test02", test02(),
+            "test03", test03(),
+            "test04", test04());
         PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
             new PartitionSeedToDataSourceKeyStrategy.NumberModulusStrategy("test%02d", dataSources.size());
         return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
