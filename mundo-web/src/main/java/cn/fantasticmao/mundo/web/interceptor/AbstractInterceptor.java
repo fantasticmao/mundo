@@ -1,5 +1,6 @@
 package cn.fantasticmao.mundo.web.interceptor;
 
+import cn.fantasticmao.mundo.core.util.JsonUtil;
 import cn.fantasticmao.mundo.web.support.JsonApi;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,7 +30,7 @@ abstract class AbstractInterceptor extends HandlerInterceptorAdapter {
 
     void sendJsonError(HttpServletResponse response, JsonApi jsonApi) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().write(jsonApi.toJson());
+        response.getWriter().write(JsonUtil.toJson(jsonApi));
         response.getWriter().flush();
         response.setStatus(HttpStatus.OK.value());
     }

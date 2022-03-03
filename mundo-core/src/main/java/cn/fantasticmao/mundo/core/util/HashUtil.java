@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 /**
  * HashUtil
@@ -40,22 +39,6 @@ public enum HashUtil {
 
     public String hash(Path path) throws IOException {
         return hash(Files.readAllBytes(path));
-    }
-
-    public static byte[] encode(String str) {
-        return Base64.getEncoder().encode(str.getBytes());
-    }
-
-    public static byte[] decode(String str) {
-        return Base64.getDecoder().decode(str.getBytes());
-    }
-
-    public static String encodeToString(String str) {
-        return new String(encode(str));
-    }
-
-    public static String decodeToString(String str) {
-        return new String(decode(str));
     }
 
     private static final char[] HEX = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};

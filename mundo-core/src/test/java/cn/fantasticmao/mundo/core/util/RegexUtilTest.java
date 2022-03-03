@@ -11,38 +11,39 @@ import org.junit.jupiter.api.Test;
  * @since 17-4-23
  */
 public class RegexUtilTest {
+
     @Test
-    public void isHost() throws Exception {
+    public void isHost() {
         String str = "www.google.com";
         Assertions.assertTrue(RegexUtil.isHost(str));
     }
 
     @Test
-    public void isUrl() throws Exception {
+    public void isUrl() {
         String str = "HTTPS://www.google.com";
         Assertions.assertTrue(RegexUtil.isUrl(str));
     }
 
     @Test
-    public void isTelephone() throws Exception {
+    public void isTelephone() {
         String str = "13291297303";
         Assertions.assertTrue(RegexUtil.isTelephone(str));
     }
 
     @Test
-    public void isEmail() throws Exception {
+    public void isEmail() {
         String str = "maomao8017@gmail.com";
         Assertions.assertTrue(RegexUtil.isEmail(str));
     }
 
     @Test
-    public void isUsername() throws Exception {
+    public void isUsername() {
         String str = "猫猫233";
         Assertions.assertTrue(RegexUtil.isUsername(str));
     }
 
     @Test
-    public void isPassword() throws Exception {
+    public void isPassword() {
         String str = "mao.122333";
         Assertions.assertTrue(RegexUtil.isPassword(str));
     }
