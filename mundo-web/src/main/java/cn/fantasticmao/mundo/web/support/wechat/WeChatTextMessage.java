@@ -18,15 +18,15 @@ public class WeChatTextMessage extends WeChatMessage {
 
     protected WeChatTextMessage(WeChatMessage weChatMessage, String content) {
         super(weChatMessage.getToUserName(), weChatMessage.getFromUserName(), weChatMessage.getCreateTime(),
-                weChatMessage.getMsgId(), weChatMessage.getMsgType());
+            weChatMessage.getMsgId(), weChatMessage.getMsgType());
         this.content = content;
     }
 
     @Override
     public String toString() {
         return "WeChatTextMessage{" +
-                "content='" + content + '\'' +
-                "} " + super.toString();
+            "content='" + content + '\'' +
+            "} " + super.toString();
     }
 
     // getter

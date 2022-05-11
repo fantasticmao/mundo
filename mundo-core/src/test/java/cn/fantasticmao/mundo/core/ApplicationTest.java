@@ -3,9 +3,8 @@ package cn.fantasticmao.mundo.core;
 import cn.fantasticmao.mundo.core.aop.AssertFalseComponent;
 import cn.fantasticmao.mundo.core.aop.PrintArgsComponent;
 import cn.fantasticmao.mundo.core.aop.TimeoutComponent;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * ApplicationTest
@@ -16,8 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @version 1.0
  * @since 2017/11/15
  */
-@EnableAspectJAutoProxy
-@Configuration
+@SpringBootApplication
 public class ApplicationTest {
 
     @Bean

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeoutException;
 public class MemcacheClientUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(MemcacheClientUtil.class);
 
-    private MemcachedClient memcachedClient;
+    private final MemcachedClient memcachedClient;
 
     public MemcacheClientUtil(MemcachedClient memcachedClient) {
         this.memcachedClient = memcachedClient;

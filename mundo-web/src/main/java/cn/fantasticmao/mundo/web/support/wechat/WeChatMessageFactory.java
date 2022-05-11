@@ -34,7 +34,7 @@ public class WeChatMessageFactory {
         final String createTime = WeChatXmlUtil.getFirstNodeTextContentByTagName(rootElement, WeChatMessage.CREATE_TIME);
         final String msgId = WeChatXmlUtil.getFirstNodeTextContentByTagName(rootElement, WeChatMessage.MSG_ID);
         final String msgType = WeChatXmlUtil.getFirstNodeTextContentByTagName(rootElement, WeChatMessage.MSG_TYPE);
-        return new WeChatMessage(toUserName, fromUserName, Long.valueOf(createTime), Long.valueOf(msgId), WeChatMessageType.of(msgType));
+        return new WeChatMessage(toUserName, fromUserName, Long.parseLong(createTime), Long.parseLong(msgId), WeChatMessageType.of(msgType));
     }
 
     public static WeChatTextMessage newTextMessage(String xml) {

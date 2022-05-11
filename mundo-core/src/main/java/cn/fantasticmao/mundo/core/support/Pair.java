@@ -1,9 +1,7 @@
 package cn.fantasticmao.mundo.core.support;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Pair
@@ -14,8 +12,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 public final class Pair<T, R> {
     private T t;
     private R r;
@@ -28,4 +24,11 @@ public final class Pair<T, R> {
         this.r = r;
     }
 
+    @Override
+    public String toString() {
+        return "Pair{" +
+            "t=" + t +
+            ", r=" + r +
+            '}';
+    }
 }
