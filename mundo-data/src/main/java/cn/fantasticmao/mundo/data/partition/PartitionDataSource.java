@@ -22,7 +22,7 @@ import java.util.Map;
 public class PartitionDataSource extends AbstractRoutingDataSource {
     private static final Logger LOGGER = LoggerFactory.getLogger(PartitionDataSource.class);
 
-    private PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy;
+    private final PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy;
 
     public PartitionDataSource(@Nonnull Map<String, DataSource> dataSources,
                                @Nullable DataSource defaultDataSource,
@@ -37,9 +37,7 @@ public class PartitionDataSource extends AbstractRoutingDataSource {
         Assert.notNull(partitionSeedToDataSourceKeyStrategy, "partitionSeedToDataSourceKeyStrategy must not be null");
         Object seedObject = PartitionSeedContext.pop();
         String dataSourceKey = partitionSeedToDataSourceKeyStrategy.apply(seedObject);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("use seed \"{}\" to determine the current lookup key \"{}\"", seedObject, dataSourceKey);
-        }
+        LOGGER.debug("use seed {} to determine the current lookup key {}", seedObject, dataSourceKey);
         return dataSourceKey;
     }
 
@@ -53,28 +51,18 @@ public class PartitionDataSource extends AbstractRoutingDataSource {
                 targetDataSources.put(entry.getKey(), entry.getValue());
             }
             super.setTargetDataSources(targetDataSources);
-
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("loading targetDataSources: \"{}\"", targetDataSources);
-            }
+            LOGGER.debug("loading targetDataSources: {}", targetDataSources);
         } else {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("loading targetDataSources is null or empty");
-            }
+            LOGGER.debug("loading targetDataSources is null or empty");
         }
     }
 
     private void initDefaultTargetDataSource(DataSource defaultDataSource) {
         if (defaultDataSource != null) {
             super.setDefaultTargetDataSource(defaultDataSource);
-
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("loading defaultTargetDataSource: \"{}\"", defaultDataSource);
-            }
+            LOGGER.debug("loading defaultTargetDataSource: {}", defaultDataSource);
         } else {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("loading defaultTargetDataSource is null");
-            }
+            LOGGER.debug("loading defaultTargetDataSource is null");
         }
     }
 
