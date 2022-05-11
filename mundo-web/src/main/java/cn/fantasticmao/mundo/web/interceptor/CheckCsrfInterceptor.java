@@ -5,6 +5,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,7 +22,8 @@ import java.util.Queue;
 public class CheckCsrfInterceptor extends AnnotationInterceptor<CheckCsrf> {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response,
+                             @Nonnull Object handler) throws Exception {
         boolean isGetMethod = Objects.equals(HttpMethod.GET.name(), request.getMethod());
         if (isGetMethod) {
             return true;

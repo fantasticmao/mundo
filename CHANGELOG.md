@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 - 2022-05-11
+
+- Upgrade Dependency `spring-boot-starter-parent` to `2.6.7`
+- Replace `logback` with `log4j2`
+
 ## 1.0.4 - 2022-03-03
 
 - Update JDK Version to `11`

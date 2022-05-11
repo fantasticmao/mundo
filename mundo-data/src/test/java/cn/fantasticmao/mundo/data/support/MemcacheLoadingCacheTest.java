@@ -31,7 +31,6 @@ public class MemcacheLoadingCacheTest extends SpringTest {
     private static final String TEST1 = "test1";
     private static final String TEST2 = "test2";
 
-
     @PostConstruct
     public void init() {
         this.cache = MemcacheCacheBuilder.<Integer, String>newBuilder(memcachedClient)

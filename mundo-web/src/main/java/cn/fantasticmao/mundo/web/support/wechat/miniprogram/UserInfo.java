@@ -29,7 +29,7 @@ public class UserInfo {
 
     @AllArgsConstructor
     public enum GenderEnum {
-        UNKNOW(0), MALE(1), FEMALE(2);
+        UNKNOWN(0), MALE(1), FEMALE(2);
 
         public final int gender;
     }

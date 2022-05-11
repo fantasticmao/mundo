@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  * @since 2018/12/5
  */
 public enum WeChatMessageType {
-    TEXT, IMAGE, VOICE, VIDEO, SHORTVIDEO, LOCATION, LINK, UNKNOWN;
+    TEXT, IMAGE, VOICE, VIDEO, SHORT_VIDEO, LOCATION, LINK, UNKNOWN;
 
     @Override
     public String toString() {
@@ -20,8 +20,8 @@ public enum WeChatMessageType {
 
     public static WeChatMessageType of(String type) {
         return Stream.of(WeChatMessageType.values())
-                .filter(messageType -> Objects.equals(messageType.toString(), type))
-                .findFirst()
-                .orElse(UNKNOWN);
+            .filter(messageType -> Objects.equals(messageType.toString(), type))
+            .findFirst()
+            .orElse(UNKNOWN);
     }
 }
