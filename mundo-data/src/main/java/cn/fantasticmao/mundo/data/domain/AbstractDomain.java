@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * AbstractDomain
@@ -21,9 +21,9 @@ public abstract class AbstractDomain<ID extends Number> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id; // 逻辑主键
     @Column(insertable = false, updatable = false)
-    private LocalDate createTime; // 创建时间
+    private LocalDateTime createTime; // 创建时间
     @Column(insertable = false, updatable = false)
-    private LocalDate modifyTime; // 修改时间
+    private LocalDateTime modifyTime; // 修改时间
 
     @Override
     public String toString() {
