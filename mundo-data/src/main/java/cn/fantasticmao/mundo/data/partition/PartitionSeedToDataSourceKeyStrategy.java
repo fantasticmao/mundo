@@ -15,8 +15,8 @@ import java.util.function.Function;
 public interface PartitionSeedToDataSourceKeyStrategy extends Function<Object, String> {
 
     class NumberModulusStrategy implements PartitionSeedToDataSourceKeyStrategy {
-        private String formatStr;
-        private int dataSourceSize;
+        private final String formatStr;
+        private final int dataSourceSize;
 
         public NumberModulusStrategy(String formatStr, int dataSourceSize) {
             this.formatStr = formatStr;
@@ -25,7 +25,8 @@ public interface PartitionSeedToDataSourceKeyStrategy extends Function<Object, S
 
         @Override
         public String apply(@Nullable Object seedObject) {
-            if (seedObject == null) { // 选择默认数据源
+            // 选择默认数据源
+            if (seedObject == null) {
                 return null;
             }
 

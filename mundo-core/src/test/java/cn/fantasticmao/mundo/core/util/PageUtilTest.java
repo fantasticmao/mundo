@@ -21,8 +21,8 @@ class PageUtilTest {
 
     @Test
     void size() {
-        Assertions.assertEquals(20, PageUtil.size(20));
-        Assertions.assertEquals(1, PageUtil.size(-20));
-        Assertions.assertEquals(500, PageUtil.size(1000));
+        Assertions.assertEquals(20, PageUtil.limit(20));
+        Assertions.assertEquals(1, PageUtil.limit(-20));
+        Assertions.assertEquals(500, PageUtil.limit(1000));
     }
 }

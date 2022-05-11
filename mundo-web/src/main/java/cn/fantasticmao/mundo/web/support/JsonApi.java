@@ -1,16 +1,17 @@
 package cn.fantasticmao.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.concurrent.Immutable;
 
 /**
- * JsonApi
+ * The JSON response for RESTFul APIs.
  * <p>
  * usages:
  * <ol>
- *     <li>{@code return JsonApi.success()}</li>
+ *     <li>{@code return JsonApi.success(data)}</li>
  *     <li>{@code return JsonApi.error(HttpStatus.NOT_FOUND)}</li>
  * </ol>
  *
@@ -18,6 +19,7 @@ import javax.annotation.concurrent.Immutable;
  * @version 1.0
  * @since 2017/3/19
  */
+@Getter
 @Immutable
 public final class JsonApi<T> {
     private final boolean status;
@@ -57,23 +59,5 @@ public final class JsonApi<T> {
             ", message='" + message + '\'' +
             ", data=" + data +
             '}';
-    }
-
-    // getter
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
     }
 }

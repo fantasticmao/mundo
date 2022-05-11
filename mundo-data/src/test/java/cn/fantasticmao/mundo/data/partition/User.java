@@ -1,5 +1,8 @@
 package cn.fantasticmao.mundo.data.partition;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,9 +14,11 @@ import javax.persistence.Table;
  * @version 1.0
  * @since 2019/1/1
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "test_user")
-public class User implements PartitionSeedProvider<Integer> {
+public class User implements PartitionSeedProvider {
     @Id
     private int id;
     private String name;
@@ -29,9 +34,9 @@ public class User implements PartitionSeedProvider<Integer> {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
     }
 
     @Override
@@ -39,19 +44,4 @@ public class User implements PartitionSeedProvider<Integer> {
         return id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
