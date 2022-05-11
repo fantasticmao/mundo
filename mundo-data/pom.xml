@@ -4,7 +4,7 @@
     <parent>
         <groupId>cn.fantasticmao.mundo</groupId>
         <artifactId>mundo-all</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -50,6 +50,11 @@
             <artifactId>xmemcached</artifactId>
             <optional>true</optional>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,5 +1,7 @@
 package cn.fantasticmao.mundo.web.support.wechat;
 
+import lombok.Getter;
+
 /**
  * WeChatMessage
  *
@@ -7,6 +9,7 @@ package cn.fantasticmao.mundo.web.support.wechat;
  * @version 1.0
  * @since 2018/12/5
  */
+@Getter
 public class WeChatMessage {
     public static final String TO_USER_NAME = "ToUserName";
     public static final String FROM_USER_NAME = "FromUserName";
@@ -39,25 +42,4 @@ public class WeChatMessage {
             '}';
     }
 
-    // getter
-
-    public String getToUserName() {
-        return toUserName;
-    }
-
-    public String getFromUserName() {
-        return fromUserName;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public long getMsgId() {
-        return msgId;
-    }
-
-    public WeChatMessageType getMsgType() {
-        return msgType;
-    }
 }

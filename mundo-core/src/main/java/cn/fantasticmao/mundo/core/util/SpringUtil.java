@@ -42,9 +42,8 @@ public final class SpringUtil implements ApplicationContextAware, EnvironmentAwa
         return applicationContext.getBean(clazz);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getBean(String name) {
-        return (T) applicationContext.getBean(name);
+    public static <T> T getBean(String name, Class<T> clazz) {
+        return applicationContext.getBean(name, clazz);
     }
 
     public static String getProperty(String key) {

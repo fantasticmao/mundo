@@ -24,20 +24,20 @@ public abstract class WeChatServerConfig {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
         String nonce = request.getParameter("nonce");
-        String echostr = request.getParameter("echostr");
+        String echoStr = request.getParameter("echostr");
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("验证微信服务器请求");
             LOGGER.debug("signature={}", signature);
             LOGGER.debug("timestamp={}", timestamp);
             LOGGER.debug("nonce={}", nonce);
-            LOGGER.debug("echostr={}", echostr);
+            LOGGER.debug("echostr={}", echoStr);
         }
 
         if (this.verifyParameters(signature, timestamp, nonce)) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("验证微信服务器请求成功");
             }
-            return echostr;
+            return echoStr;
         } else {
             LOGGER.error("验证微信服务器请求失败");
             return Constant.Strings.EMPTY;

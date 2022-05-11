@@ -1,16 +1,17 @@
 package cn.fantasticmao.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.concurrent.Immutable;
 
 /**
- * JsonApi
+ * The JSON response for RESTFul APIs.
  * <p>
  * usages:
  * <ol>
- *     <li>{@code return JsonApi.success()}</li>
+ *     <li>{@code return JsonApi.success(data)}</li>
  *     <li>{@code return JsonApi.error(HttpStatus.NOT_FOUND)}</li>
  * </ol>
  *
@@ -18,39 +19,36 @@ import javax.annotation.concurrent.Immutable;
  * @version 1.0
  * @since 2017/3/19
  */
+@Getter
 @Immutable
 public final class JsonApi<T> {
     private final boolean status;
     private final int code;
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
+    private final T data;
 
-    public JsonApi() {
-        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+    private JsonApi() {
+        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), null);
     }
 
-    public JsonApi(boolean status, int code, String message) {
+    private JsonApi(boolean status, int code, String message, T data) {
         this.status = status;
         this.code = code;
         this.message = message;
+        this.data = data;
     }
 
-    public static <T> JsonApi<T> success() {
-        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+    public static <T> JsonApi<T> success(T data) {
+        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), data);
     }
 
     public static <T> JsonApi<T> error(HttpStatus httpStatus) {
-        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase());
+        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), null);
     }
 
-    public JsonApi<T> data(T data) {
-        if (this.data == null) {
-            this.data = data;
-            return this;
-        } else {
-            return new JsonApi<T>(this.status, this.code, this.message).data(data);
-        }
+    public static <T> JsonApi<T> error(HttpStatus httpStatus, T data) {
+        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), data);
     }
 
     @Override
@@ -61,23 +59,5 @@ public final class JsonApi<T> {
             ", message='" + message + '\'' +
             ", data=" + data +
             '}';
-    }
-
-    // getter and setter
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
     }
 }
