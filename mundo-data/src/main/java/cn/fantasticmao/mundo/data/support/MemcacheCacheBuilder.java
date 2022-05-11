@@ -27,7 +27,7 @@ import java.util.function.Function;
  * @since 2018/7/22
  */
 public class MemcacheCacheBuilder<K, V> {
-    private MemcachedClient memcachedClient;
+    private final MemcachedClient memcachedClient;
     private Function<Object, String> keyConvert;
     private int expireAfterWriteSeconds;
 

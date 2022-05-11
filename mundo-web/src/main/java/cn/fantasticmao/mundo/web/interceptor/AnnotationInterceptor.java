@@ -2,6 +2,7 @@ package cn.fantasticmao.mundo.web.interceptor;
 
 import org.springframework.web.method.HandlerMethod;
 
+import javax.annotation.Nonnull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInter
     /**
      * 获取执行方法的注解，以及其当前类和祖先类的注解
      */
-    Queue<A> getMethodAnnotationQueue(Object handler, Class<A> annotationClass) {
-        if (handler != null && annotationClass != null && handler instanceof HandlerMethod) {
+    Queue<A> getMethodAnnotationQueue(@Nonnull Object handler, Class<A> annotationClass) {
+        if (annotationClass != null && handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             final Queue<A> queue = new LinkedList<>();
             Method method = handlerMethod.getMethod();
@@ -64,7 +65,7 @@ abstract class AnnotationInterceptor<A extends Annotation> extends AbstractInter
                 list.add(currentClass);
                 currentClass = currentClass.getSuperclass();
             }
-            return list.toArray(new Class<?>[list.size()]);
+            return list.toArray(new Class<?>[0]);
         }
         return new Class<?>[0];
     }

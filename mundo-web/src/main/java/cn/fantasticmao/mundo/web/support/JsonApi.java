@@ -24,33 +24,29 @@ public final class JsonApi<T> {
     private final int code;
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data;
+    private final T data;
 
-    public JsonApi() {
-        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+    private JsonApi() {
+        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), null);
     }
 
-    public JsonApi(boolean status, int code, String message) {
+    private JsonApi(boolean status, int code, String message, T data) {
         this.status = status;
         this.code = code;
         this.message = message;
+        this.data = data;
     }
 
-    public static <T> JsonApi<T> success() {
-        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase());
+    public static <T> JsonApi<T> success(T data) {
+        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), data);
     }
 
     public static <T> JsonApi<T> error(HttpStatus httpStatus) {
-        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase());
+        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), null);
     }
 
-    public JsonApi<T> data(T data) {
-        if (this.data == null) {
-            this.data = data;
-            return this;
-        } else {
-            return new JsonApi<T>(this.status, this.code, this.message).data(data);
-        }
+    public static <T> JsonApi<T> error(HttpStatus httpStatus, T data) {
+        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), data);
     }
 
     @Override
@@ -63,7 +59,7 @@ public final class JsonApi<T> {
             '}';
     }
 
-    // getter and setter
+    // getter
 
     public boolean isStatus() {
         return status;

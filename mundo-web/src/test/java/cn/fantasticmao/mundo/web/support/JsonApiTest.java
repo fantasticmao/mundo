@@ -34,35 +34,35 @@ public class JsonApiTest {
     @Test
     public void toJson1() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\"}";
-        String actual = JsonUtil.toJson(JsonApi.success().data(null));
+        String actual = JsonUtil.toJson(JsonApi.success(null));
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void toJson2() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":1}";
-        String actual = JsonUtil.toJson(JsonApi.success().data(1));
+        String actual = JsonUtil.toJson(JsonApi.success(1));
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void toJson3() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":true}";
-        String actual = JsonUtil.toJson(JsonApi.success().data(true));
+        String actual = JsonUtil.toJson(JsonApi.success(true));
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void toJson4() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":\"hello\"}";
-        String actual = JsonUtil.toJson(JsonApi.success().data("hello"));
+        String actual = JsonUtil.toJson(JsonApi.success("hello"));
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void toJson5() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":[1,2,3]}";
-        String actual = JsonUtil.toJson(JsonApi.success().data(new int[]{1, 2, 3}));
+        String actual = JsonUtil.toJson(JsonApi.success(new int[]{1, 2, 3}));
         Assertions.assertEquals(expected, actual);
     }
 
@@ -71,14 +71,14 @@ public class JsonApiTest {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":{\"hello\":123}}";
         Map<String, Integer> map = new HashMap<>();
         map.put("hello", 123);
-        String actual = JsonUtil.toJson(JsonApi.success().data(map));
+        String actual = JsonUtil.toJson(JsonApi.success(map));
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void toJson7() throws JacksonException {
         String expected = "{\"status\":true,\"code\":200,\"message\":\"OK\",\"data\":false}";
-        String actual = JsonUtil.toJson(JsonApi.success().data(true).data(false));
+        String actual = JsonUtil.toJson(JsonApi.success(false));
         Assertions.assertEquals(expected, actual);
     }
 }
