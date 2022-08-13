@@ -2,12 +2,14 @@ package cn.fantasticmao.mundo.web.support.wechat;
 
 import cn.fantasticmao.mundo.core.support.Constant;
 import cn.fantasticmao.mundo.core.util.HashUtil;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -52,8 +54,9 @@ public abstract class WeChatServerConfig {
         List<String> list = Arrays.asList(getToken(), timestamp, nonce);
         Collections.sort(list);
         final String str = String.join(Constant.Strings.EMPTY, list);
-        final String strAfterHash = HashUtil.SHA1.hash(str);
-        return Objects.equals(signature, strAfterHash);
+        final byte[] bytes = HashUtil.SHA_1.hash(str.getBytes(StandardCharsets.UTF_8));
+        final String hashStr = Hex.encodeHexString(bytes);
+        return Objects.equals(signature, hashStr);
     }
 
     protected String getToken() {

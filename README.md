@@ -16,19 +16,16 @@ probably don't need it.
 
 ### mundo-core
 
-- [x] `@AssertFalse` `@PrintArgs` `@Timeout` support logging with the annotation-driven mode
 - [x] `cn.fantasticmao.mundo.core.util.*` implement some simple business util classes
 
 ### mundo-data
 
 - [x] `AbstractDomain` specifies basic fields in the Domain object
-- [x] `MemcacheLoadingCache` support forwarding the storage layer of Guava Cache to Memcached or Redis
 - [x] `PartitionDataSource` `@PartitionParam` support data source routing at the database level
 - [x] `Snowflake` implement the Twitter's snowflake algorithm
 
 ### mundo-web
 
-- [ ] `@CheckCsrf` `@CheckLogin` support session validation with the annotation-driven mode
 - [x] `JsonApi` specifies JSON basic fields in the RESTFul API response
 - [x] `WeChatServerConfig` support signature verification when programming with WeChat open platform
 

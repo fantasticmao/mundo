@@ -11,8 +11,8 @@ import javax.annotation.concurrent.Immutable;
  * <p>
  * usages:
  * <ol>
- *     <li>{@code return JsonApi.success(data)}</li>
- *     <li>{@code return JsonApi.error(HttpStatus.NOT_FOUND)}</li>
+ *     <li>{@code return JsonApi.ok(data)}</li>
+ *     <li>{@code return JsonApi.status(HttpStatus.NOT_FOUND)}</li>
  * </ol>
  *
  * @author fantasticmao
@@ -29,26 +29,30 @@ public final class JsonApi<T> {
     private final T data;
 
     private JsonApi() {
-        this(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), null);
+        this(HttpStatus.OK, null);
     }
 
-    private JsonApi(boolean status, int code, String message, T data) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
+    private JsonApi(HttpStatus httpStatus, T data) {
+        this.status = httpStatus.is2xxSuccessful();
+        this.code = httpStatus.value();
+        this.message = httpStatus.getReasonPhrase();
         this.data = data;
     }
 
-    public static <T> JsonApi<T> success(T data) {
-        return new JsonApi<>(true, HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), data);
+    public static <T> JsonApi<T> ok(T data) {
+        return new JsonApi<>(HttpStatus.OK, data);
     }
 
-    public static <T> JsonApi<T> error(HttpStatus httpStatus) {
-        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), null);
+    public static <T> JsonApi<T> status(HttpStatus httpStatus) {
+        return new JsonApi<>(httpStatus, null);
     }
 
-    public static <T> JsonApi<T> error(HttpStatus httpStatus, T data) {
-        return new JsonApi<>(false, httpStatus.value(), httpStatus.getReasonPhrase(), data);
+    public static <T> JsonApi<T> status(HttpStatus httpStatus, T data) {
+        return new JsonApi<>(httpStatus, data);
+    }
+
+    public HttpStatus toHttpStatus() {
+        return HttpStatus.resolve(this.code);
     }
 
     @Override

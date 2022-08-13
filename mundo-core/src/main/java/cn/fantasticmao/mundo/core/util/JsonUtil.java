@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * JsonUtil
+ * Operations on {@link ObjectMapper Jackson ObjectMapper}.
  *
  * @author fantasticmao
  * @version 1.0
