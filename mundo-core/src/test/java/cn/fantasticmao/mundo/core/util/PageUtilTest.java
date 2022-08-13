@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 class PageUtilTest {
 
     @Test
-    void offset() {
+    public void offset() {
         Assertions.assertEquals(100, PageUtil.offset(5, 20));
         Assertions.assertEquals(0, PageUtil.offset(-1, 20));
         Assertions.assertEquals(5, PageUtil.offset(5, -20));
     }
 
     @Test
-    void size() {
+    public void size() {
         Assertions.assertEquals(20, PageUtil.limit(20));
         Assertions.assertEquals(1, PageUtil.limit(-20));
         Assertions.assertEquals(500, PageUtil.limit(1000));

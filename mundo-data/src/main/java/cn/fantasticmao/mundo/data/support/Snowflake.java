@@ -1,6 +1,5 @@
 package cn.fantasticmao.mundo.data.support;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.util.Arrays;
 
 /**
@@ -20,7 +19,6 @@ public interface Snowflake {
      * @see <a href="https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html">Announcing Snowflake</a>
      * @see <a href="https://github.com/twitter-archive/snowflake/blob/b3f6a3c6ca8e1b6847baa6ff42bf72201e2c2231/src/main/scala/com/twitter/service/snowflake/IdWorker.scala">twitter-archive snowflake</a>
      */
-    @ThreadSafe
     class TwitterSnowflake implements Snowflake {
         private static final int BIT_NOT_USED = 1; // 尚未使用
         private static final int BIT_TIMESTAMP = 41; // 时间戳占用位数
@@ -59,6 +57,7 @@ public interface Snowflake {
         }
 
         public static String toBinaryString(long id) {
+            // FIXME
             final char[] chars = new char[64];
             Arrays.fill(chars, '0');
             String idBinaryString = Long.toBinaryString(id);

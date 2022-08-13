@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * AbstractDomain
@@ -24,6 +25,23 @@ public abstract class AbstractDomain<ID extends Number> {
     private LocalDateTime createTime; // 创建时间
     @Column(insertable = false, updatable = false)
     private LocalDateTime modifyTime; // 修改时间
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AbstractDomain<?> that = (AbstractDomain<?>) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {

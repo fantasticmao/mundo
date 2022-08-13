@@ -4,8 +4,6 @@ import cn.fantasticmao.mundo.data.partition.PartitionDataSource;
 import cn.fantasticmao.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
 import cn.fantasticmao.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
 import cn.fantasticmao.mundo.data.partition.User;
-import net.rubyeye.xmemcached.command.BinaryCommandFactory;
-import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -105,15 +103,5 @@ public class ApplicationTest {
     @Bean
     PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
-    }
-
-    @Bean(name = "memcachedClient")
-    XMemcachedClientFactoryBean memcachedClientFactoryBean() {
-        XMemcachedClientFactoryBean factoryBean = new XMemcachedClientFactoryBean();
-        factoryBean.setServers("localhost:11211");
-        factoryBean.setCommandFactory(new BinaryCommandFactory());
-        factoryBean.setConnectionPoolSize(2);
-        factoryBean.setOpTimeout(3_000);
-        return factoryBean;
     }
 }

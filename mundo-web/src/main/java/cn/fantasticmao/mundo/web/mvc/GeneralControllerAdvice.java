@@ -1,6 +1,8 @@
 package cn.fantasticmao.mundo.web.mvc;
 
 import cn.fantasticmao.mundo.web.support.JsonApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.WebDataBinder;
@@ -22,6 +24,7 @@ import java.util.Date;
  */
 @ControllerAdvice
 public class GeneralControllerAdvice {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeneralControllerAdvice.class);
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -33,7 +36,7 @@ public class GeneralControllerAdvice {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public JsonApi<Void> exceptionHandler(RuntimeException e) {
-        e.printStackTrace();
-        return JsonApi.error(HttpStatus.INTERNAL_SERVER_ERROR);
+        LOGGER.error("Global Exception Handler", e);
+        return JsonApi.status(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

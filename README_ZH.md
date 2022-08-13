@@ -14,19 +14,16 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 ### mundo-core
 
-- [x] `@AssertFalse` `@PrintArgs` `@Timeout` 支持以注解驱动方式的日志打印
 - [x] `cn.fantasticmao.mundo.core.util.*` 实现一些简单的业务工具类
 
 ### mundo-data
 
 - [x] `AbstractDomain` 约定 Domain 对象中的基本字段
-- [x] `MemcacheLoadingCache` 支持将 Guava Cache 的存储层转发至 Memcached 或者 Redis
 - [x] `PartitionDataSource` `@PartitionParam` 支持按库级别的数据源路由
 - [x] `Snowflake` 实现 Twitter 的雪花算法
 
 ### mundo-web
 
-- [ ] `@CheckCsrf` `@CheckLogin` 支持注解驱动方式的 session 校验
 - [x] `JsonApi` 约定 RESTFul API 响应中的 JSON 基本字段
 - [x] `WeChatServerConfig` 支持对接微信开放平台时的 signature 验证
 

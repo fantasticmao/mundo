@@ -66,8 +66,8 @@ public class WeChatMessageFactory {
             transformer.transform(new DOMSource(document), new StreamResult(stringWriter));
             return stringWriter.toString();
         } catch (ParserConfigurationException | TransformerException e) {
-            LOGGER.error(e.getMessage(), e);
-            LOGGER.error("回复微信消息失败 toUserName={} fromUserName={} content={}", toUserName, fromUserName, content);
+            LOGGER.error("回复微信消息失败 toUserName={} fromUserName={} content={}", toUserName,
+                fromUserName, content, e);
             return "success";
         }
     }
