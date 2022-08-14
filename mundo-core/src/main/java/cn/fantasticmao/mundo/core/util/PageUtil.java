@@ -12,8 +12,8 @@ public interface PageUtil {
     /**
      * Calculate the page offset.
      *
-     * @param page 0 <= page
-     * @param size 1 <= size <= 500
+     * @param page greater or equals than 0
+     * @param size greater or equals than 1, and less or equals than 500
      * @return valid page offset
      */
     static int offset(int page, int size) {
@@ -24,7 +24,7 @@ public interface PageUtil {
     /**
      * Calculate the page size
      *
-     * @param size 1 <= size <= 500
+     * @param size greater or equals than 1, and less or equals than 500
      * @return valid page size
      */
     static int limit(int size) {

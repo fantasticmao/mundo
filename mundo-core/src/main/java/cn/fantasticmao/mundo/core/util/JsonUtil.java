@@ -15,21 +15,37 @@ public final class JsonUtil {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
-     * Java Object to JSON
+     * Java Object to JSON String
+     *
+     * @param obj Java object
+     * @return JSON String
+     * @throws JacksonException to JSON String error
      */
     public static String toJson(Object obj) throws JacksonException {
         return OBJECT_MAPPER.writeValueAsString(obj);
     }
 
     /**
-     * JSON to Java Object
+     * JSON String to Java Object
+     *
+     * @param json  JSON String
+     * @param clazz Java Object Class
+     * @param <T>   Java Object Type
+     * @return Java Object
+     * @throws JacksonException parse from JSON error
      */
     public static <T> T fromJson(String json, Class<T> clazz) throws JacksonException {
         return OBJECT_MAPPER.readValue(json, clazz);
     }
 
     /**
-     * JSON to Java Object
+     * JSON String to Java Object
+     *
+     * @param json      JSON String
+     * @param reference Java Object Type Reference
+     * @param <T>       Java Object Type
+     * @return Java Object
+     * @throws JacksonException parse from JSON error
      */
     public static <T> T fromJson(String json, TypeReference<T> reference) throws JacksonException {
         return OBJECT_MAPPER.readValue(json, reference);
