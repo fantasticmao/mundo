@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.fantasticmao.mundo.web.MundoWebAutoConfiguration

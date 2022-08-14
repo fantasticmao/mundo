@@ -3,6 +3,7 @@ package cn.fantasticmao.mundo.web.support;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -18,9 +19,11 @@ import javax.annotation.concurrent.Immutable;
  * @author fantasticmao
  * @version 1.0
  * @since 2017/3/19
+ * @deprecated use {@link ResponseEntity} instead
  */
 @Getter
 @Immutable
+@Deprecated
 public final class JsonApi<T> {
     private final boolean status;
     private final int code;
@@ -51,8 +54,8 @@ public final class JsonApi<T> {
         return new JsonApi<>(httpStatus, data);
     }
 
-    public HttpStatus toHttpStatus() {
-        return HttpStatus.resolve(this.code);
+    public ResponseEntity<JsonApi<T>> toResponseEntity() {
+        return ResponseEntity.status(this.code).body(this);
     }
 
     @Override
