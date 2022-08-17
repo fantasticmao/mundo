@@ -1,24 +1,23 @@
 package cn.fantasticmao.mundo.data;
 
-import cn.fantasticmao.mundo.data.partition.PartitionDataSource;
-import cn.fantasticmao.mundo.data.partition.PartitionJpaRepositoryFactoryBean;
-import cn.fantasticmao.mundo.data.partition.PartitionSeedToDataSourceKeyStrategy;
-import cn.fantasticmao.mundo.data.partition.User;
+import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
+import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.Collections;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -28,76 +27,63 @@ import java.util.Map;
  * @version 1.0
  * @since 2017/11/17
  */
-@EnableJpaRepositories(repositoryFactoryBeanClass = PartitionJpaRepositoryFactoryBean.class)
 @SpringBootApplication
 public class ApplicationTest {
+    @Resource
+    private ResourceLoader resourceLoader;
 
-    DataSource test00() {
+    DataSource test01() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:test01.db").getFile();
         return DataSourceBuilder.create()
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .url("jdbc:mysql://localhost:3306/test00")
-            .username("test")
-            .password("123456")
+            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
-    DataSource test01() {
+    DataSource test02() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:test02.db").getFile();
         return DataSourceBuilder.create()
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .url("jdbc:mysql://localhost:3306/test01")
-            .username("test")
-            .password("123456")
+            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
-    DataSource test02() {
+    DataSource test03() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:test03.db").getFile();
         return DataSourceBuilder.create()
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .url("jdbc:mysql://localhost:3306/test02")
-            .username("test")
-            .password("123456")
+            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
-    DataSource test03() {
+    DataSource test04() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:test04.db").getFile();
         return DataSourceBuilder.create()
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .url("jdbc:mysql://localhost:3306/test03")
-            .username("test")
-            .password("123456")
-            .build();
-    }
-
-    DataSource test04() {
-        return DataSourceBuilder.create()
-            .driverClassName("com.mysql.cj.jdbc.Driver")
-            .url("jdbc:mysql://localhost:3306/test04")
-            .username("test")
-            .password("123456")
+            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
     @Bean
-    PartitionDataSource partitionDataSource() {
-        Map<String, DataSource> dataSources = Map.of("test01", test01(),
+    RoutingDataSource<Integer> routingDataSource() throws IOException {
+        Map<Object, Object> dataSources = Map.of(
+            "test01", test01(),
             "test02", test02(),
             "test03", test03(),
-            "test04", test04());
-        PartitionSeedToDataSourceKeyStrategy partitionSeedToDataSourceKeyStrategy =
-            new PartitionSeedToDataSourceKeyStrategy.NumberModulusStrategy("test%02d", dataSources.size());
-        return new PartitionDataSource(dataSources, test00(), partitionSeedToDataSourceKeyStrategy);
+            "test04", test04()
+        );
+        RoutingStrategy<Integer> routingStrategy = new RoutingStrategy.ShardingByMod<>("test%02d", dataSources.size());
+        return new RoutingDataSource<>(dataSources, test01(), routingStrategy, Integer.class);
     }
 
     @Bean
     LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
-        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setShowSql(true);
-        jpaVendorAdapter.setGenerateDdl(false);
-        jpaVendorAdapter.setDatabase(Database.MYSQL);
-        return new EntityManagerFactoryBuilder(jpaVendorAdapter, Collections.emptyMap(), null)
-            .dataSource(dataSource)
-            .packages(User.class)
-            .build();
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setShowSql(true);
+        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setDatabase(Database.MYSQL);
+
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("cn.fantasticmao.mundo.data");
+        factory.setDataSource(dataSource);
+        return factory;
     }
 
     @Bean

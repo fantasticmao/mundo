@@ -1,4 +1,4 @@
-package cn.fantasticmao.mundo.data.annotation;
+package cn.fantasticmao.mundo.data.jdbc;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +10,7 @@ import java.lang.annotation.*;
  *
  * @author fantasticmao
  * @version 1.0.6
+ * @see Query
  * @since 2022-08-13
  */
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
