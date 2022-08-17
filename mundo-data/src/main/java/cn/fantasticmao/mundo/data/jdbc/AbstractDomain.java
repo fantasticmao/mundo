@@ -1,9 +1,11 @@
-package cn.fantasticmao.mundo.data.domain;
+package cn.fantasticmao.mundo.data.jdbc;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,7 +21,6 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractDomain<ID extends Number> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id; // 逻辑主键
     @Column(insertable = false, updatable = false)
     private LocalDateTime createTime; // 创建时间
