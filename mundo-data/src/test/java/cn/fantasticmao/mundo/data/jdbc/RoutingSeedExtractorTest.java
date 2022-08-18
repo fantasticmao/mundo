@@ -1,5 +1,6 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import cn.fantasticmao.mundo.core.support.Constant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,27 +15,37 @@ import java.lang.reflect.Method;
 public class RoutingSeedExtractorTest {
 
     @Test
-    public void fromMethodArguments() {
-        // todo
+    public void fromMethodArguments() throws NoSuchMethodException {
+        Method method = UserRepository.class.getMethod("findUserById", Integer.class);
+        Object seedObj = RoutingSeedExtractor.fromMethodArguments(new Object[]{1},
+            method.getParameterAnnotations());
+        Assertions.assertNotNull(seedObj);
+        Assertions.assertEquals(1, seedObj);
+
+        method = UserRepository.class.getMethod("findBob");
+        seedObj = RoutingSeedExtractor.fromMethodArguments(Constant.Arrays.OBJECTS,
+            method.getParameterAnnotations());
+        Assertions.assertNull(seedObj);
     }
 
     @Test
     public void fromMethodDeclaration() throws NoSuchMethodException {
         Method method = UserRepository.class.getMethod("findUserById", Integer.class);
-        RoutingSeed annotation = RoutingSeedExtractor.fromMethodDeclaration(method);
-        Assertions.assertNull(annotation);
+        RoutingSeed seedAnnotation = RoutingSeedExtractor.fromMethodDeclaration(method);
+        Assertions.assertNull(seedAnnotation);
 
         method = UserRepository.class.getMethod("findBob");
-        annotation = RoutingSeedExtractor.fromMethodDeclaration(method);
-        Assertions.assertNotNull(annotation);
-        Assertions.assertEquals("2", annotation.value());
+        seedAnnotation = RoutingSeedExtractor.fromMethodDeclaration(method);
+        Assertions.assertNotNull(seedAnnotation);
+        Assertions.assertEquals("2", seedAnnotation.value());
     }
 
     @Test
     public void fromClassDeclaration() {
-        RoutingSeed annotation = RoutingSeedExtractor.fromClassDeclaration(UserRepository.class);
-        Assertions.assertNotNull(annotation);
-        Assertions.assertEquals("1", annotation.value());
+        Class<?> clazz = UserRepository.class;
+        RoutingSeed seedAnnotation = RoutingSeedExtractor.fromClassDeclaration(clazz);
+        Assertions.assertNotNull(seedAnnotation);
+        Assertions.assertEquals("1", seedAnnotation.value());
     }
 
     @Test

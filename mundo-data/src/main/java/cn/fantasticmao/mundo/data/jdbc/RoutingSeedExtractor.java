@@ -23,9 +23,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2022-08-18
  */
 final class RoutingSeedExtractor {
-    private static final ConcurrentHashMap<Class<?>, Optional<Field>> DOMAIN_CLASS_SEED_FIELD_CACHE
+    private static final ConcurrentHashMap<Method, MergedAnnotation<RoutingSeed>> METHOD_ANNOTATION_CACHE
         = new ConcurrentHashMap<>(32);
-    private static final ConcurrentHashMap<Class<?>, Method> DOMAIN_CLASS_SEED_GETTER_CACHE
+    private static final ConcurrentHashMap<Class<?>, MergedAnnotation<RoutingSeed>> CLASS_ANNOTATION_CACHE
+        = new ConcurrentHashMap<>(32);
+    private static final ConcurrentHashMap<Class<?>, Optional<Field>> DOMAIN_FIELD_CACHE
+        = new ConcurrentHashMap<>(32);
+    private static final ConcurrentHashMap<Class<?>, Method> DOMAIN_GETTER_CACHE
         = new ConcurrentHashMap<>(32);
 
     @Nullable
@@ -44,77 +48,72 @@ final class RoutingSeedExtractor {
                 }
             }
         }
-        return x < 0 ? null : arguments[x];
+        return x >= 0 ? arguments[x] : null;
     }
 
     @Nullable
     public static RoutingSeed fromMethodDeclaration(Method method) {
-        MergedAnnotation<RoutingSeed> seedAnnotation = MergedAnnotations.from(method)
-            .get(RoutingSeed.class);
-        return seedAnnotation.isPresent() ? seedAnnotation.synthesize() : null;
+        MergedAnnotation<RoutingSeed> mergedAnnotation = METHOD_ANNOTATION_CACHE
+            .computeIfAbsent(method, _method ->
+                MergedAnnotations.from(_method).get(RoutingSeed.class)
+            );
+        return mergedAnnotation.isPresent() ? mergedAnnotation.synthesize() : null;
     }
 
     @Nullable
     public static RoutingSeed fromClassDeclaration(Class<?> clazz) {
-        MergedAnnotation<RoutingSeed> seedAnnotation = MergedAnnotations.from(clazz)
-            .get(RoutingSeed.class);
-        return seedAnnotation.isPresent() ? seedAnnotation.synthesize() : null;
+        MergedAnnotation<RoutingSeed> mergedAnnotation = CLASS_ANNOTATION_CACHE
+            .computeIfAbsent(clazz, _clazz ->
+                MergedAnnotations.from(_clazz).get(RoutingSeed.class)
+            );
+        return mergedAnnotation.isPresent() ? mergedAnnotation.synthesize() : null;
     }
 
     @Nullable
-    public static Object fromDomainFields(Object[] arguments, Class<?> domainClass)
-        throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        Field seedField = getDomainAnnotatedField(domainClass);
-        if (seedField == null) {
+    public static Object fromDomainFields(Object[] arguments, Class<?> domainType)
+        throws InvocationTargetException, IllegalAccessException {
+        Optional<Field> seedFieldOpt = getDomainField(domainType);
+        if (seedFieldOpt.isEmpty()) {
             return null;
         }
 
         int x = -1;
         for (int i = 0; i < arguments.length; i++) {
             Object argument = arguments[i];
-            if (domainClass.isInstance(argument)) {
+            if (domainType.isInstance(argument)) {
                 x = i;
                 break;
             }
         }
-        if (x < 0) {
-            return null;
-        }
-        return getDomainGetterMethod(seedField, domainClass).invoke(arguments[x]);
+        return x >= 0 ? getDomainGetter(seedFieldOpt.get(), domainType).invoke(arguments[x]) : null;
     }
 
-    @Nullable
-    private static Field getDomainAnnotatedField(Class<?> domainClass) {
-        Optional<Field> optional = DOMAIN_CLASS_SEED_FIELD_CACHE.get(domainClass);
-        if (optional.isPresent()) {
-            return optional.get();
-        }
+    private static Optional<Field> getDomainField(Class<?> domainType) {
+        return DOMAIN_FIELD_CACHE.computeIfAbsent(domainType, clazz -> {
+            Field seedField = ReflectionUtils.findField(clazz,
+                new ReflectionUtils.DescribedFieldFilter() {
+                    @Nonnull
+                    @Override
+                    public String getDescription() {
+                        return "@RoutingSeed must be unique";
+                    }
 
-        Field seedField = ReflectionUtils.findField(domainClass, new ReflectionUtils.DescribedFieldFilter() {
-            @Nonnull
-            @Override
-            public String getDescription() {
-                return "@RoutingSeed must be unique";
-            }
-
-            @Override
-            public boolean matches(@Nonnull Field field) {
-                return field.isAnnotationPresent(RoutingSeed.class);
-            }
-        }, true);
-        DOMAIN_CLASS_SEED_FIELD_CACHE.put(domainClass, Optional.ofNullable(seedField));
-        return seedField;
+                    @Override
+                    public boolean matches(@Nonnull Field field) {
+                        return field.isAnnotationPresent(RoutingSeed.class);
+                    }
+                }, true);
+            return Optional.ofNullable(seedField);
+        });
     }
 
-    @Nonnull
-    private static Method getDomainGetterMethod(@Nonnull Field seedField, Class<?> domainClass)
-        throws IntrospectionException {
-        Method getter = DOMAIN_CLASS_SEED_GETTER_CACHE.get(domainClass);
-        if (getter != null) {
-            return getter;
-        }
-        getter = new PropertyDescriptor(seedField.getName(), domainClass).getReadMethod();
-        DOMAIN_CLASS_SEED_GETTER_CACHE.put(domainClass, getter);
-        return getter;
+    private static Method getDomainGetter(@Nonnull Field seedField, Class<?> domainType) {
+        return DOMAIN_GETTER_CACHE.computeIfAbsent(domainType, clazz -> {
+            try {
+                return new PropertyDescriptor(seedField.getName(), clazz).getReadMethod();
+            } catch (IntrospectionException e) {
+                throw new IllegalArgumentException(e.getMessage(), e);
+            }
+        });
     }
 }
