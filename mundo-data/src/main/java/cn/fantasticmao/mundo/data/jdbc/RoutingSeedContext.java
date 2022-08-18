@@ -1,5 +1,7 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import org.springframework.core.NamedThreadLocal;
+
 import javax.annotation.Nullable;
 
 /**
@@ -9,28 +11,36 @@ import javax.annotation.Nullable;
  * @version 1.0.6
  * @since 2022-08-17
  */
-public class RoutingSeedContext {
-    private static final ThreadLocal<String> CONTEXT = new ThreadLocal<>();
+final class RoutingSeedContext {
+    private static final ThreadLocal<Object> CONTEXT
+        = new NamedThreadLocal<>("Current DataSource Routing Seed");
 
-    public static void set(String seed) {
+    public static void set(Object seed) {
         CONTEXT.set(seed);
     }
 
     @Nullable
-    public static <T> T get(Class<T> seedClass) {
-        String seed = CONTEXT.get();
-        if (seed == null || seed.isEmpty()) {
+    @SuppressWarnings("unchecked")
+    public static <T> T get(Class<T> clazz) throws ClassCastException {
+        Object seed = CONTEXT.get();
+        if (seed == null) {
             return null;
         }
-        // FIXME
-        if (seedClass.isAssignableFrom(Integer.class)) {
-            return (T) Integer.valueOf(seed);
-        } else if (seedClass.isAssignableFrom(Long.class)) {
-            return (T) Long.valueOf(seed);
-        } else if (seedClass.isAssignableFrom(String.class)) {
-            return (T) seed;
+        if (seed instanceof RoutingSeed) {
+            RoutingSeed annotation = (RoutingSeed) seed;
+            String value = annotation.value();
+            if (Integer.class.isAssignableFrom(clazz)) {
+                return (T) Integer.valueOf(value);
+            } else if (Long.class.isAssignableFrom(clazz)) {
+                return (T) Long.valueOf(value);
+            } else if (String.class.isAssignableFrom(clazz)) {
+                return (T) seed;
+            } else {
+                throw new ClassCastException("@RoutingSeed currently supports: int, long, string, " +
+                    "invalid seed value: " + seed);
+            }
         } else {
-            throw new ClassCastException("seed: " + seed);
+            return clazz.cast(seed);
         }
     }
 

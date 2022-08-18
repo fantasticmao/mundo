@@ -2,6 +2,7 @@ package cn.fantasticmao.mundo.data.jdbc;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.sql.DataSource;
 import java.util.Map;
@@ -17,7 +18,8 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     private final RoutingStrategy<SEED> routingStrategy;
     private final Class<SEED> seedClass;
 
-    public RoutingDataSource(Map<Object, Object> dataSources, DataSource defaultDataSource,
+    public RoutingDataSource(@Nonnull Map<Object, Object> dataSources,
+                             @Nonnull DataSource defaultDataSource,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
         super.setTargetDataSources(dataSources);
         super.setDefaultTargetDataSource(defaultDataSource);
