@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Optional;
 
 /**
  * UserRepository
@@ -15,10 +17,11 @@ import javax.persistence.Table;
  * @since 2019/1/1
  */
 @RoutingSeed("1")
-public interface UserRepository extends JpaRepository<UserRepository.User, Integer> {
+public interface UserRepository<ID extends Number> extends JpaRepository<UserRepository.User, ID> {
 
-    @NativeQuery("SELECT * FROM t_user WHERE id = ?1")
-    User findUserById(@RoutingSeed Integer id);
+    @Nonnull
+    @Override
+    Optional<User> findById(@Nonnull @RoutingSeed ID id);
 
     @RoutingSeed("2")
     @NativeQuery("SELECT * FROM t_user WHERE name = 'Bob'")

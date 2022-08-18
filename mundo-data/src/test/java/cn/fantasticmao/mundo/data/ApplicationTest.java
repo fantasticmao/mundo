@@ -32,6 +32,13 @@ public class ApplicationTest {
     @Resource
     private ResourceLoader resourceLoader;
 
+    DataSource test00() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:test00.db").getFile();
+        return DataSourceBuilder.create()
+            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
+            .build();
+    }
+
     DataSource test01() throws IOException {
         File dbFile = resourceLoader.getResource("classpath:test01.db").getFile();
         return DataSourceBuilder.create()
@@ -53,23 +60,16 @@ public class ApplicationTest {
             .build();
     }
 
-    DataSource test04() throws IOException {
-        File dbFile = resourceLoader.getResource("classpath:test04.db").getFile();
-        return DataSourceBuilder.create()
-            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
-            .build();
-    }
-
     @Bean
     RoutingDataSource<Integer> routingDataSource() throws IOException {
         Map<Object, Object> dataSources = Map.of(
+            "test00", test00(),
             "test01", test01(),
             "test02", test02(),
-            "test03", test03(),
-            "test04", test04()
+            "test03", test03()
         );
         RoutingStrategy<Integer> routingStrategy = new RoutingStrategy.ShardingByMod<>("test%02d", dataSources.size());
-        return new RoutingDataSource<>(dataSources, test01(), routingStrategy, Integer.class);
+        return new RoutingDataSource<>(dataSources, test00(), routingStrategy, Integer.class);
     }
 
     @Bean

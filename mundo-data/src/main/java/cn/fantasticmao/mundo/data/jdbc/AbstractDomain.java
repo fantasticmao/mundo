@@ -21,11 +21,11 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractDomain<ID extends Number> {
     @Id
-    private ID id; // 逻辑主键
+    private ID id;
     @Column(insertable = false, updatable = false)
-    private LocalDateTime createTime; // 创建时间
+    private LocalDateTime createTime;
     @Column(insertable = false, updatable = false)
-    private LocalDateTime modifyTime; // 修改时间
+    private LocalDateTime modifyTime;
 
     @Override
     public boolean equals(Object o) {

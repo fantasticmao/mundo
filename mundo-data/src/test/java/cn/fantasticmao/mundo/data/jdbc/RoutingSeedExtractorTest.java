@@ -4,20 +4,26 @@ import cn.fantasticmao.mundo.core.support.Constant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * RoutingSeedExtractorTest
  *
- * @author maodaohe
+ * @author fantasticmao
+ * @version 1.0.6
  * @since 2022-08-18
  */
 public class RoutingSeedExtractorTest {
 
     @Test
     public void fromMethodArguments() throws NoSuchMethodException {
-        Method method = UserRepository.class.getMethod("findUserById", Integer.class);
-        Object seedObj = RoutingSeedExtractor.fromMethodArguments(new Object[]{1},
+        Method method = UserRepository.class.getMethod("findById", Number.class);
+        Object seedObj = RoutingSeedExtractor.fromMethodArguments(Constant.Arrays.OBJECTS,
+            method.getParameterAnnotations());
+        Assertions.assertNull(seedObj);
+
+        seedObj = RoutingSeedExtractor.fromMethodArguments(new Object[]{1},
             method.getParameterAnnotations());
         Assertions.assertNotNull(seedObj);
         Assertions.assertEquals(1, seedObj);
@@ -30,7 +36,7 @@ public class RoutingSeedExtractorTest {
 
     @Test
     public void fromMethodDeclaration() throws NoSuchMethodException {
-        Method method = UserRepository.class.getMethod("findUserById", Integer.class);
+        Method method = UserRepository.class.getMethod("findById", Number.class);
         RoutingSeed seedAnnotation = RoutingSeedExtractor.fromMethodDeclaration(method);
         Assertions.assertNull(seedAnnotation);
 
@@ -49,7 +55,10 @@ public class RoutingSeedExtractorTest {
     }
 
     @Test
-    public void fromDomainFields() {
+    public void fromDomainFields() throws InvocationTargetException, IllegalAccessException {
+        Class<?> domainType = UserRepository.User.class;
+        Object seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
+        Assertions.assertNull(seedObj);
         // todo
     }
 }
