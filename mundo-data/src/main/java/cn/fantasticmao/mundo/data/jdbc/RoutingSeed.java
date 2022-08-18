@@ -6,10 +6,10 @@ import java.lang.annotation.*;
  * RoutingSeed
  * <p>
  * <ol>
+ *     <li>Domain Fields</li>
  *     <li>Parameter Annotations</li>
  *     <li>Method Declaration</li>
  *     <li>Class Declaration</li>
- *     <li>Domain Fields</li>
  * </ol>
  *
  * @author fantasticmao
