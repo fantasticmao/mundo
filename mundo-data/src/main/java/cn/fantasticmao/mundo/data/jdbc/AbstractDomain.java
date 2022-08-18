@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,12 +19,12 @@ import java.util.Objects;
 @Setter
 @MappedSuperclass
 public abstract class AbstractDomain<ID extends Number> {
-    @Id
-    private ID id;
     @Column(insertable = false, updatable = false)
     private LocalDateTime createTime;
     @Column(insertable = false, updatable = false)
     private LocalDateTime modifyTime;
+
+    public abstract ID getId();
 
     @Override
     public boolean equals(Object o) {
@@ -36,21 +35,19 @@ public abstract class AbstractDomain<ID extends Number> {
             return false;
         }
         AbstractDomain<?> that = (AbstractDomain<?>) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     @Override
     public String toString() {
         return "AbstractDomain{" +
-            "id=" + id +
-            ", createTime=" + createTime +
+            "createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';
     }
-
 }

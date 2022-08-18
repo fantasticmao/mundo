@@ -54,7 +54,13 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
             final Method method = invocation.getMethod();
             final Object[] arguments = invocation.getArguments();
 
-            Object seedObj = RoutingSeedExtractor.fromMethodArguments(arguments,
+            Object seedObj = RoutingSeedExtractor.fromDomainFields(arguments, repositoryInformation.getDomainType());
+            if (seedObj != null) {
+                RoutingSeedContext.set(seedObj);
+                return invocation.proceed();
+            }
+
+            seedObj = RoutingSeedExtractor.fromMethodArguments(arguments,
                 method.getParameterAnnotations());
             if (seedObj != null) {
                 RoutingSeedContext.set(seedObj);
@@ -70,12 +76,6 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
             seedAnnotation = RoutingSeedExtractor.fromClassDeclaration(method.getDeclaringClass());
             if (seedAnnotation != null) {
                 RoutingSeedContext.set(seedAnnotation);
-                return invocation.proceed();
-            }
-
-            seedObj = RoutingSeedExtractor.fromDomainFields(arguments, repositoryInformation.getDomainType());
-            if (seedObj != null) {
-                RoutingSeedContext.set(seedObj);
                 return invocation.proceed();
             }
 

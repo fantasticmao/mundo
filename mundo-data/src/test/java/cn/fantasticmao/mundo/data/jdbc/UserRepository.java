@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.annotation.Nonnull;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Optional;
 
@@ -18,6 +19,10 @@ import java.util.Optional;
  */
 @RoutingSeed("1")
 public interface UserRepository<ID extends Number> extends JpaRepository<UserRepository.User, ID> {
+
+    @Nonnull
+    @Override
+    <S extends User> S save(@Nonnull S user);
 
     @Nonnull
     @Override
@@ -35,15 +40,16 @@ public interface UserRepository<ID extends Number> extends JpaRepository<UserRep
     @Entity
     @Table(name = "t_user")
     class User extends AbstractDomain<Integer> {
+        @Id
+        @RoutingSeed
+        private Integer id;
         private String name;
-
-        public User() {
-        }
 
         @Override
         public String toString() {
             return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 "} " + super.toString();
         }
     }
