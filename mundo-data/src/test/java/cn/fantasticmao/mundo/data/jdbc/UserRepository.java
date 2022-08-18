@@ -17,6 +17,16 @@ import javax.persistence.Table;
 @RoutingSeed("1")
 public interface UserRepository extends JpaRepository<UserRepository.User, Integer> {
 
+    @NativeQuery("SELECT * FROM t_user WHERE id = ?1")
+    User findUserById(@RoutingSeed Integer id);
+
+    @RoutingSeed("2")
+    @NativeQuery("SELECT * FROM t_user WHERE name = 'Bob'")
+    User findBob();
+
+    @NativeQuery("SELECT * FROM t_user LIMIT 1")
+    User findFirst();
+
     @Getter
     @Setter
     @Entity

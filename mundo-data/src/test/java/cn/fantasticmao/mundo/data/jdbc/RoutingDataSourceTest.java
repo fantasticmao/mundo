@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 /**
  * RoutingDataSourceTest
@@ -21,10 +20,24 @@ public class RoutingDataSourceTest extends SpringTest {
     private UserRepository userRepository;
 
     @Test
-    public void findById() {
-        Optional<UserRepository.User> userOptional = userRepository.findById(1);
-        Assertions.assertTrue(userOptional.isPresent());
-        Assertions.assertEquals("Tom", userOptional.get().getName());
+    public void findUserById() {
+        UserRepository.User user = userRepository.findUserById(3);
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals("Annie", user.getName());
+    }
+
+    @Test
+    public void findBob() {
+        UserRepository.User user = userRepository.findBob();
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals("Bob", user.getName());
+    }
+
+    @Test
+    public void findFirst() {
+        UserRepository.User user = userRepository.findFirst();
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals("Tom", user.getName());
     }
 
 }
