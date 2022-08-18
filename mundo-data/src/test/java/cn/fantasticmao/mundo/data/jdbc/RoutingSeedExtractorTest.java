@@ -17,16 +17,35 @@ import java.lang.reflect.Method;
 public class RoutingSeedExtractorTest {
 
     @Test
+    public void fromDomainFields() throws InvocationTargetException, IllegalAccessException {
+        Class<?> domainType = Object.class;
+        Object seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
+        Assertions.assertNull(seedObj);
+
+        domainType = UserRepository.User.class;
+        seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
+        Assertions.assertNull(seedObj);
+
+        int seed = 66;
+        UserRepository.User user = new UserRepository.User();
+        user.setId(seed);
+        seedObj = RoutingSeedExtractor.fromDomainFields(new Object[]{user}, domainType);
+        Assertions.assertNotNull(seedObj);
+        Assertions.assertEquals(seed, seedObj);
+    }
+
+    @Test
     public void fromMethodArguments() throws NoSuchMethodException {
         Method method = UserRepository.class.getMethod("findById", Number.class);
         Object seedObj = RoutingSeedExtractor.fromMethodArguments(Constant.Arrays.OBJECTS,
             method.getParameterAnnotations());
         Assertions.assertNull(seedObj);
 
-        seedObj = RoutingSeedExtractor.fromMethodArguments(new Object[]{1},
+        int seed = 66;
+        seedObj = RoutingSeedExtractor.fromMethodArguments(new Object[]{seed},
             method.getParameterAnnotations());
         Assertions.assertNotNull(seedObj);
-        Assertions.assertEquals(1, seedObj);
+        Assertions.assertEquals(seed, seedObj);
 
         method = UserRepository.class.getMethod("findBob");
         seedObj = RoutingSeedExtractor.fromMethodArguments(Constant.Arrays.OBJECTS,
@@ -54,11 +73,4 @@ public class RoutingSeedExtractorTest {
         Assertions.assertEquals("1", seedAnnotation.value());
     }
 
-    @Test
-    public void fromDomainFields() throws InvocationTargetException, IllegalAccessException {
-        Class<?> domainType = UserRepository.User.class;
-        Object seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
-        Assertions.assertNull(seedObj);
-        // todo
-    }
 }

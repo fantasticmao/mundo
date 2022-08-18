@@ -33,6 +33,25 @@ final class RoutingSeedExtractor {
         = new ConcurrentHashMap<>(32);
 
     @Nullable
+    public static Object fromDomainFields(Object[] arguments, Class<?> domainType)
+        throws InvocationTargetException, IllegalAccessException {
+        Optional<Field> seedFieldOpt = getDomainField(domainType);
+        if (seedFieldOpt.isEmpty()) {
+            return null;
+        }
+
+        int x = -1;
+        for (int i = 0; i < arguments.length; i++) {
+            Object argument = arguments[i];
+            if (domainType.isInstance(argument)) {
+                x = i;
+                break;
+            }
+        }
+        return x >= 0 ? getDomainGetter(seedFieldOpt.get(), domainType).invoke(arguments[x]) : null;
+    }
+
+    @Nullable
     public static Object fromMethodArguments(Object[] arguments, Annotation[][] annotations) {
         if (arguments.length != annotations.length) {
             return null;
@@ -67,25 +86,6 @@ final class RoutingSeedExtractor {
                 MergedAnnotations.from(_clazz).get(RoutingSeed.class)
             );
         return mergedAnnotation.isPresent() ? mergedAnnotation.synthesize() : null;
-    }
-
-    @Nullable
-    public static Object fromDomainFields(Object[] arguments, Class<?> domainType)
-        throws InvocationTargetException, IllegalAccessException {
-        Optional<Field> seedFieldOpt = getDomainField(domainType);
-        if (seedFieldOpt.isEmpty()) {
-            return null;
-        }
-
-        int x = -1;
-        for (int i = 0; i < arguments.length; i++) {
-            Object argument = arguments[i];
-            if (domainType.isInstance(argument)) {
-                x = i;
-                break;
-            }
-        }
-        return x >= 0 ? getDomainGetter(seedFieldOpt.get(), domainType).invoke(arguments[x]) : null;
     }
 
     private static Optional<Field> getDomainField(Class<?> domainType) {
