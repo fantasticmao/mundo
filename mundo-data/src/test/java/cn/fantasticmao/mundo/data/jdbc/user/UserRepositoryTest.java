@@ -1,8 +1,8 @@
-package cn.fantasticmao.mundo.data.jdbc;
+package cn.fantasticmao.mundo.data.jdbc.user;
 
-import cn.fantasticmao.mundo.data.SpringTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,13 +10,14 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
- * RoutingDataSourceTest
+ * UserRepositoryTest
  *
  * @author fantasticmao
  * @version 1.0
  * @since 2018/7/25
  */
-public class RoutingDataSourceTest extends SpringTest {
+@SpringBootTest(classes = UserDataSourceConfiguration.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+public class UserRepositoryTest {
     @Resource
     private UserRepository<Integer> userRepository;
 

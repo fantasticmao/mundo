@@ -1,4 +1,4 @@
-package cn.fantasticmao.mundo.data;
+package cn.fantasticmao.mundo.data.jdbc.employee;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
@@ -21,59 +21,43 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * ApplicationTest
+ * EmployeeDataSourceConfiguration
  *
  * @author fantasticmao
- * @version 1.0
- * @since 2017/11/17
+ * @version 1.0.6
+ * @since 2022-08-19
  */
 @SpringBootApplication
-public class ApplicationTest {
+public class EmployeeDataSourceConfiguration {
     @Resource
     private ResourceLoader resourceLoader;
 
-    DataSource test00() throws IOException {
-        File dbFile = resourceLoader.getResource("classpath:test00.db").getFile();
+    private DataSource employee_sale() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:employee_sale.db").getFile();
         return DataSourceBuilder.create()
             .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
-    DataSource test01() throws IOException {
-        File dbFile = resourceLoader.getResource("classpath:test01.db").getFile();
-        return DataSourceBuilder.create()
-            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
-            .build();
-    }
-
-    DataSource test02() throws IOException {
-        File dbFile = resourceLoader.getResource("classpath:test02.db").getFile();
-        return DataSourceBuilder.create()
-            .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
-            .build();
-    }
-
-    DataSource test03() throws IOException {
-        File dbFile = resourceLoader.getResource("classpath:test03.db").getFile();
+    private DataSource employee_tech() throws IOException {
+        File dbFile = resourceLoader.getResource("classpath:employee_tech.db").getFile();
         return DataSourceBuilder.create()
             .url("jdbc:sqlite:" + dbFile.getAbsolutePath())
             .build();
     }
 
     @Bean
-    RoutingDataSource<Integer> routingDataSource() throws IOException {
+    public RoutingDataSource<String> routingDataSource() throws IOException {
         Map<Object, Object> dataSources = Map.of(
-            "test00", test00(),
-            "test01", test01(),
-            "test02", test02(),
-            "test03", test03()
+            "employee_sale", employee_sale(),
+            "employee_tech", employee_tech()
         );
-        RoutingStrategy<Integer> routingStrategy = new RoutingStrategy.ShardingByMod<>("test%02d", dataSources.size());
-        return new RoutingDataSource<>(dataSources, test00(), routingStrategy, Integer.class);
+        RoutingStrategy<String> routingStrategy = new RoutingStrategy.MultiTenant("employee_%s");
+        return new RoutingDataSource<>(dataSources, employee_sale(), routingStrategy, String.class);
     }
 
     @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(false);
@@ -87,7 +71,7 @@ public class ApplicationTest {
     }
 
     @Bean
-    PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }
