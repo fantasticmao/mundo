@@ -34,7 +34,7 @@ final class RoutingSeedContext {
             } else if (Long.class.isAssignableFrom(clazz)) {
                 return (T) Long.valueOf(value);
             } else if (String.class.isAssignableFrom(clazz)) {
-                return (T) seed;
+                return (T) value;
             } else {
                 throw new ClassCastException("@RoutingSeed currently supports: int, long, string, " +
                     "invalid seed value: " + seed);

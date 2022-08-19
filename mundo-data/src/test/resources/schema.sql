@@ -1,3 +1,18 @@
+CREATE TABLE IF NOT EXISTS t_employee (
+    id         INTEGER PRIMARY KEY,
+    name       VARCHAR(32),
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modifyTime DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- employee_sale.db
+INSERT INTO t_employee(id, name)
+VALUES (1, 'Bob');
+
+-- employee_tech.db
+INSERT INTO t_employee(id, name)
+VALUES (1, 'Tom');
+
 CREATE TABLE IF NOT EXISTS t_user (
     id         INTEGER PRIMARY KEY,
     name       VARCHAR(32),

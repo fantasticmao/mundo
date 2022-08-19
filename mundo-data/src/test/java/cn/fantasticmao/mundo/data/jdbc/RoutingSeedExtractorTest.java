@@ -1,6 +1,7 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
 import cn.fantasticmao.mundo.core.support.Constant;
+import cn.fantasticmao.mundo.data.jdbc.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,8 @@
-package cn.fantasticmao.mundo.data.jdbc;
+package cn.fantasticmao.mundo.data.jdbc.user;
 
+import cn.fantasticmao.mundo.data.jdbc.AbstractDomain;
+import cn.fantasticmao.mundo.data.jdbc.NativeQuery;
+import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.repository.JpaRepository;
