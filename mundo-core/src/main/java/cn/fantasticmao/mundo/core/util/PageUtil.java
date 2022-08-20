@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.util;
 
 /**
- * Calculate {@code offset} and {@code limit} parameters in sql.
+ * Calculate {@code offset} and {@code limit} parameters in SQL queries.
  *
  * @author fantasticmao
  * @version 1.0.3

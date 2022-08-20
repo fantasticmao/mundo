@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * RoutingSeedExtractor
+ * Extractor for the current {@link javax.sql.DataSource} route seed.
  *
  * @author fantasticmao
  * @version 1.0.6

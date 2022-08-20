@@ -22,13 +22,17 @@ import javax.persistence.Table;
  */
 public interface EmployeeRepository<ID extends Number> extends JpaRepository<EmployeeRepository.Employee, ID> {
 
+    String DEPARTMENT_SALE = "sale";
+
+    String DEPARTMENT_TECH = "tech";
+
     @Nullable
-    @RoutingSeed("sale")
+    @RoutingSeed(DEPARTMENT_SALE)
     @NativeQuery("SELECT * FROM t_employee WHERE id = ?1")
     Employee findByIdInSale(@Nonnull ID id);
 
     @Nullable
-    @RoutingSeed("tech")
+    @RoutingSeed(DEPARTMENT_TECH)
     @NativeQuery("SELECT * FROM t_employee WHERE id = ?1")
     Employee findByIdInTech(@Nonnull ID id);
 

@@ -10,7 +10,8 @@ import org.springframework.data.repository.core.support.RepositoryProxyPostProce
 import javax.annotation.Nonnull;
 
 /**
- * RoutingRepositoryBeanPostProcessor
+ * {@link BeanPostProcessor} to apply a {@link RoutingRepositoryFactoryCustomizer}
+ * to all {@link RepositoryFactorySupport repository factories}.
  *
  * @author fantasticmao
  * @version 1.0.6
