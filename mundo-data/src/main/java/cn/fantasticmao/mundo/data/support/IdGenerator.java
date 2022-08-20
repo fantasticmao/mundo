@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.data.support;
 
 /**
- * Distributed id generator
+ * Distributed id generator.
  *
  * @author fantasticmao
  * @version 1.0

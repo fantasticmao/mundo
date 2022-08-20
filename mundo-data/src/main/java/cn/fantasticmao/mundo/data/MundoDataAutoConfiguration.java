@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
 
 /**
- * MundoDataAutoConfiguration
+ * Auto configuration for {@code mundo-data}.
  *
  * @author fantasticmao
  * @version 1.0.6

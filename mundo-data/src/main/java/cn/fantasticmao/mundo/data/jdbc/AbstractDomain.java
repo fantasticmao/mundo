@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * AbstractDomain
+ * Abstract base class for entities, providing some common attributes.
  *
  * @author fantasticmao
  * @version 1.0
@@ -18,13 +18,13 @@ import java.util.Objects;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AbstractDomain<ID extends Number> {
+public abstract class AbstractDomain<PK extends Number> {
     @Column(insertable = false, updatable = false)
     private LocalDateTime createTime;
     @Column(insertable = false, updatable = false)
     private LocalDateTime modifyTime;
 
-    public abstract ID getId();
+    public abstract PK getId();
 
     @Override
     public boolean equals(Object o) {

@@ -5,7 +5,7 @@ import org.springframework.core.NamedThreadLocal;
 import javax.annotation.Nullable;
 
 /**
- * RoutingSeedContext
+ * Holder for the current {@link javax.sql.DataSource} route seed.
  *
  * @author fantasticmao
  * @version 1.0.6
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  */
 final class RoutingSeedContext {
     private static final ThreadLocal<Object> CONTEXT
-        = new NamedThreadLocal<>("Current DataSource Routing Seed");
+        = new NamedThreadLocal<>("Current DataSource Route Seed");
 
     public static void set(Object seed) {
         CONTEXT.set(seed);

@@ -8,7 +8,8 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
- * RoutingDataSource
+ * {@link javax.sql.DataSource} implementation that routes {@link #getConnection()}
+ * calls to one of various target DataSources based on a lookup key.
  *
  * @author fantasticmao
  * @version 1.0.6

@@ -13,7 +13,8 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 
 /**
- * RoutingDataSourcePostProcessor
+ * {@link RepositoryProxyPostProcessor} that extracts the route seed and sets up
+ * to the {@link RoutingSeedContext context} before the method is invoked.
  *
  * @author fantasticmao
  * @version 1.0.6

@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * RoutingKeyStrategy
+ * {@link RoutingDataSource DataSoure} route strategy based on the {@link RoutingSeed seed}.
  *
  * @author fantasticmao
  * @version 1.0.6
@@ -12,6 +12,12 @@ import javax.annotation.Nullable;
  */
 public interface RoutingStrategy<SEED> {
 
+    /**
+     * Get the {@link RoutingDataSource} lookup key by the current {@link RoutingSeed}.
+     *
+     * @param seed the current thread-local route seed
+     * @return datasource lookup key
+     */
     @Nullable
     String getKey(@Nonnull SEED seed);
 
