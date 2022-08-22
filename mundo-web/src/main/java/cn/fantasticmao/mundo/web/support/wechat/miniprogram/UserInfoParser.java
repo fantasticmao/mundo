@@ -1,20 +1,19 @@
 package cn.fantasticmao.mundo.web.support.wechat.miniprogram;
 
+import cn.fantasticmao.mundo.core.util.CipherUtil;
 import cn.fantasticmao.mundo.core.util.HashUtil;
 import cn.fantasticmao.mundo.core.util.JsonUtil;
 import com.fasterxml.jackson.core.JacksonException;
+import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.annotation.Nullable;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.spec.AlgorithmParameterSpec;
 import java.util.Base64;
 import java.util.Objects;
 
@@ -29,18 +28,6 @@ import java.util.Objects;
 public class UserInfoParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoParser.class);
 
-    private static final Cipher CIPHER;
-
-    static {
-        final String aesCbcPadding = "AES/CBC/PKCS5Padding";
-        try {
-            CIPHER = Cipher.getInstance(aesCbcPadding);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            LOGGER.error("can not find such algorithm: {}", aesCbcPadding);
-            throw new UserInfoParserException(e);
-        }
-    }
-
     /**
      * 校验数据签名
      *
@@ -50,12 +37,10 @@ public class UserInfoParser {
      * @return true 校验成功；false 校验失败
      * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">数据签名校验</a>
      */
-    public static boolean checkSignature(final String sessionKey, final String rawData, final String signature) {
-        LOGGER.debug("rawData: {}", rawData);
-        LOGGER.debug("signature: {}", signature);
-        String hash = HashUtil.SHA1.hash(rawData + sessionKey);
-        LOGGER.debug("hash: {}", hash);
-        return Objects.equals(signature, hash);
+    public static boolean checkSignature(final String sessionKey, final String rawData,
+                                         final String signature) {
+        byte[] bytes = HashUtil.SHA_1.hash((rawData + sessionKey).getBytes(StandardCharsets.UTF_8));
+        return Objects.equals(signature, Hex.encodeHexString(bytes));
     }
 
     /**
@@ -67,23 +52,21 @@ public class UserInfoParser {
      * @return 小程序用户信息 {@link UserInfo}
      * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">加密数据解密算法</a>
      */
-    public static UserInfo decryptData(final String sessionKey, final String encryptedData, final String iv) {
-        final byte[] sessionKeyBase64 = Base64.getDecoder().decode(sessionKey);
-        final byte[] encryptedDataBase64 = Base64.getDecoder().decode(encryptedData);
-        final byte[] ivBase64 = Base64.getDecoder().decode(iv);
+    @Nullable
+    public static UserInfo decryptData(final String sessionKey, final String encryptedData,
+                                       final String iv) {
+        final Base64.Decoder decoder = Base64.getDecoder();
+        final Key key = new SecretKeySpec(decoder.decode(sessionKey), "AES");
+        final byte[] input = decoder.decode(encryptedData);
+        final AlgorithmParameterSpec params = new IvParameterSpec(decoder.decode(iv));
 
+        byte[] output = CipherUtil.AES_CBC_PKCS5.decrypt(key, input, params);
+        String userInfo = new String(output, StandardCharsets.UTF_8);
         try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(sessionKeyBase64, "AES");
-            IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBase64);
-            CIPHER.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
-
-            byte[] userInfoBytes = CIPHER.doFinal(encryptedDataBase64);
-            String userInfoJson = new String(userInfoBytes);
-            LOGGER.debug("decrypt user info data: {}", userInfoJson);
-            return JsonUtil.fromJson(userInfoJson, UserInfo.class);
-        } catch (JacksonException | InvalidAlgorithmParameterException | IllegalBlockSizeException
-            | BadPaddingException | InvalidKeyException e) {
-            throw new UserInfoParserException(e);
+            return JsonUtil.fromJson(userInfo, UserInfo.class);
+        } catch (JacksonException e) {
+            LOGGER.error("Parse user info error", e);
+            return null;
         }
     }
 }

@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.util;
 
 /**
- * PageUtil
+ * Calculate {@code offset} and {@code limit} parameters in SQL queries.
  *
  * @author fantasticmao
  * @version 1.0.3
@@ -10,12 +10,11 @@ package cn.fantasticmao.mundo.core.util;
 public interface PageUtil {
 
     /**
-     * 计算偏移量
+     * Calculate the page offset.
      *
-     * @param page 页数 {@code 0 <= page}
-     * @param size 页长 {@code 1 <= size <= 500}
-     * @return 偏移量
-     * @see #limit(int)
+     * @param page greater or equals than 0
+     * @param size greater or equals than 1, and less or equals than 500
+     * @return valid page offset
      */
     static int offset(int page, int size) {
         page = Math.max(page, 0);
@@ -23,10 +22,10 @@ public interface PageUtil {
     }
 
     /**
-     * 计算页长
+     * Calculate the page size
      *
-     * @param size 页长 {@code 1 <= size <= 500}
-     * @return 页长
+     * @param size greater or equals than 1, and less or equals than 500
+     * @return valid page size
      */
     static int limit(int size) {
         size = Math.max(size, 1);
