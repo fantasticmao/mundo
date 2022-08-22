@@ -5,7 +5,7 @@ import org.springframework.core.NamedThreadLocal;
 import javax.annotation.Nullable;
 
 /**
- * Holder for the current {@link javax.sql.DataSource} route seed.
+ * Holder for the current {@link RoutingDataSource DataSource} route seed.
  *
  * @author fantasticmao
  * @version 1.0.6

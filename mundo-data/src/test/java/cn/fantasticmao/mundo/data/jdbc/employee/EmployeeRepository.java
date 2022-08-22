@@ -5,7 +5,7 @@ import cn.fantasticmao.mundo.data.jdbc.NativeQuery;
 import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @version 1.0.6
  * @since 2022-08-19
  */
-public interface EmployeeRepository<ID extends Number> extends JpaRepository<EmployeeRepository.Employee, ID> {
+public interface EmployeeRepository<ID extends Number> extends CrudRepository<EmployeeRepository.Employee, ID> {
 
     String DEPARTMENT_SALE = "sale";
 
