@@ -20,30 +20,40 @@ import java.lang.annotation.*;
 public @interface NativeQuery {
     /**
      * Alias for {@link Query#value()}.
+     *
+     * @return JPA query
      */
     @AliasFor(annotation = Query.class)
     String value() default "";
 
     /**
      * Alias for {@link Query#countQuery()}.
+     *
+     * @return count query
      */
     @AliasFor(annotation = Query.class)
     String countQuery() default "";
 
     /**
      * Alias for {@link Query#countProjection()}.
+     *
+     * @return projection part of the count query
      */
     @AliasFor(annotation = Query.class)
     String countProjection() default "";
 
     /**
      * Alias for {@link Query#name()}.
+     *
+     * @return name of the query
      */
     @AliasFor(annotation = Query.class)
     String name() default "";
 
     /**
      * Alias for {@link Query#countName()}.
+     *
+     * @return name of the count query
      */
     @AliasFor(annotation = Query.class)
     String countName() default "";

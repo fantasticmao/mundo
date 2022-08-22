@@ -26,7 +26,7 @@ import java.lang.annotation.*;
  *     User save(User user);
  *
  *     &#64;Override
- *     Optional<User> findById(&#64;RoutingSeed Integer id);
+ *     Optional&lt;User&gt; findById(&#64;RoutingSeed Integer id);
  * }
  * </pre>
  * <p>
