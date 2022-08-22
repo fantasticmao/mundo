@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6 - 2022-08-23
+
+- Add `@RoutingSeed` and `RoutingDataSource`
+- Code cleanup
+
 ## 1.0.5 - 2022-05-12
 
 - Upgrade Dependency `spring-boot-starter-parent` to `2.6.7`

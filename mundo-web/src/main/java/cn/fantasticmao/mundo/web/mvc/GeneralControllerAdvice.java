@@ -1,20 +1,20 @@
 package cn.fantasticmao.mundo.web.mvc;
 
-import cn.fantasticmao.mundo.web.support.JsonApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * GeneralController
+ * General controller advice for {@code Spring-Web-MVC}.
  *
  * @author fantasticmao
  * @version 1.0
@@ -22,6 +22,7 @@ import java.util.Date;
  */
 @ControllerAdvice
 public class GeneralControllerAdvice {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeneralControllerAdvice.class);
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -31,9 +32,8 @@ public class GeneralControllerAdvice {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    @ResponseBody
-    public JsonApi<Void> exceptionHandler(RuntimeException e) {
-        e.printStackTrace();
-        return JsonApi.error(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> exceptionHandler(RuntimeException e) {
+        LOGGER.error("Global Exception Handler", e);
+        return ResponseEntity.internalServerError().body("INTERNAL SERVER ERROR");
     }
 }

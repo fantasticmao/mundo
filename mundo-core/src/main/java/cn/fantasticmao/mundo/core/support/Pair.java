@@ -3,6 +3,8 @@ package cn.fantasticmao.mundo.core.support;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 /**
  * Pair
  *
@@ -22,6 +24,23 @@ public final class Pair<T, R> {
     public Pair(T t, R r) {
         this.t = t;
         this.r = r;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pair<?, ?> pair = (Pair<?, ?>) o;
+        return Objects.equals(t, pair.t) && Objects.equals(r, pair.r);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(t, r);
     }
 
     @Override
