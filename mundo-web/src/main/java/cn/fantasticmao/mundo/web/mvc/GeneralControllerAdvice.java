@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * General controller advice for Spring Web MVC.
+ * General controller advice for {@code Spring-Web-MVC}.
  *
  * @author fantasticmao
  * @version 1.0

@@ -5,7 +5,7 @@ import cn.fantasticmao.mundo.data.jdbc.NativeQuery;
 import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import javax.annotation.Nonnull;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import java.util.Optional;
  * @since 2019/1/1
  */
 @RoutingSeed("1")
-public interface UserRepository<ID extends Number> extends JpaRepository<UserRepository.User, ID> {
+public interface UserRepository<ID extends Number> extends CrudRepository<UserRepository.User, ID> {
 
     @Nonnull
     @Override

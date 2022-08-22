@@ -16,20 +16,20 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Extractor for the current {@link javax.sql.DataSource} route seed.
+ * Extractor for the current {@link RoutingDataSource DataSource} route seed.
  *
  * @author fantasticmao
  * @version 1.0.6
  * @since 2022-08-18
  */
 final class RoutingSeedExtractor {
-    private static final ConcurrentHashMap<Method, MergedAnnotation<RoutingSeed>> METHOD_ANNOTATION_CACHE
-        = new ConcurrentHashMap<>(32);
-    private static final ConcurrentHashMap<Class<?>, MergedAnnotation<RoutingSeed>> CLASS_ANNOTATION_CACHE
-        = new ConcurrentHashMap<>(32);
     private static final ConcurrentHashMap<Class<?>, Optional<Field>> DOMAIN_FIELD_CACHE
         = new ConcurrentHashMap<>(32);
     private static final ConcurrentHashMap<Class<?>, Method> DOMAIN_GETTER_CACHE
+        = new ConcurrentHashMap<>(32);
+    private static final ConcurrentHashMap<Method, MergedAnnotation<RoutingSeed>> METHOD_ANNOTATION_CACHE
+        = new ConcurrentHashMap<>(32);
+    private static final ConcurrentHashMap<Class<?>, MergedAnnotation<RoutingSeed>> CLASS_ANNOTATION_CACHE
         = new ConcurrentHashMap<>(32);
 
     @Nullable
