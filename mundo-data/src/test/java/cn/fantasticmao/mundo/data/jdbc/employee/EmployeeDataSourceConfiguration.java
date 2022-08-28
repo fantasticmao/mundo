@@ -2,6 +2,7 @@ package cn.fantasticmao.mundo.data.jdbc.employee;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -31,6 +32,8 @@ import java.util.Map;
 public class EmployeeDataSourceConfiguration {
     @Resource
     private ResourceLoader resourceLoader;
+    @Resource
+    private Map<String, Object> hibernateProperties;
 
     private DataSource employee_sale() throws IOException {
         File dbFile = resourceLoader.getResource("classpath:employee_sale.db").getFile();
@@ -48,16 +51,16 @@ public class EmployeeDataSourceConfiguration {
 
     @Bean
     public RoutingDataSource<String> routingDataSource() throws IOException {
-        Map<Object, Object> dataSources = Map.of(
+        Map<Object, DataSource> dataSources = Map.of(
             "employee_sale", employee_sale(),
             "employee_tech", employee_tech()
         );
         RoutingStrategy<String> routingStrategy = new RoutingStrategy.MultiTenant("employee_%s");
-        return new RoutingDataSource<>(dataSources, employee_sale(), routingStrategy, String.class);
+        return new RoutingDataSource<>(dataSources, routingStrategy, String.class);
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+    public FactoryBean<EntityManagerFactory> entityManagerFactory(@Autowired DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(false);
@@ -67,6 +70,7 @@ public class EmployeeDataSourceConfiguration {
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("cn.fantasticmao.mundo.data");
         factory.setDataSource(dataSource);
+        factory.setJpaPropertyMap(hibernateProperties);
         return factory;
     }
 

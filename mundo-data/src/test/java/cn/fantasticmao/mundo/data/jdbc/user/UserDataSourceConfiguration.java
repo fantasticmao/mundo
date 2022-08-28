@@ -2,6 +2,7 @@ package cn.fantasticmao.mundo.data.jdbc.user;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -31,6 +32,8 @@ import java.util.Map;
 public class UserDataSourceConfiguration {
     @Resource
     private ResourceLoader resourceLoader;
+    @Resource
+    private Map<String, Object> hibernateProperties;
 
     private DataSource user_00() throws IOException {
         File dbFile = resourceLoader.getResource("classpath:user_00.db").getFile();
@@ -62,18 +65,18 @@ public class UserDataSourceConfiguration {
 
     @Bean
     public RoutingDataSource<Integer> routingDataSource() throws IOException {
-        Map<Object, Object> dataSources = Map.of(
+        Map<Object, DataSource> dataSources = Map.of(
             "user_00", user_00(),
             "user_01", user_01(),
             "user_02", user_02(),
             "user_03", user_03()
         );
         RoutingStrategy<Integer> routingStrategy = new RoutingStrategy.ShardingByMod<>("user_%02d", dataSources.size());
-        return new RoutingDataSource<>(dataSources, user_00(), routingStrategy, Integer.class);
+        return new RoutingDataSource<>(dataSources, routingStrategy, Integer.class);
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource dataSource) {
+    public FactoryBean<EntityManagerFactory> entityManagerFactory(@Autowired DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(false);
@@ -83,6 +86,7 @@ public class UserDataSourceConfiguration {
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("cn.fantasticmao.mundo.data");
         factory.setDataSource(dataSource);
+        factory.setJpaPropertyMap(hibernateProperties);
         return factory;
     }
 
