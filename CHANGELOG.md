@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+- Integrate `@RoutingSeed` and `RoutingDataSource` with transaction
+
 ## 1.0.6 - 2022-08-23
 
 - Add `@RoutingSeed` and `RoutingDataSource`

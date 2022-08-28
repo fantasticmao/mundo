@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.sql.DataSource;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * {@link javax.sql.DataSource} implementation that routes {@link #getConnection()}
@@ -21,11 +22,21 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     private final RoutingStrategy<SEED> routingStrategy;
     private final Class<SEED> seedClass;
 
-    public RoutingDataSource(@Nonnull Map<Object, Object> dataSources,
-                             @Nonnull DataSource defaultDataSource,
+    public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
-        super.setTargetDataSources(dataSources);
-        super.setDefaultTargetDataSource(defaultDataSource);
+        this(dataSources, null, routingStrategy, seedClass);
+    }
+
+    public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
+                             @Nullable DataSource defaultDataSource,
+                             RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
+        Map<Object, Object> targetDataSources = dataSources.entrySet().stream()
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        super.setTargetDataSources(targetDataSources);
+        if (defaultDataSource != null) {
+            super.setDefaultTargetDataSource(defaultDataSource);
+        }
+
         this.routingStrategy = routingStrategy;
         this.seedClass = seedClass;
     }
@@ -33,16 +44,7 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     @Nullable
     @Override
     protected Object determineCurrentLookupKey() {
-        SEED seed;
-        try {
-            seed = RoutingSeedContext.get(seedClass);
-        } finally {
-            RoutingSeedContext.remove();
-        }
-
-        if (seed == null) {
-            return null;
-        }
-        return routingStrategy.getKey(seed);
+        SEED seed = RoutingSeedContext.get(seedClass);
+        return seed != null ? routingStrategy.getKey(seed) : null;
     }
 }

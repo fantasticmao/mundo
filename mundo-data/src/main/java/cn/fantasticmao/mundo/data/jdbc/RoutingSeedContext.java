@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  * @version 1.0.6
  * @since 2022-08-17
  */
-final class RoutingSeedContext {
+public final class RoutingSeedContext {
     private static final ThreadLocal<Object> CONTEXT
         = new NamedThreadLocal<>("Current DataSource Route Seed");
 

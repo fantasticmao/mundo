@@ -1,10 +1,10 @@
 package cn.fantasticmao.mundo.data.jdbc.user;
 
+import cn.fantasticmao.mundo.data.jdbc.RoutingSeedContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.util.Optional;
@@ -20,20 +20,27 @@ import java.util.Optional;
 public class UserRepositoryTest {
     @Resource
     private UserRepository<Integer> userRepository;
+    @Resource
+    private TransactionTemplate transactionTemplate;
 
     @Test
-    @Rollback
-    @Transactional
     public void save() {
-        Optional<UserRepository.User> userOptional = userRepository.findById(4);
-        Assertions.assertTrue(userOptional.isPresent());
+        // FIXME
+        RoutingSeedContext.set(4);
 
-        UserRepository.User user = userOptional.get();
-        Assertions.assertEquals("Jason", user.getName());
+        transactionTemplate.executeWithoutResult(status -> {
+            Optional<UserRepository.User> userOptional = userRepository.findById(4);
+            Assertions.assertTrue(userOptional.isPresent());
 
-        user.setName("Jack");
-        user = userRepository.save(user);
-        Assertions.assertEquals("Jack", user.getName());
+            UserRepository.User user = userOptional.get();
+            Assertions.assertEquals("Jason", user.getName());
+
+            user.setName("Jack");
+            user = userRepository.save(user);
+            Assertions.assertEquals("Jack", user.getName());
+
+            status.setRollbackOnly();
+        });
     }
 
     @Test
