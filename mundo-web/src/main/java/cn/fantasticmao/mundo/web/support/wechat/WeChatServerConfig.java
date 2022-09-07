@@ -28,11 +28,8 @@ public abstract class WeChatServerConfig {
         String nonce = request.getParameter("nonce");
         String echoStr = request.getParameter("echostr");
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("验证微信服务器请求");
-            LOGGER.debug("signature={}", signature);
-            LOGGER.debug("timestamp={}", timestamp);
-            LOGGER.debug("nonce={}", nonce);
-            LOGGER.debug("echostr={}", echoStr);
+            LOGGER.debug("验证微信服务器请求 signature={} timestamp={} nonce={} echostr={}",
+                signature, timestamp, nonce, echoStr);
         }
 
         if (this.verifyParameters(signature, timestamp, nonce)) {

@@ -31,7 +31,7 @@ public abstract class AbstractDomain<PK extends Number> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AbstractDomain)) {
             return false;
         }
         AbstractDomain<?> that = (AbstractDomain<?>) o;
