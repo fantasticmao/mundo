@@ -12,7 +12,7 @@ import java.util.Base64;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 17-4-24
+ * @since 2017-04-24
  */
 public class HashUtilTest {
 

@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2017/3/5
+ * @since 2017-03-05
  */
 @Getter
 @Setter
@@ -31,7 +31,7 @@ public final class Pair<T, R> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Pair)) {
             return false;
         }
         Pair<?, ?> pair = (Pair<?, ?>) o;
@@ -48,6 +48,6 @@ public final class Pair<T, R> {
         return "Pair{" +
             "t=" + t +
             ", r=" + r +
-            '}';
+            "}";
     }
 }

@@ -55,33 +55,39 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
             final Method method = invocation.getMethod();
             final Object[] arguments = invocation.getArguments();
 
-            Object seedObj = RoutingSeedExtractor.fromDomainFields(arguments, repositoryInformation.getDomainType());
+            Object seedObj = RoutingSeedExtractor.fromDomainFields(arguments,
+                repositoryInformation.getDomainType());
             if (seedObj != null) {
-                RoutingSeedContext.set(seedObj);
-                return invocation.proceed();
+                return invokeWithSeed(invocation, seedObj);
             }
 
             seedObj = RoutingSeedExtractor.fromMethodArguments(arguments,
                 method.getParameterAnnotations());
             if (seedObj != null) {
-                RoutingSeedContext.set(seedObj);
-                return invocation.proceed();
+                return invokeWithSeed(invocation, seedObj);
             }
 
             RoutingSeed seedAnnotation = RoutingSeedExtractor.fromMethodDeclaration(method);
             if (seedAnnotation != null) {
-                RoutingSeedContext.set(seedAnnotation);
-                return invocation.proceed();
+                return invokeWithSeed(invocation, seedAnnotation);
             }
 
             seedAnnotation = RoutingSeedExtractor.fromClassDeclaration(method.getDeclaringClass());
             if (seedAnnotation != null) {
-                RoutingSeedContext.set(seedAnnotation);
-                return invocation.proceed();
+                return invokeWithSeed(invocation, seedAnnotation);
             }
 
             return invocation.proceed();
         }
 
+        private Object invokeWithSeed(@Nonnull MethodInvocation invocation, @Nonnull Object seed)
+            throws Throwable {
+            try {
+                RoutingSeedContext.set(seed);
+                return invocation.proceed();
+            } finally {
+                RoutingSeedContext.remove();
+            }
+        }
     }
 }

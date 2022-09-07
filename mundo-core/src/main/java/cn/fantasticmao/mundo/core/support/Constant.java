@@ -5,7 +5,7 @@ package cn.fantasticmao.mundo.core.support;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 27/05/2018
+ * @since 2018-05-27
  */
 public interface Constant {
 
