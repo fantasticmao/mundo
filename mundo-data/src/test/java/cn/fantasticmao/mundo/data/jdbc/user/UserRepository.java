@@ -18,7 +18,7 @@ import java.util.Optional;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2019/1/1
+ * @since 2019-01-01
  */
 @RoutingSeed("1")
 public interface UserRepository<ID extends Number> extends CrudRepository<UserRepository.User, ID> {

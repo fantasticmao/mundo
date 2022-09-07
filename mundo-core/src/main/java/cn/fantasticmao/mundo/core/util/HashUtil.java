@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2017/3/5
+ * @since 2017-03-05
  */
 public enum HashUtil {
     MD5("MD5"),

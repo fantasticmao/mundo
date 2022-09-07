@@ -5,7 +5,7 @@ package cn.fantasticmao.mundo.data.support;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/7/22
+ * @since 2018-07-22
  */
 public interface IdGenerator {
 

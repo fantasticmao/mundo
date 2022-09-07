@@ -20,7 +20,7 @@ import java.io.StringReader;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 class WeChatXmlUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatXmlUtil.class);

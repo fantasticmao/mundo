@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2017/3/5
+ * @since 2017-03-05
  */
 @Getter
 @Setter
@@ -48,6 +48,6 @@ public abstract class AbstractDomain<PK extends Number> {
         return "AbstractDomain{" +
             "createTime=" + createTime +
             ", modifyTime=" + modifyTime +
-            '}';
+            "}";
     }
 }

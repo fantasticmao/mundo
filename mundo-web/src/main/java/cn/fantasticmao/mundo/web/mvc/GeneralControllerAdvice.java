@@ -18,7 +18,7 @@ import java.util.Date;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 16/01/2018
+ * @since 2018-01-16
  */
 @ControllerAdvice
 public class GeneralControllerAdvice {
