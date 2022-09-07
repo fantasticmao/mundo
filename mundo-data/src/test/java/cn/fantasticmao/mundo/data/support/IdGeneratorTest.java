@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2019/1/2
+ * @since 2019-01-02
  */
 public class IdGeneratorTest {
 

@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 public abstract class WeChatServerConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatServerConfig.class);
@@ -28,11 +28,8 @@ public abstract class WeChatServerConfig {
         String nonce = request.getParameter("nonce");
         String echoStr = request.getParameter("echostr");
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("验证微信服务器请求");
-            LOGGER.debug("signature={}", signature);
-            LOGGER.debug("timestamp={}", timestamp);
-            LOGGER.debug("nonce={}", nonce);
-            LOGGER.debug("echostr={}", echoStr);
+            LOGGER.debug("验证微信服务器请求 signature={} timestamp={} nonce={} echostr={}",
+                signature, timestamp, nonce, echoStr);
         }
 
         if (this.verifyParameters(signature, timestamp, nonce)) {

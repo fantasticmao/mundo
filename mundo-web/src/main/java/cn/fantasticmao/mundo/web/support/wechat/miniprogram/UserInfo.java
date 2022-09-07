@@ -41,7 +41,7 @@ public class UserInfo {
             ", avatarUrl='" + avatarUrl + '\'' +
             ", unionId='" + unionId + '\'' +
             ", watermark=" + watermark +
-            '}';
+            "}";
     }
 
     public enum GenderEnum {
@@ -80,7 +80,7 @@ public class UserInfo {
             return "Watermark{" +
                 "appid='" + appid + '\'' +
                 ", timestamp='" + timestamp + '\'' +
-                '}';
+                "}";
         }
     }
 }

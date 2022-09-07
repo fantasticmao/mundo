@@ -18,7 +18,7 @@ import javax.annotation.concurrent.Immutable;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2017/3/19
+ * @since 2017-03-19
  * @deprecated use {@link ResponseEntity} instead
  */
 @Getter
@@ -65,6 +65,6 @@ public final class JsonApi<T> {
             ", code=" + code +
             ", message='" + message + '\'' +
             ", data=" + data +
-            '}';
+            "}";
     }
 }

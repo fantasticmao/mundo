@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2017/3/19
+ * @since 2017-03-19
  */
 public class JsonApiTest {
 

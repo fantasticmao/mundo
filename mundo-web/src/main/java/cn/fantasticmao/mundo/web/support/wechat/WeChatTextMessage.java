@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 public class WeChatTextMessage extends WeChatMessage {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatTextMessage.class);

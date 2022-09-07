@@ -7,7 +7,7 @@ import lombok.Getter;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 @Getter
 public class WeChatMessage {
@@ -39,7 +39,7 @@ public class WeChatMessage {
             ", createTime=" + createTime +
             ", msgId=" + msgId +
             ", msgType=" + msgType +
-            '}';
+            "}";
     }
 
 }

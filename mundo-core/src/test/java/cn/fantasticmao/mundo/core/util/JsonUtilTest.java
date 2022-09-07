@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/1/6
+ * @since 2018-01-06
  */
 public class JsonUtilTest {
 

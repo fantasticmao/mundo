@@ -9,6 +9,7 @@ import org.w3c.dom.Text;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,7 +21,7 @@ import java.io.StringReader;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 class WeChatXmlUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatXmlUtil.class);
@@ -28,6 +29,7 @@ class WeChatXmlUtil {
     static Element getRootElement(String xml) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder docBuilder = factory.newDocumentBuilder();
             InputSource source = new InputSource(new StringReader(xml));
             Document document = docBuilder.parse(source);
