@@ -31,7 +31,7 @@ public final class Pair<T, R> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Pair)) {
             return false;
         }
         Pair<?, ?> pair = (Pair<?, ?>) o;
