@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 public class WeChatMessageFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatMessageFactory.class);

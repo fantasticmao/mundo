@@ -3,6 +3,7 @@
 ## 1.0.7
 
 - Integrate `@RoutingSeed` and `RoutingDataSource` with transaction
+- Code cleanup
 
 ## 1.0.6 - 2022-08-23
 

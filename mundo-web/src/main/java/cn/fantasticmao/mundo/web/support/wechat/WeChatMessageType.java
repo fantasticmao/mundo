@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/12/5
+ * @since 2018-12-05
  */
 public enum WeChatMessageType {
     TEXT, IMAGE, VOICE, VIDEO, SHORT_VIDEO, LOCATION, LINK, UNKNOWN;

@@ -12,7 +12,7 @@ import java.util.Optional;
  *
  * @author fantasticmao
  * @version 1.0
- * @since 2018/7/25
+ * @since 2018-07-25
  */
 @SpringBootTest(classes = UserDataSourceConfiguration.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class UserRepositoryTest {
