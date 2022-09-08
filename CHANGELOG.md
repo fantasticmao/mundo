@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8
+
+- Rename `modifyTime` to `updateTime` in `AbstractDomain`
+
 ## 1.0.7
 
 - Integrate `@RoutingSeed` and `RoutingDataSource` with transaction

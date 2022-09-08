@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS t_employee (
     id          INTEGER PRIMARY KEY,
     name        VARCHAR(32),
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    modify_time DATETIME DEFAULT CURRENT_TIMESTAMP
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- employee_sale.db
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS t_user (
     id          INTEGER PRIMARY KEY,
     name        VARCHAR(32),
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    modify_time DATETIME DEFAULT CURRENT_TIMESTAMP
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- test00.db
