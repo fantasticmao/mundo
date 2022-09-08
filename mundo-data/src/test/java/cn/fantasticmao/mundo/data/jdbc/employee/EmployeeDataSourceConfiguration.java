@@ -3,7 +3,6 @@ package cn.fantasticmao.mundo.data.jdbc.employee;
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -60,7 +59,7 @@ public class EmployeeDataSourceConfiguration {
     }
 
     @Bean
-    public FactoryBean<EntityManagerFactory> entityManagerFactory(@Autowired DataSource dataSource) {
+    public FactoryBean<EntityManagerFactory> entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(false);
@@ -75,7 +74,7 @@ public class EmployeeDataSourceConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(@Autowired EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

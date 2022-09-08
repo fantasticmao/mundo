@@ -22,7 +22,7 @@ public abstract class AbstractDomain<PK extends Number> {
     @Column(insertable = false, updatable = false)
     private LocalDateTime createTime;
     @Column(insertable = false, updatable = false)
-    private LocalDateTime modifyTime;
+    private LocalDateTime updateTime;
 
     public abstract PK getId();
 
@@ -47,7 +47,7 @@ public abstract class AbstractDomain<PK extends Number> {
     public String toString() {
         return "AbstractDomain{" +
             "createTime=" + createTime +
-            ", modifyTime=" + modifyTime +
+            ", updateTime=" + updateTime +
             "}";
     }
 }
