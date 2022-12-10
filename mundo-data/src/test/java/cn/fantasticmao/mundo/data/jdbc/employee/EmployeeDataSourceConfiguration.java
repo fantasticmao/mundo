@@ -2,19 +2,12 @@ package cn.fantasticmao.mundo.data.jdbc.employee;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +24,6 @@ import java.util.Map;
 public class EmployeeDataSourceConfiguration {
     @Resource
     private ResourceLoader resourceLoader;
-    @Resource
-    private Map<String, Object> hibernateProperties;
 
     private DataSource employee_sale() throws IOException {
         File dbFile = resourceLoader.getResource("classpath:employee_sale.db").getFile();
@@ -55,26 +46,7 @@ public class EmployeeDataSourceConfiguration {
             "employee_tech", employee_tech()
         );
         RoutingStrategy<String> routingStrategy = new RoutingStrategy.MultiTenant("employee_%s");
-        return new RoutingDataSource<>(dataSources, routingStrategy, String.class);
+        return new RoutingDataSource<>(dataSources, employee_sale(), routingStrategy, String.class);
     }
 
-    @Bean
-    public FactoryBean<EntityManagerFactory> entityManagerFactory(DataSource dataSource) {
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
-        vendorAdapter.setGenerateDdl(false);
-        vendorAdapter.setDatabase(Database.MYSQL);
-
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("cn.fantasticmao.mundo.data");
-        factory.setDataSource(dataSource);
-        factory.setJpaPropertyMap(hibernateProperties);
-        return factory;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
 }

@@ -23,11 +23,6 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     private final Class<SEED> seedClass;
 
     public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
-                             RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
-        this(dataSources, null, routingStrategy, seedClass);
-    }
-
-    public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
                              @Nullable DataSource defaultDataSource,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
         Map<Object, Object> targetDataSources = dataSources.entrySet().stream()

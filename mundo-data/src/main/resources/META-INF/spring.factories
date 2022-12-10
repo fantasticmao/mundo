@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   cn.fantasticmao.mundo.data.MundoDataAutoConfiguration
+org.springframework.data.jdbc.repository.config.DialectResolver$JdbcDialectProvider=\
+  cn.fantasticmao.mundo.data.support.SQLiteDialectProvider
