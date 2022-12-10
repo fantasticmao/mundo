@@ -33,7 +33,7 @@ public class UserRepositoryTransactionTest {
             Assertions.assertEquals("Jason", user.getName());
 
             user.setName("Jack");
-            status.flush();
+            userRepository.save(user);
 
             userOptional = userRepository.findById(userId);
             Assertions.assertTrue(userOptional.isPresent());
@@ -54,6 +54,7 @@ public class UserRepositoryTransactionTest {
             Assertions.assertEquals("Annie", tempUser.getName());
 
             tempUser.setName("Anna");
+            userRepository.save(tempUser);
             return tempUser;
         });
 
