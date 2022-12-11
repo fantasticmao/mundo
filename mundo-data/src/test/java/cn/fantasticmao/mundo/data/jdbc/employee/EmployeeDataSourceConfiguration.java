@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
+import org.sqlite.jdbc4.JDBC4DatabaseMetaData;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -46,7 +47,8 @@ public class EmployeeDataSourceConfiguration {
             "employee_tech", employee_tech()
         );
         RoutingStrategy<String> routingStrategy = new RoutingStrategy.MultiTenant("employee_%s");
-        return new RoutingDataSource<>(dataSources, employee_sale(), routingStrategy, String.class);
+        return new RoutingDataSource<>(dataSources, new JDBC4DatabaseMetaData(null),
+            routingStrategy, String.class);
     }
 
 }
