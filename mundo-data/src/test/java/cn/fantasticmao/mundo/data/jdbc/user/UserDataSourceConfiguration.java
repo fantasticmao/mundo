@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
+import org.sqlite.jdbc4.JDBC4DatabaseMetaData;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -62,7 +63,8 @@ public class UserDataSourceConfiguration {
             "user_03", user_03()
         );
         RoutingStrategy<Integer> routingStrategy = new RoutingStrategy.ShardingByMod<>("user_%02d", dataSources.size());
-        return new RoutingDataSource<>(dataSources, user_00(), routingStrategy, Integer.class);
+        return new RoutingDataSource<>(dataSources, new JDBC4DatabaseMetaData(null),
+            routingStrategy, Integer.class);
     }
 
 }
