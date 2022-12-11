@@ -2,9 +2,8 @@ package cn.fantasticmao.mundo.data.jdbc;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,11 +16,10 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-@MappedSuperclass
 public abstract class AbstractDomain<PK extends Number> {
-    @Column(insertable = false, updatable = false)
+    @ReadOnlyProperty
     private LocalDateTime createTime;
-    @Column(insertable = false, updatable = false)
+    @ReadOnlyProperty
     private LocalDateTime updateTime;
 
     public abstract PK getId();

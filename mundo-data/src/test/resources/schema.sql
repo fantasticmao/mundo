@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS t_employee (
     id          INTEGER PRIMARY KEY,
-    name        VARCHAR(32),
-    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+    name        TEXT,
+    create_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now')),
+    update_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now'))
 );
 
 -- employee_sale.db
@@ -15,23 +15,23 @@ VALUES (1, 'Tom');
 
 CREATE TABLE IF NOT EXISTS t_user (
     id          INTEGER PRIMARY KEY,
-    name        VARCHAR(32),
-    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+    name        TEXT,
+    create_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now')),
+    update_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now'))
 );
 
--- test00.db
+-- user_00.db
 INSERT INTO t_user(id, name)
 VALUES (4, 'Jason');
 
--- test01.db
+-- user_01.db
 INSERT INTO t_user(id, name)
 VALUES (1, 'Tom');
 
--- test02.db
+-- user_02.db
 INSERT INTO t_user(id, name)
 VALUES (2, 'Bob');
 
--- test03.db
+-- user_03.db
 INSERT INTO t_user(id, name)
 VALUES (3, 'Annie');

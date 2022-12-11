@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.9
+
+- Upgrade Dependency `spring-boot-starter-parent` to `2.7.6`
+- Replace `Spring Data JPA` with `Spring Data JDBC`
+
 ## 1.0.8
 
 - Rename `modifyTime` to `updateTime` in `AbstractDomain`

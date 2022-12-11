@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <packaging>pom</packaging>
 
     <name>mundo-all</name>
@@ -61,7 +61,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
 
-        <spring-boot.version>2.6.7</spring-boot.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <google.findbugs.version>3.0.2</google.findbugs.version>
         <jmh.version>1.35</jmh.version>
