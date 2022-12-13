@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS t_employee (
     id          INTEGER PRIMARY KEY,
     name        TEXT,
-    create_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now')),
-    update_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now'))
+    create_time TEXT DEFAULT CURRENT_TIMESTAMP,
+    update_time TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 -- employee_sale.db
@@ -16,8 +16,8 @@ VALUES (1, 'Tom');
 CREATE TABLE IF NOT EXISTS t_user (
     id          INTEGER PRIMARY KEY,
     name        TEXT,
-    create_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now')),
-    update_time TEXT DEFAULT (STRFTIME('%Y-%m-%dT%H:%M:%S', 'now'))
+    create_time TEXT DEFAULT CURRENT_TIMESTAMP,
+    update_time TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 -- user_00.db
