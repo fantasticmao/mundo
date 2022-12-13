@@ -3,10 +3,14 @@ package cn.fantasticmao.mundo.data;
 import cn.fantasticmao.mundo.data.jdbc.RoutingRepositoryBeanPostProcessor;
 import cn.fantasticmao.mundo.data.jdbc.RoutingTransactionTemplate;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
+import org.springframework.data.relational.core.dialect.Dialect;
+import org.springframework.data.relational.core.dialect.RenderContextFactory;
+import org.springframework.data.relational.core.sql.render.SqlRenderer;
 import org.springframework.transaction.support.TransactionTemplate;
 
 /**
@@ -30,6 +34,13 @@ public class MundoDataAutoConfiguration {
     public RoutingTransactionTemplate routingTransactionTemplate(
         TransactionTemplate transactionTemplate) {
         return new RoutingTransactionTemplate(transactionTemplate);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SqlRenderer sqlRenderer(Dialect dialect) {
+        RenderContextFactory factory = new RenderContextFactory(dialect);
+        return SqlRenderer.create(factory.createRenderContext());
     }
 
 }
