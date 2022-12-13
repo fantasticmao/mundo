@@ -6,6 +6,8 @@ import org.springframework.data.relational.core.dialect.LockClause;
 import org.springframework.data.relational.core.sql.LockOptions;
 
 import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * An SQL dialect for SQLite.
@@ -31,6 +33,19 @@ public class SQLiteDialect extends AbstractDialect {
     @Override
     public LockClause lock() {
         return SQLiteLockClause.INSTANCE;
+    }
+
+    @Nonnull
+    @Override
+    public Collection<Object> getConverters() {
+        return List.of(
+            SQLiteConverters.StringToLocalTime.INSTANCE,
+            SQLiteConverters.StringToLocalDate.INSTANCE,
+            SQLiteConverters.StringToLocalDateTime.INSTANCE,
+            SQLiteConverters.LocalTimeToString.INSTANCE,
+            SQLiteConverters.LocalDateToString.INSTANCE,
+            SQLiteConverters.LocalDateTimeToString.INSTANCE
+        );
     }
 
     enum SQLiteLimitClause implements LimitClause {
