@@ -1,16 +1,14 @@
 # Changelog
 
-## 1.0.9
+## 1.0.9 ~ 1.0.10 - 2022-12-14
 
 - Upgrade Dependency `spring-boot-starter-parent` to `2.7.6`
 - Replace `Spring Data JPA` with `Spring Data JDBC`
+- Support SQLite Dialect in `Spring Data JDBC`
 
-## 1.0.8
+## 1.0.7 ~ 1.0.8 - 2022-09-08
 
 - Rename `modifyTime` to `updateTime` in `AbstractDomain`
-
-## 1.0.7
-
 - Integrate `@RoutingSeed` and `RoutingDataSource` with transaction
 - Code cleanup
 
