@@ -1,10 +1,14 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Annotation to declare the {@link RoutingDataSource DataSource} route seed. Used
- * on domain type fields, method parameters, method and interface declarations of
+ * on entity type fields, method parameters, method and interface declarations of
  * {@link org.springframework.data.repository.Repository Spring-Data Repositories}.
  * <p>
  * With {@link RoutingStrategy.ShardingByMod ShardingByMod Strategy}, this annotation

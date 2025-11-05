@@ -19,11 +19,9 @@ import javax.annotation.concurrent.Immutable;
  * @author fantasticmao
  * @version 1.0
  * @since 2017-03-19
- * @deprecated use {@link ResponseEntity} instead
  */
 @Getter
 @Immutable
-@Deprecated
 public final class JsonApi<T> {
     private final boolean status;
     private final int code;

@@ -1,6 +1,6 @@
 package cn.fantasticmao.mundo.data.jdbc.user;
 
-import cn.fantasticmao.mundo.data.jdbc.AbstractDomain;
+import cn.fantasticmao.mundo.data.jdbc.AbstractEntity;
 import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +40,7 @@ public interface UserRepository<ID extends Number> extends CrudRepository<UserRe
     @Getter
     @Setter
     @Table("t_user")
-    class User extends AbstractDomain<Integer> {
+    class User extends AbstractEntity<Integer> {
         @Id
         @RoutingSeed
         private Integer id;
