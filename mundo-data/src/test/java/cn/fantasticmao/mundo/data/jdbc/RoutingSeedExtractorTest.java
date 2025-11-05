@@ -18,19 +18,19 @@ import java.lang.reflect.Method;
 public class RoutingSeedExtractorTest {
 
     @Test
-    public void fromDomainFields() throws InvocationTargetException, IllegalAccessException {
-        Class<?> domainType = Object.class;
-        Object seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
+    public void fromEntityFields() throws InvocationTargetException, IllegalAccessException {
+        Class<?> entityType = Object.class;
+        Object seedObj = RoutingSeedExtractor.fromEntityFields(Constant.Arrays.OBJECTS, entityType);
         Assertions.assertNull(seedObj);
 
-        domainType = UserRepository.User.class;
-        seedObj = RoutingSeedExtractor.fromDomainFields(Constant.Arrays.OBJECTS, domainType);
+        entityType = UserRepository.User.class;
+        seedObj = RoutingSeedExtractor.fromEntityFields(Constant.Arrays.OBJECTS, entityType);
         Assertions.assertNull(seedObj);
 
         int seed = 66;
         UserRepository.User user = new UserRepository.User();
         user.setId(seed);
-        seedObj = RoutingSeedExtractor.fromDomainFields(new Object[]{user}, domainType);
+        seedObj = RoutingSeedExtractor.fromEntityFields(new Object[]{user}, entityType);
         Assertions.assertNotNull(seedObj);
         Assertions.assertEquals(seed, seedObj);
     }

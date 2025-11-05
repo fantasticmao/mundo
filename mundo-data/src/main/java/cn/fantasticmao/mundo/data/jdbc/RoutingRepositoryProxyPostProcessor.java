@@ -55,7 +55,7 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
             final Method method = invocation.getMethod();
             final Object[] arguments = invocation.getArguments();
 
-            Object seedObj = RoutingSeedExtractor.fromDomainFields(arguments,
+            Object seedObj = RoutingSeedExtractor.fromEntityFields(arguments,
                 repositoryInformation.getDomainType());
             if (seedObj != null) {
                 return invokeWithSeed(invocation, seedObj);

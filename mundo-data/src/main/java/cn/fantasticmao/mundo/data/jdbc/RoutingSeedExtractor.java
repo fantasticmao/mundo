@@ -23,9 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2022-08-18
  */
 final class RoutingSeedExtractor {
-    private static final ConcurrentHashMap<Class<?>, Optional<Field>> DOMAIN_FIELD_CACHE
+    private static final ConcurrentHashMap<Class<?>, Optional<Field>> ENTITY_FIELD_CACHE
         = new ConcurrentHashMap<>(32);
-    private static final ConcurrentHashMap<Class<?>, Method> DOMAIN_GETTER_CACHE
+    private static final ConcurrentHashMap<Class<?>, Method> ENTITY_GETTER_CACHE
         = new ConcurrentHashMap<>(32);
     private static final ConcurrentHashMap<Method, MergedAnnotation<RoutingSeed>> METHOD_ANNOTATION_CACHE
         = new ConcurrentHashMap<>(32);
@@ -33,9 +33,9 @@ final class RoutingSeedExtractor {
         = new ConcurrentHashMap<>(32);
 
     @Nullable
-    public static Object fromDomainFields(Object[] arguments, Class<?> domainType)
+    public static Object fromEntityFields(Object[] arguments, Class<?> entityType)
         throws InvocationTargetException, IllegalAccessException {
-        Optional<Field> seedFieldOpt = getDomainField(domainType);
+        Optional<Field> seedFieldOpt = getEntityField(entityType);
         if (seedFieldOpt.isEmpty()) {
             return null;
         }
@@ -43,12 +43,12 @@ final class RoutingSeedExtractor {
         int x = -1;
         for (int i = 0; i < arguments.length; i++) {
             Object argument = arguments[i];
-            if (domainType.isInstance(argument)) {
+            if (entityType.isInstance(argument)) {
                 x = i;
                 break;
             }
         }
-        return x >= 0 ? getDomainGetter(seedFieldOpt.get(), domainType).invoke(arguments[x]) : null;
+        return x >= 0 ? getEntityGetter(seedFieldOpt.get(), entityType).invoke(arguments[x]) : null;
     }
 
     @Nullable
@@ -88,8 +88,8 @@ final class RoutingSeedExtractor {
         return mergedAnnotation.isPresent() ? mergedAnnotation.synthesize() : null;
     }
 
-    private static Optional<Field> getDomainField(Class<?> domainType) {
-        return DOMAIN_FIELD_CACHE.computeIfAbsent(domainType, clazz -> {
+    private static Optional<Field> getEntityField(Class<?> entityType) {
+        return ENTITY_FIELD_CACHE.computeIfAbsent(entityType, clazz -> {
             Field seedField = ReflectionUtils.findField(clazz,
                 new ReflectionUtils.DescribedFieldFilter() {
                     @Nonnull
@@ -107,8 +107,8 @@ final class RoutingSeedExtractor {
         });
     }
 
-    private static Method getDomainGetter(@Nonnull Field seedField, Class<?> domainType) {
-        return DOMAIN_GETTER_CACHE.computeIfAbsent(domainType, clazz -> {
+    private static Method getEntityGetter(@Nonnull Field seedField, Class<?> entityType) {
+        return ENTITY_GETTER_CACHE.computeIfAbsent(entityType, clazz -> {
             try {
                 return new PropertyDescriptor(seedField.getName(), clazz).getReadMethod();
             } catch (IntrospectionException e) {
