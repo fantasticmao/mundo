@@ -1,6 +1,6 @@
 package cn.fantasticmao.mundo.data.support;
 
-import org.springframework.data.jdbc.repository.config.DialectResolver;
+import org.springframework.data.jdbc.core.dialect.DialectResolver;
 import org.springframework.data.relational.core.dialect.Dialect;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcOperations;

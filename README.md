@@ -1,7 +1,7 @@
 # Mundo
 
 [![Actions Status](https://github.com/fantasticmao/mundo/workflows/ci/badge.svg)](https://github.com/fantasticmao/mundo/actions)
-![JDK Version](https://img.shields.io/badge/JDK-11%2B-blue)
+![JDK Version](https://img.shields.io/badge/JDK-21%2B-blue)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.fantasticmao.mundo/mundo-all.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22cn.fantasticmao.mundo%22)
 [![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
@@ -21,7 +21,7 @@ personal requirements that I meet in my daily study and work, so you probably do
 
 ### mundo-data
 
-- [x] `AbstractDomain` defines common attributes in Domain types
+- [x] `AbstractEntity` defines common attributes in Database Entity types
 - [x] `@RoutingSeed` and `RoutingDataSource` supports route strategy on datasource level
 - [x] `IdGenerator` provides the implementation of the distributed ID algorithm
 

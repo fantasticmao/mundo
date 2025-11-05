@@ -1,7 +1,7 @@
 # Mundo
 
 [![Actions Status](https://github.com/fantasticmao/mundo/workflows/ci/badge.svg)](https://github.com/fantasticmao/mundo/actions)
-![JDK Version](https://img.shields.io/badge/JDK-11%2B-blue)
+![JDK Version](https://img.shields.io/badge/JDK-21%2B-blue)
 [![Maven Central](https://img.shields.io/maven-central/v/cn.fantasticmao.mundo/mundo-all.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22cn.fantasticmao.mundo%22)
 [![image](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/fantasticmao/mundo/blob/master/LICENSE)
 
@@ -18,7 +18,7 @@ Mundo 是一个开箱即用（可能没用）的小型业务开发组件，它�
 
 ### mundo-data
 
-- [x] `AbstractDomain` 定义 Domain 类中的常用字段
+- [x] `AbstractEntity` 定义数据库 Entity 类中的常用字段
 - [x] `@RoutingSeed` 和 `RoutingDataSource` 支持数据源级别的路由策略
 - [x] `IdGenerator` 提供分布式 ID 算法的实现
 

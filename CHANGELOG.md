@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.11 - 2025-11-05
+
+- Update JDK Version to `21`
+- Update Spring-Boot Version to `3.5.7`
+
 ## 1.0.9 ~ 1.0.10 - 2022-12-14
 
 - Upgrade Dependency `spring-boot-starter-parent` to `2.7.6`
@@ -8,7 +13,7 @@
 
 ## 1.0.7 ~ 1.0.8 - 2022-09-08
 
-- Rename `modifyTime` to `updateTime` in `AbstractDomain`
+- Rename `modifyTime` to `updateTime` in `AbstractEntity`
 - Integrate `@RoutingSeed` and `RoutingDataSource` with transaction
 - Code cleanup
 

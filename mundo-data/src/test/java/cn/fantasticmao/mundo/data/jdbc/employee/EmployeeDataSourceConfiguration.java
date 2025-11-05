@@ -2,13 +2,13 @@ package cn.fantasticmao.mundo.data.jdbc.employee;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingDataSource;
 import cn.fantasticmao.mundo.data.jdbc.RoutingStrategy;
+import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
 import org.sqlite.jdbc4.JDBC4DatabaseMetaData;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;

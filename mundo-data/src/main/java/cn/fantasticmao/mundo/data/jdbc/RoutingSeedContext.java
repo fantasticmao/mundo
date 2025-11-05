@@ -26,8 +26,7 @@ final class RoutingSeedContext {
         if (seed == null) {
             return null;
         }
-        if (seed instanceof RoutingSeed) {
-            RoutingSeed annotation = (RoutingSeed) seed;
+        if (seed instanceof RoutingSeed annotation) {
             String value = annotation.value();
             if (Integer.class.isAssignableFrom(clazz)) {
                 return (T) Integer.valueOf(value);

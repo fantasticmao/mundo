@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-public abstract class AbstractDomain<PK extends Number> {
+public abstract class AbstractEntity<PK extends Number> {
     @ReadOnlyProperty
     private LocalDateTime createTime;
     @ReadOnlyProperty
@@ -26,13 +26,9 @@ public abstract class AbstractDomain<PK extends Number> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof AbstractDomain)) {
-            return false;
-        }
-        AbstractDomain<?> that = (AbstractDomain<?>) o;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractEntity<?> that = (AbstractEntity<?>) o;
         return Objects.equals(getId(), that.getId());
     }
 
@@ -43,7 +39,7 @@ public abstract class AbstractDomain<PK extends Number> {
 
     @Override
     public String toString() {
-        return "AbstractDomain{" +
+        return "AbstractEntity{" +
             "createTime=" + createTime +
             ", updateTime=" + updateTime +
             "}";
