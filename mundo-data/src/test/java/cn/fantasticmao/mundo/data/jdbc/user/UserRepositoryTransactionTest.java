@@ -1,11 +1,11 @@
 package cn.fantasticmao.mundo.data.jdbc.user;
 
 import cn.fantasticmao.mundo.data.jdbc.RoutingTransactionTemplate;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
