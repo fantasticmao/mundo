@@ -1,13 +1,17 @@
 # Changelog
 
+## 1.0.12 - 2026-10-01
+
+- Upgrade Spring Boot to `4.1.1`
+
 ## 1.0.11 - 2025-11-05
 
-- Update JDK Version to `21`
-- Update Spring-Boot Version to `3.5.7`
+- Upgrade JDK to `21`
+- Upgrade Spring Boot to `3.5.7`
 
 ## 1.0.9 ~ 1.0.10 - 2022-12-14
 
-- Upgrade Dependency `spring-boot-starter-parent` to `2.7.6`
+- Upgrade Spring Boot to `2.7.6`
 - Replace `Spring Data JPA` with `Spring Data JDBC`
 - Support SQLite Dialect in `Spring Data JDBC`
 
@@ -24,13 +28,13 @@
 
 ## 1.0.5 - 2022-05-12
 
-- Upgrade Dependency `spring-boot-starter-parent` to `2.6.7`
+- Upgrade Spring Boot to `2.6.7`
 - Replace `logback` with `log4j2`
 - Code cleanup
 
 ## 1.0.4 - 2022-03-03
 
-- Update JDK Version to `11`
+- Upgrade JDK to `11`
 - Code cleanup
 - Update Java Class `JsonUtil`
 
@@ -55,7 +59,7 @@
 
 - Code cleanup
 - Support GitHub Action CI
-- Upgrade Dependency `spring-boot-starter-parent` to `2.5.1`
+- Upgrade Spring Boot to `2.5.1`
 
 ## 1.0 - 2017-11-14
 

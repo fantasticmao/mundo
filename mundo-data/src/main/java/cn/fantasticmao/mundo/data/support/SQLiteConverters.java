@@ -1,10 +1,10 @@
 package cn.fantasticmao.mundo.data.support;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
 
-import javax.annotation.Nonnull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,7 +29,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         @Override
-        public LocalTime convert(@Nonnull String source) {
+        public LocalTime convert(@NonNull String source) {
             return LocalTime.parse(source, formatter);
         }
     }
@@ -41,7 +41,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         @Override
-        public LocalDate convert(@Nonnull String source) {
+        public LocalDate convert(@NonNull String source) {
             return LocalDate.parse(source, formatter);
         }
     }
@@ -53,7 +53,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         @Override
-        public LocalDateTime convert(@Nonnull String source) {
+        public LocalDateTime convert(@NonNull String source) {
             return LocalDateTime.parse(source, formatter);
         }
     }
@@ -65,7 +65,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         @Override
-        public String convert(@Nonnull LocalTime source) {
+        public String convert(@NonNull LocalTime source) {
             return formatter.format(source);
         }
     }
@@ -77,7 +77,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         @Override
-        public String convert(@Nonnull LocalDate source) {
+        public String convert(@NonNull LocalDate source) {
             return formatter.format(source);
         }
     }
@@ -89,7 +89,7 @@ interface SQLiteConverters {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         @Override
-        public String convert(@Nonnull LocalDateTime source) {
+        public String convert(@NonNull LocalDateTime source) {
             return formatter.format(source);
         }
     }

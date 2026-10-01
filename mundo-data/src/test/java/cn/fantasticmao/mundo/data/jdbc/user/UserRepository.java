@@ -4,12 +4,12 @@ import cn.fantasticmao.mundo.data.jdbc.AbstractEntity;
 import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.annotation.Nonnull;
 import java.util.Optional;
 
 /**
@@ -22,13 +22,13 @@ import java.util.Optional;
 @RoutingSeed("1")
 public interface UserRepository<ID extends Number> extends CrudRepository<UserRepository.User, ID> {
 
-    @Nonnull
+    @NonNull
     @Override
-    <S extends User> S save(@Nonnull S user);
+    <S extends User> S save(@NonNull S user);
 
-    @Nonnull
+    @NonNull
     @Override
-    Optional<User> findById(@Nonnull @RoutingSeed ID id);
+    Optional<User> findById(@NonNull @RoutingSeed ID id);
 
     @RoutingSeed("2")
     @Query("SELECT * FROM t_user WHERE name = 'Bob'")

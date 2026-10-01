@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.fantasticmao.mundo</groupId>
     <artifactId>mundo-all</artifactId>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
     <packaging>pom</packaging>
 
     <name>mundo-all</name>
@@ -50,9 +50,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>21</java.version>
 
-        <spring-boot.version>3.5.7</spring-boot.version>
-        <commons-collections4.version>4.5.0</commons-collections4.version>
-        <google.findbugs.version>3.0.2</google.findbugs.version>
+        <spring-boot.version>4.1.1</spring-boot.version>
+        <commons-collections4.version>4.6.0</commons-collections4.version>
         <jmh.version>1.37</jmh.version>
     </properties>
 
@@ -171,12 +170,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>${google.findbugs.version}</version>
             </dependency>
 
             <dependency>

@@ -1,11 +1,11 @@
 package cn.fantasticmao.mundo.data.support;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.relational.core.dialect.AbstractDialect;
 import org.springframework.data.relational.core.dialect.LimitClause;
 import org.springframework.data.relational.core.dialect.LockClause;
 import org.springframework.data.relational.core.sql.LockOptions;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,19 +23,19 @@ public class SQLiteDialect extends AbstractDialect {
      */
     public static final SQLiteDialect INSTANCE = new SQLiteDialect();
 
-    @Nonnull
+    @NonNull
     @Override
     public LimitClause limit() {
         return SQLiteLimitClause.INSTANCE;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public LockClause lock() {
         return SQLiteLockClause.INSTANCE;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Collection<Object> getConverters() {
         return List.of(
@@ -51,25 +51,25 @@ public class SQLiteDialect extends AbstractDialect {
     enum SQLiteLimitClause implements LimitClause {
         INSTANCE;
 
-        @Nonnull
+        @NonNull
         @Override
         public String getLimit(long limit) {
             return "LIMIT " + limit;
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public String getOffset(long offset) {
             return "OFFSET " + offset;
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public String getLimitOffset(long limit, long offset) {
             return String.format("LIMIT %d OFFSET %d", limit, offset);
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public Position getClausePosition() {
             return Position.AFTER_ORDER_BY;
@@ -79,13 +79,13 @@ public class SQLiteDialect extends AbstractDialect {
     enum SQLiteLockClause implements LockClause {
         INSTANCE;
 
-        @Nonnull
+        @NonNull
         @Override
-        public String getLock(@Nonnull LockOptions lockOptions) {
+        public String getLock(@NonNull LockOptions lockOptions) {
             return "";
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public Position getClausePosition() {
             return Position.AFTER_ORDER_BY;

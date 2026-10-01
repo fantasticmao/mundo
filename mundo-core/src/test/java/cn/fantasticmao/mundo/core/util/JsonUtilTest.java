@@ -1,9 +1,10 @@
 package cn.fantasticmao.mundo.core.util;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.Data;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
 
 import java.util.Map;
 
@@ -43,24 +44,9 @@ public class JsonUtilTest {
         Assertions.assertEquals(20, map.get("age"));
     }
 
+    @Data
     private static class User {
         private String name;
         private Integer age;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Integer getAge() {
-            return age;
-        }
-
-        public void setAge(Integer age) {
-            this.age = age;
-        }
     }
 }

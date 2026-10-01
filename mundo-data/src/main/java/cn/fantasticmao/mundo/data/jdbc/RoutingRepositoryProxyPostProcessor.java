@@ -2,14 +2,14 @@ package cn.fantasticmao.mundo.data.jdbc;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.support.RepositoryProxyPostProcessor;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 
 /**
@@ -26,8 +26,8 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
     }
 
     @Override
-    public void postProcess(@Nonnull ProxyFactory factory,
-                            @Nonnull RepositoryInformation repositoryInformation) {
+    public void postProcess(@NonNull ProxyFactory factory,
+                            @NonNull RepositoryInformation repositoryInformation) {
         Advisor[] advisors = factory.getAdvisors();
         int i = advisors.length - 1;
         for (; i > 0; i--) {
@@ -51,7 +51,7 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
 
         @Nullable
         @Override
-        public Object invoke(@Nonnull MethodInvocation invocation) throws Throwable {
+        public Object invoke(@NonNull MethodInvocation invocation) throws Throwable {
             final Method method = invocation.getMethod();
             final Object[] arguments = invocation.getArguments();
 
@@ -80,7 +80,7 @@ public class RoutingRepositoryProxyPostProcessor implements RepositoryProxyPostP
             return invocation.proceed();
         }
 
-        private Object invokeWithSeed(@Nonnull MethodInvocation invocation, @Nonnull Object seed)
+        private Object invokeWithSeed(@NonNull MethodInvocation invocation, @NonNull Object seed)
             throws Throwable {
             try {
                 RoutingSeedContext.set(seed);

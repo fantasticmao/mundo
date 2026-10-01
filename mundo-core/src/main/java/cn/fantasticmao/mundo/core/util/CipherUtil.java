@@ -1,6 +1,7 @@
 package cn.fantasticmao.mundo.core.util;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -44,13 +45,11 @@ public enum CipherUtil {
         return encrypt(key, data, null);
     }
 
-    public byte[] encrypt(Key key, byte[] data,
-                          @Nullable AlgorithmParameterSpec params) {
+    public byte[] encrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params) {
         return encrypt(key, data, null, null);
     }
 
-    public byte[] encrypt(Key key, byte[] data,
-                          @Nullable AlgorithmParameterSpec params,
+    public byte[] encrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params,
                           @Nullable SecureRandom random) {
         init(Cipher.ENCRYPT_MODE, key, params, random);
         return doFinal(data);

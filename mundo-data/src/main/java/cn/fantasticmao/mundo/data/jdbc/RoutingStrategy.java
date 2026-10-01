@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * {@link RoutingDataSource DataSoure} route strategy based on the {@link RoutingSeed seed}.
@@ -19,7 +19,7 @@ public interface RoutingStrategy<SEED> {
      * @return datasource lookup key
      */
     @Nullable
-    String getKey(@Nonnull SEED seed);
+    String getKey(@NonNull SEED seed);
 
     class ShardingByMod<SEED extends Number> implements RoutingStrategy<SEED> {
         private final String format;
@@ -32,7 +32,7 @@ public interface RoutingStrategy<SEED> {
 
         @Nullable
         @Override
-        public String getKey(@Nonnull SEED seed) {
+        public String getKey(@NonNull SEED seed) {
             int index = seed.intValue() % num;
             return String.format(format, index);
         }
@@ -47,7 +47,7 @@ public interface RoutingStrategy<SEED> {
 
         @Nullable
         @Override
-        public String getKey(@Nonnull String tenant) {
+        public String getKey(@NonNull String tenant) {
             return String.format(format, tenant);
         }
     }

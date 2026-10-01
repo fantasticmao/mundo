@@ -1,11 +1,11 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.annotation.MergedAnnotation;
 import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.data.util.ReflectionUtils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
@@ -27,9 +27,9 @@ final class RoutingSeedExtractor {
         = new ConcurrentHashMap<>(32);
     private static final ConcurrentHashMap<Class<?>, Method> ENTITY_GETTER_CACHE
         = new ConcurrentHashMap<>(32);
-    private static final ConcurrentHashMap<Method, MergedAnnotation<RoutingSeed>> METHOD_ANNOTATION_CACHE
+    private static final ConcurrentHashMap<Method, MergedAnnotation<@NonNull RoutingSeed>> METHOD_ANNOTATION_CACHE
         = new ConcurrentHashMap<>(32);
-    private static final ConcurrentHashMap<Class<?>, MergedAnnotation<RoutingSeed>> CLASS_ANNOTATION_CACHE
+    private static final ConcurrentHashMap<Class<?>, MergedAnnotation<@NonNull RoutingSeed>> CLASS_ANNOTATION_CACHE
         = new ConcurrentHashMap<>(32);
 
     @Nullable
@@ -92,14 +92,14 @@ final class RoutingSeedExtractor {
         return ENTITY_FIELD_CACHE.computeIfAbsent(entityType, clazz -> {
             Field seedField = ReflectionUtils.findField(clazz,
                 new ReflectionUtils.DescribedFieldFilter() {
-                    @Nonnull
+                    @NonNull
                     @Override
                     public String getDescription() {
                         return "@RoutingSeed must be unique";
                     }
 
                     @Override
-                    public boolean matches(@Nonnull Field field) {
+                    public boolean matches(@NonNull Field field) {
                         return field.isAnnotationPresent(RoutingSeed.class);
                     }
                 }, true);
@@ -107,7 +107,7 @@ final class RoutingSeedExtractor {
         });
     }
 
-    private static Method getEntityGetter(@Nonnull Field seedField, Class<?> entityType) {
+    private static Method getEntityGetter(@NonNull Field seedField, Class<?> entityType) {
         return ENTITY_GETTER_CACHE.computeIfAbsent(entityType, clazz -> {
             try {
                 return new PropertyDescriptor(seedField.getName(), clazz).getReadMethod();

@@ -1,13 +1,12 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport;
 import org.springframework.data.repository.core.support.RepositoryFactoryCustomizer;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 import org.springframework.data.repository.core.support.RepositoryProxyPostProcessor;
-
-import javax.annotation.Nonnull;
 
 /**
  * {@link BeanPostProcessor} to apply a {@link RoutingRepositoryFactoryCustomizer}
@@ -26,7 +25,7 @@ public class RoutingRepositoryBeanPostProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessBeforeInitialization(@Nonnull Object bean, @Nonnull String beanName)
+    public Object postProcessBeforeInitialization(@NonNull Object bean, @NonNull String beanName)
         throws BeansException {
         if (bean instanceof RepositoryFactoryBeanSupport) {
             ((RepositoryFactoryBeanSupport<?, ?, ?>) bean).addRepositoryFactoryCustomizer(customizer);

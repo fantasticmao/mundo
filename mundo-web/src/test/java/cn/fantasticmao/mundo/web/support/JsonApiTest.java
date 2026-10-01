@@ -1,11 +1,11 @@
 package cn.fantasticmao.mundo.web.support;
 
 import cn.fantasticmao.mundo.core.util.JsonUtil;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +25,10 @@ public class JsonApiTest {
         TypeReference<JsonApi<String>> reference = new TypeReference<>() {
         };
         JsonApi<String> jsonApi = JsonUtil.fromJson(json, reference);
-        Assertions.assertFalse(jsonApi.isStatus());
-        Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), jsonApi.getCode());
-        Assertions.assertEquals(HttpStatus.NOT_FOUND.getReasonPhrase(), jsonApi.getMessage());
-        Assertions.assertEquals("hello", jsonApi.getData());
+        Assertions.assertFalse(jsonApi.status());
+        Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), jsonApi.code());
+        Assertions.assertEquals(HttpStatus.NOT_FOUND.getReasonPhrase(), jsonApi.message());
+        Assertions.assertEquals("hello", jsonApi.data());
     }
 
     @Test

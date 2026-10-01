@@ -4,14 +4,13 @@ import cn.fantasticmao.mundo.data.jdbc.AbstractEntity;
 import cn.fantasticmao.mundo.data.jdbc.RoutingSeed;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * EmployeeRepository
@@ -29,12 +28,12 @@ public interface EmployeeRepository<ID extends Number> extends CrudRepository<Em
     @Nullable
     @RoutingSeed(DEPARTMENT_SALE)
     @Query("SELECT * FROM t_employee WHERE id = :id")
-    Employee findByIdInSale(@Nonnull @Param("id") ID id);
+    Employee findByIdInSale(@NonNull @Param("id") ID id);
 
     @Nullable
     @RoutingSeed(DEPARTMENT_TECH)
     @Query("SELECT * FROM t_employee WHERE id = :id")
-    Employee findByIdInTech(@Nonnull @Param("id") ID id);
+    Employee findByIdInTech(@NonNull @Param("id") ID id);
 
     @Getter
     @Setter

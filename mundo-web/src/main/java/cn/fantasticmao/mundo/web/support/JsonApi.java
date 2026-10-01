@@ -1,11 +1,8 @@
 package cn.fantasticmao.mundo.web.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import javax.annotation.concurrent.Immutable;
 
 /**
  * The JSON response for RESTFul APIs.
@@ -20,24 +17,14 @@ import javax.annotation.concurrent.Immutable;
  * @version 1.0
  * @since 2017-03-19
  */
-@Getter
-@Immutable
-public final class JsonApi<T> {
-    private final boolean status;
-    private final int code;
-    private final String message;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private final T data;
-
+public record JsonApi<T>(boolean status, int code, String message,
+                         @JsonInclude(JsonInclude.Include.NON_NULL) T data) {
     private JsonApi() {
         this(HttpStatus.OK, null);
     }
 
     private JsonApi(HttpStatus httpStatus, T data) {
-        this.status = httpStatus.is2xxSuccessful();
-        this.code = httpStatus.value();
-        this.message = httpStatus.getReasonPhrase();
-        this.data = data;
+        this(httpStatus.is2xxSuccessful(), httpStatus.value(), httpStatus.getReasonPhrase(), data);
     }
 
     public static <T> JsonApi<T> ok(T data) {

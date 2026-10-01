@@ -1,18 +1,23 @@
 package cn.fantasticmao.mundo.core.util;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.MapperFeature;
+import tools.jackson.databind.cfg.DateTimeFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
- * Operations on {@link ObjectMapper Jackson ObjectMapper}.
+ * Operations on {@link JsonMapper Jackson JsonMapper}.
  *
  * @author fantasticmao
  * @version 1.0
  * @since 2017-03-05
  */
 public final class JsonUtil {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final JsonMapper JSON_MAPPER = JsonMapper.builder()
+        .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, false)
+        .configure(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS, true)
+        .build();
 
     /**
      * Java Object to JSON String
@@ -22,7 +27,7 @@ public final class JsonUtil {
      * @throws JacksonException to JSON String error
      */
     public static String toJson(Object obj) throws JacksonException {
-        return OBJECT_MAPPER.writeValueAsString(obj);
+        return JSON_MAPPER.writeValueAsString(obj);
     }
 
     /**
@@ -35,7 +40,7 @@ public final class JsonUtil {
      * @throws JacksonException parse from JSON error
      */
     public static <T> T fromJson(String json, Class<T> clazz) throws JacksonException {
-        return OBJECT_MAPPER.readValue(json, clazz);
+        return JSON_MAPPER.readValue(json, clazz);
     }
 
     /**
@@ -48,7 +53,7 @@ public final class JsonUtil {
      * @throws JacksonException parse from JSON error
      */
     public static <T> T fromJson(String json, TypeReference<T> reference) throws JacksonException {
-        return OBJECT_MAPPER.readValue(json, reference);
+        return JSON_MAPPER.readValue(json, reference);
     }
 
 }

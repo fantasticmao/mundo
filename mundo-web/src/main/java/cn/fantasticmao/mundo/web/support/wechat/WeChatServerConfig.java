@@ -5,10 +5,10 @@ import cn.fantasticmao.mundo.core.util.HashUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,7 +75,7 @@ public abstract class WeChatServerConfig {
          *
          * @return 配置令牌
          */
-        @Nonnull
+        @NonNull
         String token();
     }
 }

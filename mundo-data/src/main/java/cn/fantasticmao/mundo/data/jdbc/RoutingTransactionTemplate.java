@@ -1,12 +1,12 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -25,7 +25,7 @@ public class RoutingTransactionTemplate {
     }
 
     @Nullable
-    public <T> T execute(@Nonnull Object seed, TransactionCallback<T> action)
+    public <T> T execute(@NonNull Object seed, TransactionCallback<T> action)
         throws TransactionException {
         RoutingSeedContext.set(seed);
         try {
@@ -35,7 +35,7 @@ public class RoutingTransactionTemplate {
         }
     }
 
-    public void executeWithoutResult(@Nonnull Object seed, Consumer<TransactionStatus> action)
+    public void executeWithoutResult(@NonNull Object seed, Consumer<TransactionStatus> action)
         throws TransactionException {
         RoutingSeedContext.set(seed);
         try {

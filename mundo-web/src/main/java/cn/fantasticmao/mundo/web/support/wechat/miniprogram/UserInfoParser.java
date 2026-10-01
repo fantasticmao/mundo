@@ -3,12 +3,12 @@ package cn.fantasticmao.mundo.web.support.wechat.miniprogram;
 import cn.fantasticmao.mundo.core.util.CipherUtil;
 import cn.fantasticmao.mundo.core.util.HashUtil;
 import cn.fantasticmao.mundo.core.util.JsonUtil;
-import com.fasterxml.jackson.core.JacksonException;
 import org.apache.commons.codec.binary.Hex;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.core.JacksonException;
 
-import javax.annotation.Nullable;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;

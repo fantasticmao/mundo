@@ -1,10 +1,10 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.jdbc.datasource.AbstractDataSource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -25,8 +25,8 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     private final RoutingStrategy<SEED> routingStrategy;
     private final Class<SEED> seedClass;
 
-    public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
-                             @Nonnull DatabaseMetaData databaseMetaData,
+    public RoutingDataSource(@NonNull Map<Object, DataSource> dataSources,
+                             @NonNull DatabaseMetaData databaseMetaData,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
         this(dataSources, routingStrategy, seedClass);
 
@@ -51,15 +51,15 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
         super.setDefaultTargetDataSource(defaultDataSource);
     }
 
-    public RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
-                             @Nonnull DataSource defaultDataSource,
+    public RoutingDataSource(@NonNull Map<Object, DataSource> dataSources,
+                             @NonNull DataSource defaultDataSource,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
         this(dataSources, routingStrategy, seedClass);
 
         super.setDefaultTargetDataSource(defaultDataSource);
     }
 
-    private RoutingDataSource(@Nonnull Map<Object, DataSource> dataSources,
+    private RoutingDataSource(@NonNull Map<Object, DataSource> dataSources,
                               RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
         Map<Object, Object> targetDataSources = dataSources.entrySet().stream()
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

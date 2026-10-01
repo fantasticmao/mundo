@@ -1,8 +1,7 @@
 package cn.fantasticmao.mundo.data.jdbc;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.NamedThreadLocal;
-
-import javax.annotation.Nullable;
 
 /**
  * Holder for the current {@link RoutingDataSource DataSource} route seed.
