@@ -22,3 +22,7 @@ jobs:
           java-version: '21'
       - name: Run Maven Test
         run: ./mvnw test -B
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
