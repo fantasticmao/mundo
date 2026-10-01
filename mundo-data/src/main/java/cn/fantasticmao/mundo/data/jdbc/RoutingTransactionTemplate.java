@@ -20,10 +20,26 @@ import java.util.function.Consumer;
 public class RoutingTransactionTemplate {
     private final TransactionTemplate delegate;
 
+    /**
+     * Creates a template that delegates to the given transaction template.
+     *
+     * @param transactionTemplate transaction template to delegate to
+     */
     public RoutingTransactionTemplate(TransactionTemplate transactionTemplate) {
         this.delegate = transactionTemplate;
     }
 
+    /**
+     * Executes the action in a transaction after setting the route seed.
+     * <p>
+     * The seed is removed from the routing context when the call returns.
+     *
+     * @param seed   route seed for the current thread
+     * @param action callback to execute
+     * @param <T>    result type
+     * @return result of the callback
+     * @throws TransactionException if the transaction fails
+     */
     @Nullable
     public <T> T execute(@NonNull Object seed, TransactionCallback<T> action)
         throws TransactionException {
@@ -35,6 +51,15 @@ public class RoutingTransactionTemplate {
         }
     }
 
+    /**
+     * Executes the action in a transaction after setting the route seed.
+     * <p>
+     * The seed is removed from the routing context when the call returns.
+     *
+     * @param seed   route seed for the current thread
+     * @param action callback to execute
+     * @throws TransactionException if the transaction fails
+     */
     public void executeWithoutResult(@NonNull Object seed, Consumer<TransactionStatus> action)
         throws TransactionException {
         RoutingSeedContext.set(seed);

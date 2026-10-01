@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.ServiceLoader;
 
 /**
- * WeChatServerConfig
+ * Verifies a WeChat server configuration request.
  *
  * @author fantasticmao
  * @version 1.0
@@ -26,6 +26,12 @@ import java.util.ServiceLoader;
 public abstract class WeChatServerConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatServerConfig.class);
 
+    /**
+     * Verifies the signature on a WeChat server configuration request.
+     *
+     * @param request HTTP request carrying {@code signature}, {@code timestamp}, {@code nonce}, and {@code echostr}
+     * @return {@code echostr} when verification succeeds, otherwise an empty string
+     */
     public String config(HttpServletRequest request) {
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
@@ -47,6 +53,14 @@ public abstract class WeChatServerConfig {
         }
     }
 
+    /**
+     * Checks that the signature matches {@code SHA-1(sort(token, timestamp, nonce))}.
+     *
+     * @param signature expected signature
+     * @param timestamp request timestamp
+     * @param nonce     request nonce
+     * @return {@code true} when the parameters are present and the signature matches
+     */
     protected boolean verifyParameters(final String signature, final String timestamp, final String nonce) {
         if (StringUtils.isAnyEmpty(signature, timestamp, nonce)) {
             return false;
@@ -60,6 +74,12 @@ public abstract class WeChatServerConfig {
         return Objects.equals(signature, hashStr);
     }
 
+    /**
+     * Loads the server token from the first {@link TokenProvider} on the classpath.
+     *
+     * @return server token
+     * @throws IllegalArgumentException if no provider is available
+     */
     protected String getToken() {
         ServiceLoader<TokenProvider> serviceLoader = ServiceLoader.load(TokenProvider.class);
         for (TokenProvider provider : serviceLoader) {
@@ -71,9 +91,9 @@ public abstract class WeChatServerConfig {
     public interface TokenProvider {
 
         /**
-         * 获取微信服务器配置令牌
+         * Returns the WeChat server configuration token.
          *
-         * @return 配置令牌
+         * @return configuration token
          */
         @NonNull
         String token();

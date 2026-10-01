@@ -21,7 +21,13 @@ import java.security.spec.AlgorithmParameterSpec;
  * @since 2022-08-13
  */
 public enum CipherUtil {
+    /**
+     * AES cipher with ECB mode and PKCS #5 padding.
+     */
     AES_ECB_PKCS5("AES/ECB/PKCS5Padding"),
+    /**
+     * AES cipher with CBC mode and PKCS #5 padding.
+     */
     AES_CBC_PKCS5("AES/CBC/PKCS5Padding");
 
     private final Cipher cipher;
@@ -41,28 +47,84 @@ public enum CipherUtil {
         }
     }
 
+    /**
+     * Encrypts the given data.
+     *
+     * @param key  encryption key
+     * @param data plaintext
+     * @return ciphertext
+     * @throws IllegalArgumentException if the key, block size, or padding is invalid
+     */
     public byte[] encrypt(Key key, byte[] data) {
         return encrypt(key, data, null);
     }
 
+    /**
+     * Encrypts the given data.
+     * <p>
+     * {@code params} is not used.
+     *
+     * @param key    encryption key
+     * @param data   plaintext
+     * @param params ignored
+     * @return ciphertext
+     * @throws IllegalArgumentException if the key, block size, or padding is invalid
+     */
     public byte[] encrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params) {
         return encrypt(key, data, null, null);
     }
 
+    /**
+     * Encrypts the given data.
+     *
+     * @param key    encryption key
+     * @param data   plaintext
+     * @param params algorithm parameters, or {@code null}
+     * @param random source of randomness, or {@code null}
+     * @return ciphertext
+     * @throws IllegalArgumentException if the key, algorithm parameters, block size, or padding is invalid
+     */
     public byte[] encrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params,
                           @Nullable SecureRandom random) {
         init(Cipher.ENCRYPT_MODE, key, params, random);
         return doFinal(data);
     }
 
+    /**
+     * Decrypts the given data.
+     *
+     * @param key  decryption key
+     * @param data ciphertext
+     * @return plaintext
+     * @throws IllegalArgumentException if the key, block size, or padding is invalid
+     */
     public byte[] decrypt(Key key, byte[] data) {
         return decrypt(key, data, null);
     }
 
+    /**
+     * Decrypts the given data.
+     *
+     * @param key    decryption key
+     * @param data   ciphertext
+     * @param params algorithm parameters, or {@code null}
+     * @return plaintext
+     * @throws IllegalArgumentException if the key, algorithm parameters, block size, or padding is invalid
+     */
     public byte[] decrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params) {
         return decrypt(key, data, params, null);
     }
 
+    /**
+     * Decrypts the given data.
+     *
+     * @param key    decryption key
+     * @param data   ciphertext
+     * @param params algorithm parameters, or {@code null}
+     * @param random source of randomness, or {@code null}
+     * @return plaintext
+     * @throws IllegalArgumentException if the key, algorithm parameters, block size, or padding is invalid
+     */
     public byte[] decrypt(Key key, byte[] data, @Nullable AlgorithmParameterSpec params,
                           @Nullable SecureRandom random) {
         init(Cipher.DECRYPT_MODE, key, params, random);

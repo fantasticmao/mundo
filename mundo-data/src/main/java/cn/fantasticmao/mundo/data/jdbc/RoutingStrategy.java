@@ -21,10 +21,21 @@ public interface RoutingStrategy<SEED> {
     @Nullable
     String getKey(@NonNull SEED seed);
 
+    /**
+     * Routes by {@code seed % num}, formatted with {@code format}.
+     *
+     * @param <SEED> numeric seed type
+     */
     class ShardingByMod<SEED extends Number> implements RoutingStrategy<SEED> {
         private final String format;
         private final int num;
 
+        /**
+         * Creates a modulo sharding strategy.
+         *
+         * @param format lookup-key format, for example {@code "ds_%d"}
+         * @param num    number of shards
+         */
         public ShardingByMod(String format, int num) {
             this.format = format;
             this.num = num;
@@ -38,9 +49,17 @@ public interface RoutingStrategy<SEED> {
         }
     }
 
+    /**
+     * Routes by formatting the tenant name with {@code format}.
+     */
     class MultiTenant implements RoutingStrategy<String> {
         private final String format;
 
+        /**
+         * Creates a multi-tenant strategy.
+         *
+         * @param format lookup-key format, for example {@code "ds_%s"}
+         */
         public MultiTenant(String format) {
             this.format = format;
         }

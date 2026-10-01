@@ -9,6 +9,11 @@ package cn.fantasticmao.mundo.data.support;
  */
 public interface IdGenerator {
 
+    /**
+     * Returns the next generated id.
+     *
+     * @return next id
+     */
     long next();
 
     /**
@@ -42,6 +47,13 @@ public interface IdGenerator {
             this.sequence = 0L;
         }
 
+        /**
+         * Creates a Snowflake generator for the given worker.
+         *
+         * @param workerNumber worker number, from {@code 0} to {@code 1023} inclusive
+         * @return a new generator
+         * @throws IllegalArgumentException if {@code workerNumber} is out of range
+         */
         public static IdGenerator newInstance(long workerNumber) {
             if (workerNumber < 0 || workerNumber > MAX_WORKER_NUMBER) {
                 throw new IllegalArgumentException("Invalid worker number: " + workerNumber);

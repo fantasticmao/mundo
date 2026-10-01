@@ -19,7 +19,7 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
 /**
- * WeChatMessageFactory
+ * Parses WeChat XML messages and builds reply XML.
  *
  * @author fantasticmao
  * @version 1.0
@@ -28,6 +28,12 @@ import java.nio.charset.StandardCharsets;
 public class WeChatMessageFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatMessageFactory.class);
 
+    /**
+     * Parses a WeChat message from XML.
+     *
+     * @param xml message XML
+     * @return parsed message
+     */
     public static WeChatMessage newMessage(String xml) {
         final Element rootElement = WeChatXmlUtil.getRootElement(xml);
         final String toUserName = WeChatXmlUtil.getFirstNodeTextContentByTagName(rootElement, WeChatMessage.TO_USER_NAME);
@@ -38,6 +44,12 @@ public class WeChatMessageFactory {
         return new WeChatMessage(toUserName, fromUserName, Long.parseLong(createTime), Long.parseLong(msgId), WeChatMessageType.of(msgType));
     }
 
+    /**
+     * Parses a WeChat text message from XML.
+     *
+     * @param xml message XML
+     * @return parsed text message
+     */
     public static WeChatTextMessage newTextMessage(String xml) {
         final Element rootElement = WeChatXmlUtil.getRootElement(xml);
         final WeChatMessage weChatMessage = WeChatMessageFactory.newMessage(xml);
@@ -45,6 +57,14 @@ public class WeChatMessageFactory {
         return new WeChatTextMessage(weChatMessage, content);
     }
 
+    /**
+     * Builds reply XML for a text message.
+     *
+     * @param toUserName   recipient
+     * @param fromUserName sender
+     * @param content      text content
+     * @return reply XML, or {@code success} when XML generation fails
+     */
     public static String newXmlByTextMessage(String toUserName, String fromUserName, String content) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

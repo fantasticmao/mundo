@@ -12,8 +12,17 @@ import java.util.Objects;
  * @since 2017-03-05
  */
 public enum HashUtil {
+    /**
+     * MD5 message digest.
+     */
     MD5("MD5"),
+    /**
+     * SHA-1 message digest.
+     */
     SHA_1("SHA-1"),
+    /**
+     * SHA-256 message digest.
+     */
     SHA_256("SHA-256");
 
     private final MessageDigest messageDigest;
@@ -26,6 +35,12 @@ public enum HashUtil {
         }
     }
 
+    /**
+     * Computes the hash of the given bytes.
+     *
+     * @param bytes input bytes
+     * @return digest bytes
+     */
     public byte[] hash(byte[] bytes) {
         Objects.requireNonNull(this.messageDigest);
         return this.messageDigest.digest(bytes);

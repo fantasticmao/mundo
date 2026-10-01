@@ -17,11 +17,22 @@ import java.util.Objects;
 @Getter
 @Setter
 public abstract class AbstractEntity<PK extends Number> {
+    /**
+     * Creation time. Read only.
+     */
     @ReadOnlyProperty
     private LocalDateTime createTime;
+    /**
+     * Update time. Read only.
+     */
     @ReadOnlyProperty
     private LocalDateTime updateTime;
 
+    /**
+     * Returns the primary key.
+     *
+     * @return primary key
+     */
     public abstract PK getId();
 
     @Override

@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * WeChatTextMessage
+ * A WeChat text message.
  *
  * @author fantasticmao
  * @version 1.0
@@ -14,10 +14,22 @@ import org.slf4j.LoggerFactory;
 @Getter
 public class WeChatTextMessage extends WeChatMessage {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeChatTextMessage.class);
+    /**
+     * XML tag for the text content.
+     */
     public static final String CONTENT = "Content";
 
+    /**
+     * Text content.
+     */
     private final String content;
 
+    /**
+     * Creates a text message.
+     *
+     * @param weChatMessage common message fields
+     * @param content       text content
+     */
     protected WeChatTextMessage(WeChatMessage weChatMessage, String content) {
         super(weChatMessage.getToUserName(), weChatMessage.getFromUserName(), weChatMessage.getCreateTime(),
             weChatMessage.getMsgId(), weChatMessage.getMsgType());

@@ -18,24 +18,24 @@ import java.util.Base64;
 import java.util.Objects;
 
 /**
- * UserInfoParser
+ * Checks and decrypts user information from a WeChat mini program.
  *
  * @author fantasticmao
  * @version 1.0
- * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">开放数据校验与解密</a>
+ * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">Signature verification and decryption</a>
  * @since 2019-03-30
  */
 public class UserInfoParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoParser.class);
 
     /**
-     * 校验数据签名
+     * Checks the data signature.
      *
-     * @param sessionKey 用户的会话密钥
-     * @param rawData    不包括敏感信息的原始数据字符串，用于计算签名
-     * @param signature  使用 sha1( rawData + sessionKey ) 得到字符串，用于校验用户信息
-     * @return true 校验成功；false 校验失败
-     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">数据签名校验</a>
+     * @param sessionKey session key of the user
+     * @param rawData    raw data string without sensitive information, used to compute the signature
+     * @param signature  expected signature, {@code sha1(rawData + sessionKey)}
+     * @return {@code true} when the signature matches
+     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">Data signature verification</a>
      */
     public static boolean checkSignature(final String sessionKey, final String rawData,
                                          final String signature) {
@@ -44,13 +44,13 @@ public class UserInfoParser {
     }
 
     /**
-     * 解密敏感数据
+     * Decrypts sensitive user data.
      *
-     * @param sessionKey    用户的会话密钥
-     * @param encryptedData 包括敏感数据在内的完整用户信息的加密数据
-     * @param iv            加密算法的初始向量
-     * @return 小程序用户信息 {@link UserInfo}
-     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">加密数据解密算法</a>
+     * @param sessionKey    session key of the user
+     * @param encryptedData encrypted user information, including sensitive data
+     * @param iv            initialization vector
+     * @return mini program {@linkplain UserInfo user information}, or {@code null} when parsing fails
+     * @see <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html">Decryption algorithm</a>
      */
     @Nullable
     public static UserInfo decryptData(final String sessionKey, final String encryptedData,

@@ -25,6 +25,14 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
     private final RoutingStrategy<SEED> routingStrategy;
     private final Class<SEED> seedClass;
 
+    /**
+     * Creates a routing data source whose default target only exposes database metadata.
+     *
+     * @param dataSources      target data sources, keyed by lookup key
+     * @param databaseMetaData metadata returned by the default data source
+     * @param routingStrategy  strategy that maps a seed to a lookup key
+     * @param seedClass        type of the route seed
+     */
     public RoutingDataSource(@NonNull Map<Object, DataSource> dataSources,
                              @NonNull DatabaseMetaData databaseMetaData,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {
@@ -51,6 +59,14 @@ public class RoutingDataSource<SEED> extends AbstractRoutingDataSource {
         super.setDefaultTargetDataSource(defaultDataSource);
     }
 
+    /**
+     * Creates a routing data source with an explicit default target.
+     *
+     * @param dataSources       target data sources, keyed by lookup key
+     * @param defaultDataSource data source used when no lookup key is resolved
+     * @param routingStrategy   strategy that maps a seed to a lookup key
+     * @param seedClass         type of the route seed
+     */
     public RoutingDataSource(@NonNull Map<Object, DataSource> dataSources,
                              @NonNull DataSource defaultDataSource,
                              RoutingStrategy<SEED> routingStrategy, Class<SEED> seedClass) {

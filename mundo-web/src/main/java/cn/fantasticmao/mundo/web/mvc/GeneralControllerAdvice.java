@@ -24,6 +24,11 @@ import java.util.Date;
 public class GeneralControllerAdvice {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneralControllerAdvice.class);
 
+    /**
+     * Binds {@link Date} request parameters as {@code yyyy-MM-dd HH:mm:ss}.
+     *
+     * @param binder data binder for the current request
+     */
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -31,6 +36,12 @@ public class GeneralControllerAdvice {
         binder.registerCustomEditor(Date.class, customDateEditor);
     }
 
+    /**
+     * Logs the exception and returns HTTP 500 with a fixed body.
+     *
+     * @param e uncaught runtime exception
+     * @return response with status 500 and body {@code INTERNAL SERVER ERROR}
+     */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> exceptionHandler(RuntimeException e) {
         LOGGER.error("Global Exception Handler", e);

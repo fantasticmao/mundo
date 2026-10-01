@@ -1,7 +1,7 @@
 package cn.fantasticmao.mundo.core.support;
 
 /**
- * Constant
+ * Shared constants.
  *
  * @author fantasticmao
  * @version 1.0
@@ -9,6 +9,9 @@ package cn.fantasticmao.mundo.core.support;
  */
 public interface Constant {
 
+    /**
+     * Empty arrays.
+     */
     interface Arrays {
         boolean[] BOOLEANS = new boolean[0];
         char[] CHARS = new char[0];
@@ -22,6 +25,9 @@ public interface Constant {
         String[] STRINGS = new String[0];
     }
 
+    /**
+     * Common separators and blank strings.
+     */
     interface Strings {
         String EMPTY = "";
         String SPACE = " ";
